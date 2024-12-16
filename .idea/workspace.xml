@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42736296-ca58-4c50-8fee-f202a3f70e6f" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/app/views/static_pages/author.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/TheGuruProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TheGuruProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/static_pages_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/static_pages_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,9 +50,6 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2qCLRtgjBtrivljJYLpb02XgyrI" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -63,7 +58,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/add-author-page",
+    "git-widget-placeholder": "feature/full-task",
     "last_opened_file_path": "/home/unix/TheGuruProject",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -72,6 +67,7 @@
     "nodejs_interpreter_path": "/home/unix/.var/app/com.jetbrains.RubyMine/config/JetBrains/RubyMine2024.3/node/versions/22.12.0/bin/node",
     "nodejs_package_manager_path": "npm",
     "ruby.structure.view.model.defaults.configured": "true",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Confirmation",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -169,7 +165,7 @@
       <option name="presentableId" value="Default" />
       <updated>1734161605473</updated>
       <workItem from="1734161606545" duration="7848000" />
-      <workItem from="1734221922993" duration="3951000" />
+      <workItem from="1734221922993" duration="16914000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
