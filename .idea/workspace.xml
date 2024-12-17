@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42736296-ca58-4c50-8fee-f202a3f70e6f" name="Changes" comment="first commit">
+    <list default="true" id="42736296-ca58-4c50-8fee-f202a3f70e6f" name="Changes" comment="docs: обновлен README, добавил &quot;Категория&quot;">
+      <change afterPath="$PROJECT_DIR$/public/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/about/author.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/static_pages/about.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/static_pages/author.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +22,7 @@
       <list>
         <option value="Ruby File" />
         <option value="ERB File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -46,6 +51,13 @@
     &quot;repository&quot;: &quot;TheGuruProject&quot;
   }
 }</component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -56,6 +68,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Rails.TheGuruProject.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "#7 on feature/full-task",
@@ -165,7 +179,7 @@
       <option name="presentableId" value="Default" />
       <updated>1734161605473</updated>
       <workItem from="1734161606545" duration="7848000" />
-      <workItem from="1734221922993" duration="19573000" />
+      <workItem from="1734221922993" duration="20896000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -175,7 +189,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734161995108</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="docs: обновлен README, добавил &quot;Категория&quot;">
+      <option name="closed" value="true" />
+      <created>1734407044315</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1734407044315</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +243,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="docs: обновлен README, добавил &quot;Категория&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs: обновлен README, добавил &quot;Категория&quot;" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/TheGuruProject@TheGuruProject.rcov" NAME="TheGuruProject Coverage Results" MODIFIED="1734407882703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="TheGuruProject" />
   </component>
 </project>
