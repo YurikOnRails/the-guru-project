@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42736296-ca58-4c50-8fee-f202a3f70e6f" name="Changes" comment="docs: обновлен README, добавил &quot;Категория&quot;">
-      <change afterPath="$PROJECT_DIR$/public/about.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/about/author.html" afterDir="false" />
+    <list default="true" id="42736296-ca58-4c50-8fee-f202a3f70e6f" name="Changes" comment="chore: отдал статичные страницы  в обход рельсового приложения для скорости">
+      <change afterPath="$PROJECT_DIR$/config/locales/ru.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/static_pages/about.html.erb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/static_pages/author.html.erb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +175,7 @@
       <option name="presentableId" value="Default" />
       <updated>1734161605473</updated>
       <workItem from="1734161606545" duration="7848000" />
-      <workItem from="1734221922993" duration="20896000" />
+      <workItem from="1734221922993" duration="22161000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -197,7 +193,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734407044315</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="chore: отдал статичные страницы  в обход рельсового приложения для скорости">
+      <option name="closed" value="true" />
+      <created>1734408251894</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1734408251894</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +248,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value="docs: обновлен README, добавил &quot;Категория&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs: обновлен README, добавил &quot;Категория&quot;" />
+    <MESSAGE value="chore: отдал статичные страницы  в обход рельсового приложения для скорости" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: отдал статичные страницы  в обход рельсового приложения для скорости" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TheGuruProject@TheGuruProject.rcov" NAME="TheGuruProject Coverage Results" MODIFIED="1734407882703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="TheGuruProject" />
