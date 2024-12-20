@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42736296-ca58-4c50-8fee-f202a3f70e6f" name="Changes" comment="first commit" />
+    <list default="true" id="42736296-ca58-4c50-8fee-f202a3f70e6f" name="Changes" comment="fix: добавил файл локализации для русского языка">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/static_pages_controller.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/helpers/static_pages_helper.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/locales/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/en.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/locales/ru.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/ru.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/about/author.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/about/author.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/controllers/static_pages_controller_test.rb" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,50 +25,57 @@
       <list>
         <option value="Ruby File" />
         <option value="ERB File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "yyyrk"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;yyyrk&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/yyyrk/TheGuruProject.git",
-    "accountId": "61221777-f8b7-4143-9339-f9f1327bfad7"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/yyyrk/TheGuruProject.git&quot;,
+    &quot;accountId&quot;: &quot;61221777-f8b7-4143-9339-f9f1327bfad7&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "yyyrk",
-    "repository": "TheGuruProject"
+    &quot;owner&quot;: &quot;yyyrk&quot;,
+    &quot;repository&quot;: &quot;TheGuruProject&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
-  <component name="ProjectId" id="2qCLRtgjBtrivljJYLpb02XgyrI" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+}</component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2qCLRtgjBtrivljJYLpb02XgyrI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Rails.TheGuruProject.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/update-readme",
+    "git-widget-placeholder": "#7 on feature/full-task",
     "last_opened_file_path": "/home/unix/TheGuruProject",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -67,6 +84,7 @@
     "nodejs_interpreter_path": "/home/unix/.var/app/com.jetbrains.RubyMine/config/JetBrains/RubyMine2024.3/node/versions/22.12.0/bin/node",
     "nodejs_package_manager_path": "npm",
     "ruby.structure.view.model.defaults.configured": "true",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Confirmation",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -164,6 +182,7 @@
       <option name="presentableId" value="Default" />
       <updated>1734161605473</updated>
       <workItem from="1734161606545" duration="7848000" />
+      <workItem from="1734221922993" duration="25859000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -173,7 +192,31 @@
       <option name="project" value="LOCAL" />
       <updated>1734161995108</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="docs: обновлен README, добавил &quot;Категория&quot;">
+      <option name="closed" value="true" />
+      <created>1734407044315</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1734407044315</updated>
+    </task>
+    <task id="LOCAL-00003" summary="chore: отдал статичные страницы  в обход рельсового приложения для скорости">
+      <option name="closed" value="true" />
+      <created>1734408251894</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1734408251894</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix: добавил файл локализации для русского языка">
+      <option name="closed" value="true" />
+      <created>1734410137415</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1734410137415</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +262,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="docs: обновлен README, добавил &quot;Категория&quot;" />
+    <MESSAGE value="chore: отдал статичные страницы  в обход рельсового приложения для скорости" />
+    <MESSAGE value="fix: добавил файл локализации для русского языка" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: добавил файл локализации для русского языка" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/TheGuruProject@TheGuruProject.rcov" NAME="TheGuruProject Coverage Results" MODIFIED="1734407882703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="TheGuruProject" />
   </component>
 </project>

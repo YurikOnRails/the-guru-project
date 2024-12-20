@@ -1,0 +1,16 @@
+ru:
+  hello: "Привет"
+  errors:
+    messages:
+      record_invalid: "Не удалось сохранить запись: %{errors}"
+      attribute_invalid: "%{attribute} недопустим"
+  activerecord:
+    models:
+      user: "Пользователь"
+    attributes:
+      user:
+        name: "Имя"
+        email: "Электронная почта"
+    errors:
+      messages:
+        blank: "не может быть пустым"
