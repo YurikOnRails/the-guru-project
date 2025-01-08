@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42736296-ca58-4c50-8fee-f202a3f70e6f" name="Changes" comment="fix: добавил файл локализации для русского языка">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="42736296-ca58-4c50-8fee-f202a3f70e6f" name="Changes" comment="fix:  remove validations">
+      <change beforePath="$PROJECT_DIR$/app/models/answer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/answer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/category.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/category.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +88,7 @@
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" />
       <window_info id="Learn" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.19973958" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19973958" />
       <window_info id="Commit" order="1" weight="0.19973958" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -352,7 +353,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734410137415</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix:  remove validations">
+      <option name="closed" value="true" />
+      <created>1736312557666</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1736312557666</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,7 +415,8 @@
     <MESSAGE value="docs: обновлен README, добавил &quot;Категория&quot;" />
     <MESSAGE value="chore: отдал статичные страницы  в обход рельсового приложения для скорости" />
     <MESSAGE value="fix: добавил файл локализации для русского языка" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: добавил файл локализации для русского языка" />
+    <MESSAGE value="fix:  remove validations" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix:  remove validations" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TheGuruProject@TheGuruProject.rcov" NAME="TheGuruProject Coverage Results" MODIFIED="1734407882703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="TheGuruProject" />
