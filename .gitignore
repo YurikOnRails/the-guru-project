@@ -1,6 +1,9 @@
 # Ignore bundler config
 /.bundle
 
+#Ignore development Data Bases
+/storage/*.sqlite3
+
 # Ignore JetBrains IDE folder
 .idea/
 
