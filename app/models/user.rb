@@ -1,10 +1,11 @@
 class User < ApplicationRecord
-  has_many :test_results, dependent: :destroy # Связь с результатами тестов
-  has_many :tests, through: :test_results # Связь с тестами через результаты тестов
+  has_many :test_results, dependent: :destroy
+  has_many :tests, through: :test_results
 
-  # Выдает тесты, принимая level в качествен аргумента
+  # Тесты, которые создал пользователь
+  has_many :authored_tests, class_name: "Test", foreign_key: :author_id, dependent: :nullify
+
   def tests_by_level(level)
-    Test.joins("INNER JOIN test_results ON test_results.test_id = tests.id")
-        .where("test_results.user_id = ? AND tests.level = ?", id, level)
+    tests.where(level: level)
   end
 end
