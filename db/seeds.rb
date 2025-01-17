@@ -30,10 +30,10 @@ puts "Categories created: #{categories.count}"
 # Create tests
 puts "Creating tests..."
 tests = [
-  users[0].authored_tests.create!(title: 'Countries of Europe', level: 1, category: categories[0]),
-  users[1].authored_tests.create!(title: 'Ancient Civilizations', level: 2, category: categories[1]),
-  users[0].authored_tests.create!(title: 'Capitals of the World', level: 1, category: categories[0]),
-  users[2].authored_tests.create!(title: 'Physics Basics', level: 3, category: categories[2])
+  users[0].authored_tests.create!(title: 'Countries of Europe', level: 1, category_id: categories[0].id),
+  users[1].authored_tests.create!(title: 'Ancient Civilizations', level: 2, category_id: categories[1].id),
+  users[0].authored_tests.create!(title: 'Capitals of the World', level: 1, category_id: categories[0].id),
+  users[2].authored_tests.create!(title: 'Physics Basics', level: 3, category_id: categories[2].id)
 ]
 puts "Tests created: #{tests.count}"
 
@@ -74,8 +74,8 @@ puts "Test results created: #{test_results.count}"
 # Additional examples
 puts "Creating additional examples..."
 additional_tests = [
-  users[1].authored_tests.create!(title: 'Famous Landmarks', level: 2, category: categories[0]),
-  users[2].authored_tests.create!(title: 'World Wars', level: 3, category: categories[1])
+  users[1].authored_tests.create!(title: 'Famous Landmarks', level: 2, category_id: categories[0].id),
+  users[2].authored_tests.create!(title: 'World Wars', level: 3, category_id: categories[1].id)
 ]
 puts "Additional tests created: #{additional_tests.count}"
 
