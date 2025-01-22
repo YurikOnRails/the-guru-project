@@ -64,10 +64,10 @@ puts "Answers created successfully. Total answers: #{answers.count}"
 # Create test results
 puts "Creating test results..."
 test_results = [
-  users[0].test_results.create!(test: tests[0], completed: true, score: 80),
-  users[1].test_results.create!(test: tests[2], completed: true, score: 100),
-  users[2].test_results.create!(test: tests[3], completed: false, score: 50),
-  users[0].test_results.create!(test: tests[1], completed: true, score: 90)
+  users[0].test_results.create!(test: tests[0]),
+  users[1].test_results.create!(test: tests[2]),
+  users[2].test_results.create!(test: tests[3]),
+  users[0].test_results.create!(test: tests[1])
 ]
 puts "Test results created: #{test_results.count}"
 
