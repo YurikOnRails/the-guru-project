@@ -62,3 +62,6 @@
 storage/development.sqlite3-shm
 storage/development.sqlite3-wal
 storage/.project
+/.ruby-lsp/
+/.kamal/
+/.github/
