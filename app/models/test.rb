@@ -5,9 +5,9 @@ class Test < ApplicationRecord
 
   belongs_to :category
 
-  has_many :test_results, dependent: :destroy
-  has_many :users, through: :test_results, dependent: :destroy
-  has_many :questions, dependent: :destroy
+  has_many :test_results
+  has_many :users, through: :test_results
+  has_many :questions
 
   def self.titles_by_category_name(category_name)
     joins(:category)
