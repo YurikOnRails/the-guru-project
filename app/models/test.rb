@@ -1,7 +1,8 @@
 class Test < ApplicationRecord
   belongs_to :author,
              class_name: "User",
-             foreign_key: :author_id
+             foreign_key: "user_id"
+
   belongs_to :category
 
   has_many :test_results, dependent: :destroy
