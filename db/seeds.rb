@@ -10,65 +10,77 @@ puts "Database cleared successfully."
 
 # Create users
 puts "Creating users..."
-users = [
-  User.create!(name: 'Andrey', email: 'andrey@example.com'),
-  User.create!(name: 'Pavel', email: 'pavel@example.com'),
-  User.create!(name: 'Maria', email: 'maria@example.com'),
-  User.create!(name: 'Olga', email: 'olga@example.com')
-]
-puts "Users created: #{users.count}"
+User.create!(
+  [
+    { name: 'Andrey', email: 'andrey@example.com' },
+    { name: 'Pavel', email: 'pavel@example.com' },
+    { name: 'Maria', email: 'maria@example.com' },
+    { name: 'Olga', email: 'olga@example.com' }
+  ]
+)
+puts "Users created: #{User.count}"
 
 # Create categories
 puts "Creating categories..."
-categories = [
-  Category.create!(name: 'Geography'),
-  Category.create!(name: 'History'),
-  Category.create!(name: 'Science')
-]
-puts "Categories created: #{categories.count}"
+Category.create!(
+  [
+    { name: 'Geography' },
+    { name: 'History' },
+    { name: 'Science' }
+  ]
+)
+puts "Categories created: #{Category.count}"
 
 # Create tests
 puts "Creating tests..."
-tests = [
-  Test.create!(title: 'Countries of Europe', level: 1, category: categories[0], author: users[0]),
-  Test.create!(title: 'Ancient Civilizations', level: 2, category: categories[1], author: users[1]),
-  Test.create!(title: 'Capitals of the World', level: 1, category: categories[0], author: users[0]),
-  Test.create!(title: 'Physics Basics', level: 3, category: categories[2], author: users[2])
-]
-puts "Tests created: #{tests.count}"
+Test.create!(
+  [
+    { title: 'Countries of Europe', level: 1, category: Category.first, author: User.first },
+    { title: 'Ancient Civilizations', level: 2, category: Category.second, author: User.second },
+    { title: 'Capitals of the World', level: 1, category: Category.first, author: User.first },
+    { title: 'Physics Basics', level: 3, category: Category.third, author: User.third }
+  ]
+)
+puts "Tests created: #{Test.count}"
 
 # Create questions
 puts "Creating questions..."
-questions = [
-  tests[2].questions.create!(content: 'What is the capital of France?'),
-  tests[1].questions.create!(content: 'Which country is known for the Colosseum?'),
-  tests[0].questions.create!(content: 'What is the largest country in Europe?'),
-  tests[3].questions.create!(content: 'What is Newton\'s second law?')
-]
-puts "Questions created: #{questions.count}"
+Question.create!(
+  [
+    { content: 'What is the capital of France?', test: Test.first },
+    { content: 'Which country is known for the Colosseum?', test: Test.second },
+    { content: 'What is the largest country in Europe?', test: Test.first },
+    { content: 'What is Newton\'s second law?', test: Test.third }
+  ]
+)
+puts "Questions created: #{Question.count}"
 
 # Create answers
 puts "Creating answers..."
-answers = [
-  questions[0].answers.create!(content: 'Paris', correct: true),
-  questions[1].answers.create!(content: 'Rome', correct: true),
-  questions[2].answers.create!(content: 'Russia', correct: true),
-  questions[2].answers.create!(content: 'Germany', correct: false),
-  questions[0].answers.create!(content: 'London', correct: false),
-  questions[1].answers.create!(content: 'Athens', correct: false),
-  questions[3].answers.create!(content: 'F = ma', correct: true),
-  questions[3].answers.create!(content: 'E = mc²', correct: false)
-]
-puts "Answers created successfully. Total answers: #{answers.count}"
+Answer.create!(
+  [
+    { content: 'Paris', correct: true, question: Question.first },
+    { content: 'London', correct: false, question: Question.first },
+    { content: 'Rome', correct: true, question: Question.second },
+    { content: 'Athens', correct: false, question: Question.second },
+    { content: 'Russia', correct: true, question: Question.third },
+    { content: 'Germany', correct: false, question: Question.third },
+    { content: 'F = ma', correct: true, question: Question.fourth },
+    { content: 'E = mc²', correct: false, question: Question.fourth }
+  ]
+)
+puts "Answers created: #{Answer.count}"
 
 # Create test results
 puts "Creating test results..."
-test_results = [
-  TestResult.create!(user: users[0], test: tests[0]),
-  TestResult.create!(user: users[1], test: tests[2]),
-  TestResult.create!(user: users[2], test: tests[3]),
-  TestResult.create!(user: users[0], test: tests[1])
-]
-puts "Test results created: #{test_results.count}"
+TestResult.create!(
+  [
+    { user: User.first, test: Test.first },
+    { user: User.second, test: Test.second },
+    { user: User.third, test: Test.third },
+    { user: User.first, test: Test.second }
+  ]
+)
+puts "Test results created: #{TestResult.count}"
 
 puts "Hallelujah! We did it!!! Seed data created successfully!!!"
