@@ -1,86 +1,62 @@
-# Clear the database
 puts "Clearing the database..."
-TestResult.destroy_all
-Answer.destroy_all
-Question.destroy_all
-Test.destroy_all
-Category.destroy_all
-User.destroy_all
+[ TestResult, Answer, Question, Test, Category, User ].each(&:delete_all)
 puts "Database cleared successfully."
 
-# Create users
-puts "Creating users..."
-User.create!(
-  [
-    { name: 'Andrey', email: 'andrey@example.com' },
-    { name: 'Pavel', email: 'pavel@example.com' },
-    { name: 'Maria', email: 'maria@example.com' },
-    { name: 'Olga', email: 'olga@example.com' }
-  ]
-)
-puts "Users created: #{User.count}"
+puts "Seeding users..."
+users = [
+  User.create!(name: 'Andrey', email: 'andrey@example.com'),
+  User.create!(name: 'Pavel', email: 'pavel@example.com'),
+  User.create!(name: 'Maria', email: 'maria@example.com'),
+  User.create!(name: 'Olga', email: 'olga@example.com')
+]
+puts "Users: #{User.count}"
 
-# Create categories
-puts "Creating categories..."
-Category.create!(
-  [
-    { name: 'Geography' },
-    { name: 'History' },
-    { name: 'Science' }
-  ]
-)
-puts "Categories created: #{Category.count}"
+puts "Seeding categories..."
+categories = [
+  Category.create!(name: 'Geography'),
+  Category.create!(name: 'History'),
+  Category.create!(name: 'Science')
+]
+puts "Categories: #{Category.count}"
 
-# Create tests
-puts "Creating tests..."
-Test.create!(
-  [
-    { title: 'Countries of Europe', level: 1, category: Category.first, author: User.first },
-    { title: 'Ancient Civilizations', level: 2, category: Category.second, author: User.second },
-    { title: 'Capitals of the World', level: 1, category: Category.first, author: User.first },
-    { title: 'Physics Basics', level: 3, category: Category.third, author: User.third }
-  ]
-)
-puts "Tests created: #{Test.count}"
+puts "Seeding tests..."
+tests = [
+  Test.create!(title: 'Countries of Europe', level: 1, category: categories[0], author: users[0]),
+  Test.create!(title: 'Ancient Civilizations', level: 2, category: categories[1], author: users[1]),
+  Test.create!(title: 'Capitals of the World', level: 1, category: categories[0], author: users[0]),
+  Test.create!(title: 'Physics Basics', level: 3, category: categories[2], author: users[2])
+]
+puts "Tests: #{Test.count}"
 
-# Create questions
-puts "Creating questions..."
-Question.create!(
-  [
-    { content: 'What is the capital of France?', test: Test.first },
-    { content: 'Which country is known for the Colosseum?', test: Test.second },
-    { content: 'What is the largest country in Europe?', test: Test.first },
-    { content: 'What is Newton\'s second law?', test: Test.third }
-  ]
-)
-puts "Questions created: #{Question.count}"
+puts "Seeding questions..."
+questions = [
+  Question.create!(content: 'What is the capital of France?', test: tests[0]),
+  Question.create!(content: 'Which country is known for the Colosseum?', test: tests[1]),
+  Question.create!(content: 'What is the largest country in Europe?', test: tests[0]),
+  Question.create!(content: "What is Newton's second law?", test: tests[3])
+]
+puts "Questions: #{Question.count}"
 
-# Create answers
-puts "Creating answers..."
-Answer.create!(
-  [
-    { content: 'Paris', correct: true, question: Question.first },
-    { content: 'London', correct: false, question: Question.first },
-    { content: 'Rome', correct: true, question: Question.second },
-    { content: 'Athens', correct: false, question: Question.second },
-    { content: 'Russia', correct: true, question: Question.third },
-    { content: 'Germany', correct: false, question: Question.third },
-    { content: 'F = ma', correct: true, question: Question.fourth },
-    { content: 'E = mc²', correct: false, question: Question.fourth }
-  ]
-)
-puts "Answers created: #{Answer.count}"
+puts "Seeding answers..."
+Answer.create!([
+                 { content: 'Paris', correct: true, question: questions[0] },
+                 { content: 'London', correct: false, question: questions[0] },
+                 { content: 'Rome', correct: true, question: questions[1] },
+                 { content: 'Athens', correct: false, question: questions[1] },
+                 { content: 'Russia', correct: true, question: questions[2] },
+                 { content: 'Germany', correct: false, question: questions[2] },
+                 { content: 'F = ma', correct: true, question: questions[3] },
+                 { content: 'E = mc²', correct: false, question: questions[3] }
+               ])
+puts "Answers: #{Answer.count}"
 
-# Create test results
-puts "Creating test results..."
-TestResult.create!(
-  [
-    { user: User.first, test: Test.first },
-    { user: User.second, test: Test.second },
-    { user: User.third, test: Test.third },
-    { user: User.first, test: Test.second }
-  ]
-)
-puts "Test results created: #{TestResult.count}"
+puts "Seeding test results..."
+TestResult.create!([
+                     { user: users[0], test: tests[0] },
+                     { user: users[1], test: tests[1] },
+                     { user: users[2], test: tests[2] },
+                     { user: users[0], test: tests[1] }
+                   ])
+puts "Test Results: #{TestResult.count}"
 
-puts "Hallelujah! We did it!!! Seed data created successfully!!!"
+puts "Seeding completed successfully!"
