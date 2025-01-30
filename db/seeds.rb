@@ -3,38 +3,38 @@ puts "Clearing the database..."
 puts "Database cleared successfully."
 
 puts "Seeding users..."
-users = [
-  User.create!(name: 'Andrey', email: 'andrey@example.com'),
-  User.create!(name: 'Pavel', email: 'pavel@example.com'),
-  User.create!(name: 'Maria', email: 'maria@example.com'),
-  User.create!(name: 'Olga', email: 'olga@example.com')
-]
+users = User.create!([
+                       { name: 'Andrey', email: 'andrey@example.com' },
+                       { name: 'Pavel', email: 'pavel@example.com' },
+                       { name: 'Maria', email: 'maria@example.com' },
+                       { name: 'Olga', email: 'olga@example.com' }
+                     ])
 puts "Users: #{User.count}"
 
 puts "Seeding categories..."
-categories = [
-  Category.create!(name: 'Geography'),
-  Category.create!(name: 'History'),
-  Category.create!(name: 'Science')
-]
+categories = Category.create!([
+                                { name: 'Geography' },
+                                { name: 'History' },
+                                { name: 'Science' }
+                              ])
 puts "Categories: #{Category.count}"
 
 puts "Seeding tests..."
-tests = [
-  Test.create!(title: 'Countries of Europe', level: 1, category: categories[0], author: users[0]),
-  Test.create!(title: 'Ancient Civilizations', level: 2, category: categories[1], author: users[1]),
-  Test.create!(title: 'Capitals of the World', level: 1, category: categories[0], author: users[0]),
-  Test.create!(title: 'Physics Basics', level: 3, category: categories[2], author: users[2])
-]
+tests = Test.create!([
+                       { title: 'Countries of Europe', level: 1, category: categories[0], author: users[0] },
+                       { title: 'Ancient Civilizations', level: 2, category: categories[1], author: users[1] },
+                       { title: 'Capitals of the World', level: 1, category: categories[0], author: users[0] },
+                       { title: 'Physics Basics', level: 3, category: categories[2], author: users[2] }
+                     ])
 puts "Tests: #{Test.count}"
 
 puts "Seeding questions..."
-questions = [
-  Question.create!(content: 'What is the capital of France?', test: tests[0]),
-  Question.create!(content: 'Which country is known for the Colosseum?', test: tests[1]),
-  Question.create!(content: 'What is the largest country in Europe?', test: tests[0]),
-  Question.create!(content: "What is Newton's second law?", test: tests[3])
-]
+questions = Question.create!([
+                               { content: 'What is the capital of France?', test: tests[0] },
+                               { content: 'Which country is known for the Colosseum?', test: tests[1] },
+                               { content: 'What is the largest country in Europe?', test: tests[0] },
+                               { content: "What is Newton's second law?", test: tests[3] }
+                             ])
 puts "Questions: #{Question.count}"
 
 puts "Seeding answers..."
