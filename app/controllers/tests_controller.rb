@@ -19,7 +19,7 @@ class TestsController < ApplicationController
   end
 
   def search
-    result = ["Class: #{params.class}", "Parameters: #{params.inspect}"]
+    result = [ "Class: #{params.class}", "Parameters: #{params.inspect}" ]
 
     render plain: result.join("\n")
   end
