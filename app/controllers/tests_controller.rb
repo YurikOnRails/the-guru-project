@@ -13,9 +13,20 @@ class TestsController < ApplicationController
   end
 
   def create
-
-    test = Test.create(params[:test])
+    test = Test.create(test_params)
 
     render plain: test.inspect
+  end
+
+  def search
+    result = ["Class: #{params.class}", "Parameters: #{params.inspect}"]
+
+    render plain: result.join("\n")
+  end
+
+  private
+
+  def test_params
+    params.require(:test).permit(:title, :level)
   end
 end
