@@ -20,9 +20,9 @@ class QuestionsController < ApplicationController
   def create
     @question = @test.questions.new(question_params)
     if @question.save
-      render plain: "Question created successfully!"
+      render plain: "Question created successfully! ID: #{@question.id}, Content: #{@question.content}"
     else
-      render plain: "Error: Question could not be saved."
+      render :new, status: :unprocessable_entity
     end
   end
 
