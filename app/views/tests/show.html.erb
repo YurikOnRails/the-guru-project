@@ -7,3 +7,19 @@
   <strong>Level:</strong>
   <%= @test.level %>
 </p>
+
+<h2>Questions for <%= @test.title %></h2>
+
+<% if @test.questions.any? %>
+  <ul>
+    <% @test.questions.each do |question| %>
+      <li><%= question.content %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No questions yet.</p>
+<% end %>
+
+<%= link_to "Add a new question", new_test_question_path(@test) %> |
+<%= link_to "Edit", edit_test_path(@test) %> |
+<%= link_to "Back to Tests", tests_path %>

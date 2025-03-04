@@ -1,12 +1,5 @@
 <h1>Create a New Question</h1>
 
-<%= form_with model: @question, url: test_questions_path(@test), method: :post do |f| %>
-  <div>
-    <%= f.label :content, "Question" %>
-    <%= f.text_field :content %>
-  </div>
+<%= render 'questions/form' %>
 
-  <%= f.hidden_field :test_id, value: @test.id %>
-
-  <%= f.submit "Create" %>
-<% end %>
+<%= link_to 'Back to Test', test_path(@test) %>

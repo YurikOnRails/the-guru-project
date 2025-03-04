@@ -1,17 +1,14 @@
 class QuestionsController < ApplicationController
   before_action :set_test, only: %i[index new create]
-  before_action :set_question, only: %i[show destroy]
+  before_action :set_question, only: %i[show edit update destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
 
   def index
     @questions = @test.questions
-    render plain: @questions.map(&:content).join("\n")
   end
 
-  def show
-    render plain: @question.content.to_s
-  end
+  def show; end
 
   def new
     @question = @test.questions.new
@@ -20,15 +17,27 @@ class QuestionsController < ApplicationController
   def create
     @question = @test.questions.new(question_params)
     if @question.save
-      render plain: "Question created successfully! ID: #{@question.id}, Content: #{@question.content}"
+      redirect_to @question, notice: "Question was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    if @question.update(question_params)
+      redirect_to @question, notice: "Question was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @question.destroy
-    render plain: "Question deleted successfully!"
+    redirect_to test_questions_path(@question.test), notice: "Question was deleted."
   end
 
   private

@@ -1,14 +1,10 @@
-<h1>Tricky Tests</h1>
+<h1>Tests</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Level</th>
-  </tr>
+<ul>
   <% @tests.each do |test| %>
-  <tr>
-    <td><%= test.title %></td>
-    <td><%= test.level %></td>
-  </tr>
+    <li>
+      <%= link_to test.title, test_path(test) %>
+      (Questions: <%= test.questions.count %>)
+    </li>
   <% end %>
-</table>
+</ul>

@@ -1,1 +1,13 @@
-<h1>Test data: time is: <%= Time.now %> </h1>
+<h1>Questions for <%= @test.title %></h1>
+
+<ul>
+  <% @test.questions.each do |question| %>
+    <li>
+      <%= link_to question.content, question %>
+      (<%= link_to 'Edit', edit_question_path(question) %>,
+      <%= link_to 'Delete', question, method: :delete, data: { confirm: "Are you sure?" } %>)
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Add Question', new_test_question_path(@test) %>
