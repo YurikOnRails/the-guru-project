@@ -9,9 +9,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_test_not_found
   end
 
   def show
-    # title = Test.first.title
-
-    # render inline: "<%= @test.title %>"
     @test = Test.find(params[:id])
   end
 
@@ -51,7 +48,6 @@ end
   def test_params
     params.require(:test).permit(:title, :level, :category_id)
   end
-
 
   def rescue_with_test_not_found
     render plain: "Test was not found"

@@ -1,4 +1,4 @@
-<h1> Edit <%= @test.title %> test</h1>
+<h1>Edit <%= @test.title %> test</h1>
 
 <%= form_with model: @test, local: true do |form| %>
   <% if @test.errors.present? %>
@@ -14,7 +14,6 @@
     </div>
   <% end %>
 
-
   <p>
     <%= form.label :title  %><br>
     <%= form.text_field :title, id: :test_title %>
@@ -27,7 +26,7 @@
 
   <p>
     <%= form.label :category_id  %><br>
-    <%= form.collection_select :category_id, Category.all, :id, :title, prompt: true %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, prompt: true %>
   </p>
 
   <p><%= form.submit %></p>

@@ -1,0 +1,8 @@
+<%= form_with model: [@test, @question] do |f| %>
+  <div>
+    <%= f.label :content, "Question" %>
+    <%= f.text_field :content %>
+  </div>
+
+  <%= f.submit "Save" %>
+<% end %>
