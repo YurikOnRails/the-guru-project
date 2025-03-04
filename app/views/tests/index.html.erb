@@ -4,7 +4,7 @@
   <% @tests.each do |test| %>
     <li>
       <%= link_to test.title, test_path(test) %>
-      (Questions: <%= test.questions.count %>)
+      (<%= test.questions.count %> questions)
     </li>
   <% end %>
 </ul>
