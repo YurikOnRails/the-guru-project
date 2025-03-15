@@ -1,4 +1,6 @@
 <%= form_with model: [@test, @question] do |f| %>
+  <%= render 'shared/errors', object: @question %>
+
   <div>
     <%= f.label :content, "Question" %>
     <%= f.text_field :content %>
