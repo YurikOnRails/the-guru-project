@@ -12,9 +12,7 @@
 
 <% if @test.questions.any? %>
   <ul>
-    <% @test.questions.each do |question| %>
-      <li><%= question.content %></li>
-    <% end %>
+    <%= render @test.questions %>
   </ul>
 <% else %>
   <p>No questions yet.</p>
