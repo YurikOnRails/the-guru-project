@@ -2,9 +2,6 @@ class TestsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_test_not_found
 
   def index
-    # result = [ "Class: #{params.class}", "Parameters: #{params.inspect}" ]
-    #
-    # render plain: result.join("\n")
     @tests = Test.all
   end
 
@@ -25,19 +22,18 @@ def update
     render :edit
   end
 end
-  def new
-    @test = Test.new
-  end
+def new
+  @test = current_user.author_tests.new
+end
 
-  def create
-    @test = Test.new(test_params)
-
-    if @test.save
-      redirect_to @test
-    else
-      render :new
-    end
+def create
+  @test = current_user.author_tests.new(test_params)
+  if @test.save
+    redirect_to @test, notice: "Test successfully created!"
+  else
+    render :new
   end
+end
 
   private
 
