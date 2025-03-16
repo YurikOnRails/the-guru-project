@@ -1,22 +1,5 @@
 <h1>Edit <%= @test.title %> Test</h1>
 
-<%= form_with model: @test, local: true do |form| %>
-  <%= render 'shared/errors', object: @test %>
+<%= render 'form' %>
 
-  <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title, id: :test_title %>
-  </p>
-
-  <p>
-    <%= form.label :level %><br>
-    <%= form.number_field :level, id: :test_level %>
-  </p>
-
-  <p>
-    <%= form.label :category_id %><br>
-    <%= form.collection_select :category_id, Category.all, :id, :name, prompt: true %>
-  </p>
-
-  <p><%= form.submit "Update Test" %></p>
-<% end %>
+<%= link_to "Back to Tests", tests_path %>
