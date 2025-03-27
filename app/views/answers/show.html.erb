@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<h1>Question</h1>
 
-<%= render @answer %>
+<p>
+  <%= @answer.question.content %>
+</p>
 
-<div>
-  <%= link_to "Edit this answer", edit_answer_path(@answer) %> |
-  <%= link_to "Back to answers", answers_path %>
+<p>
+  <b>Answer:</b>
+<%= @answer.content %>
+<p>
 
-  <%= button_to "Destroy this answer", @answer, method: :delete %>
-</div>
+<p>
+  <b>Correct:</b>
+  <%= @answer.correct %>
+</p>
+
+<%= link_to 'Back', question_path(@answer.question) %>
