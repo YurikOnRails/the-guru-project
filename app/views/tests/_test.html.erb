@@ -1,4 +1,13 @@
 <li>
-  <%= link_to test.title, test_path(test) %>
-  (<%= test.questions.count %> questions)
+  <div class="test-title">
+    <%= test.title.humanize %>
+  </div>
+  <div class="test-actions">
+    <%= link_to 'Show', test_path(test) %> |
+    <%= link_to 'Edit', edit_test_path(test) %> |
+    <%= link_to 'Delete',
+                test_path(test),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+  </div>
 </li>
