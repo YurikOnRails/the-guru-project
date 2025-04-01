@@ -6,4 +6,8 @@ class User < ApplicationRecord
   def tests_by_level(level)
     tests.where(level: level)
   end
+
+  def test_results(test)
+    test_results.order(id: :desk).find_by(test_id: test.id)
+  end
 end

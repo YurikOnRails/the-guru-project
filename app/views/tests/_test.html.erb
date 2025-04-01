@@ -1,13 +1,14 @@
-<li>
-  <div class="test-title">
-    <%= test.title.humanize %>
-  </div>
+<li class="test-item">
+  <h3 class="test-title"><%= test.title.humanize %></h3>
+
   <div class="test-actions">
-    <%= link_to 'Show', test_path(test) %> |
-    <%= link_to 'Edit', edit_test_path(test) %> |
+    <%= link_to 'Show', test_path(test), class: 'action-link' %>
+    <%= link_to 'Edit', edit_test_path(test), class: 'action-link' %>
     <%= link_to 'Delete',
                 test_path(test),
                 method: :delete,
-                data: { confirm: 'Are you sure?' } %>
+                data: { confirm: 'Are you sure?' },
+                class: 'action-link danger' %>
+    <%= button_to 'Start', start_test_path(test), class: 'start-button' %>
   </div>
 </li>
