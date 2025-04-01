@@ -1,66 +1,68 @@
 class TestsController < ApplicationController
-rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_test_not_found
-before_action :set_test, only: :start
+  before_action :set_user
+  before_action :set_test, only: :start
+
   def index
     @tests = Test.all
   end
 
   def show
+    @test = Test.find(params[:id])
+  end
+
+  def new
+    @test = @user.author_tests.new
+  end
+
+  def create
+    @test = @user.author_tests.new(test_params)
+    if @test.save
+      redirect_to @test, notice: "Test successfully created!"
+    else
+      render :new
+    end
   end
 
   def edit
+    @test = Test.find(params[:id])
   end
 
-def update
-  if @test.update(test_params)
-    redirect_to @test
-  else
-    render :edit
+  def update
+    @test = Test.find(params[:id])
+    if @test.update(test_params)
+      redirect_to @test
+    else
+      render :edit
+    end
   end
-end
 
-def new
-  @test = current_user.author_tests.new
-end
-
-def create
-  @test = current_user.author_tests.new(test_params)
-  if @test.save
-    redirect_to @test, notice: "Test successfully created!"
-  else
-    render :new
+  def destroy
+    @test = Test.find(params[:id])
+    @test.destroy
+    redirect_to tests_path
   end
-end
 
-def destroy
-  @test.destroy
-  redirect_to tests_path
-end
+  def start
+    if @test.questions.empty?
+      redirect_to tests_path, alert: 'Тест не содержит вопросов'
+      return
+    end
 
-def start
-  @user.tests.push(@test)
-  redirect_to @user.test_passages(@test)
-end
+    test_passage = @user.test_passages.create!(test: @test)
+    redirect_to test_passage_path(test_passage)
+  end
 
   private
 
-  # def test_params
-  #   params.require(:test).permit(:title, :level)
-  # end
+  def set_user
+    @user = User.first # Заглушка: всегда используем первого пользователя
+  end
+
+  def set_test
+    @test = Test.find(params[:id])
+  end
 
   def test_params
     params.require(:test).permit(:title, :level, :category_id)
-  end
-
-def set_test
-  @test = Test.find(params[:id])
-end
-
-def set_user
-  @user = User.first
-end
-
-  def rescue_with_test_not_found
-    render plain: "Test was not found"
   end
 end

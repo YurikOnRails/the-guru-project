@@ -1,3 +1,19 @@
-<li>
-  <%= question.content %>
+<li class="question-item">
+  <div class="question-content">
+    <%= question.content %>
+  </div>
+  
+  <div class="question-actions">
+    <%= button_to "Add answer", new_question_answer_path(question), method: :get, class: "btn btn-sm btn-success" %>
+    <%= button_to "Edit", edit_question_path(question), method: :get, class: "btn btn-sm btn-primary" %>
+    <%= button_to "Delete", question_path(question), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "Are you sure?" } %>
+  </div>
+
+  <% if question.answers.any? %>
+    <ul class="answers-list">
+      <%= render question.answers %>
+    </ul>
+  <% else %>
+    <p class="no-answers">No answers yet.</p>
+  <% end %>
 </li>
