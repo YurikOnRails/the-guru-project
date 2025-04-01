@@ -2,8 +2,8 @@ class QuestionsController < ApplicationController
   before_action :set_test, only: %i[new create]
   before_action :set_question, only: %i[show edit update destroy]
 
-  def show
-  end
+  rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
+  def show; end
 
   def new
     @question = @test.questions.new
@@ -18,8 +18,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @question.update(question_params)
@@ -31,10 +30,10 @@ class QuestionsController < ApplicationController
 
   def destroy
     @test = @question.test
-    @question.answers.destroy_all
     @question.destroy
     redirect_to @test, notice: "Question was successfully deleted."
   end
+
 
   private
 
