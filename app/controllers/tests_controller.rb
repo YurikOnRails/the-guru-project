@@ -2,6 +2,7 @@ class TestsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_test_not_found
 
   before_action :set_test, only: %i[show edit update destroy]
+  before_action :set_author, only: %i[new create]
 
   def index
     @tests = Test.all
@@ -15,7 +16,7 @@ class TestsController < ApplicationController
 
   def create
     @test = Test.new(test_params)
-    @test.author_id = params[:author_id]
+    @test.author = @author
 
     if @test.save
       redirect_to @test, notice: "Test successfully created!"
@@ -57,11 +58,15 @@ class TestsController < ApplicationController
     @test = Test.find(params[:id])
   end
 
+  def set_author
+    @author = User.first
+  end
+
   def test_params
-    params.require(:test).permit(:title, :level, :category_id, :author_id)
+    params.require(:test).permit(:title, :level, :category_id)
   end
 
   def rescue_with_test_not_found
-    render plain: "Test not found", status: :not_found
+    render plain: '404: Тест не найден'
   end
 end
