@@ -12,7 +12,7 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answer_params)
     if @answer.save
-      redirect_to @question.test, notice: 'Answer was successfully created.'
+      redirect_to @question.test, notice: "Answer was successfully created."
     else
       render :new
     end
@@ -23,7 +23,7 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update(answer_params)
-      redirect_to @answer.question.test, notice: 'Answer was successfully updated.'
+      redirect_to @answer.question.test, notice: "Answer was successfully updated."
     else
       render :edit
     end
@@ -32,7 +32,7 @@ class AnswersController < ApplicationController
   def destroy
     @test = @answer.question.test
     @answer.destroy
-    redirect_to @test, notice: 'Answer was successfully deleted.'
+    redirect_to @test, notice: "Answer was successfully deleted."
   end
 
   private
@@ -48,4 +48,4 @@ class AnswersController < ApplicationController
   def answer_params
     params.require(:answer).permit(:content, :correct)
   end
-end 
+end
