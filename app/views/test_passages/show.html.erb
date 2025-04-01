@@ -6,17 +6,17 @@
   </div>
 <% end %>
 
-<div class="progress-container">
-  <p class="progress">
+<div>
+  <p>
     Вопрос <%= @test_passage.test.questions.index(@test_passage.current_question) + 1 %> 
     из <%= @test_passage.test.questions.count %>
   </p>
-  <div class="progress-bar">
+  <div>
     <div class="progress-fill" style="width: <%= (@test_passage.test.questions.index(@test_passage.current_question) + 1).to_f / @test_passage.test.questions.count * 100 %>%"></div>
   </div>
 </div>
 
-<div class="question-container">
+<div>
   <% if @test_passage.current_question.present? %>
     <h2 class="question-body"><%= @test_passage.current_question.content %></h2>
 
@@ -28,9 +28,9 @@
         </div>
       <% end %>
 
-      <%= form.submit 'Ответить', class: 'btn btn-primary' %>
+      <%= form.submit 'Ответить' %>
     <% end %>
   <% else %>
-    <p class="no-questions">Для этого теста нет доступных вопросов.</p>
+    <p>Для этого теста нет доступных вопросов.</p>
   <% end %>
 </div>

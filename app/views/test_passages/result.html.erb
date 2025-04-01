@@ -15,12 +15,12 @@
     </strong>
   </p>
 
-  <p class="percentage">
+  <p>
     Процент успеха: 
     <span class="<%= @test_passage.successful? ? 'success' : 'failure' %>">
       <%= @test_passage.success_percentage %>%
     </span>
   </p>
 
-  <%= link_to 'Вернуться к списку тестов', tests_path, class: 'btn btn-primary' %>
+  <%= link_to 'Вернуться к списку тестов', tests_path %>
 </div>
