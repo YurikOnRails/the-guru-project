@@ -1,12 +1,12 @@
 <%= form_with model: [@test, @question], local: true do |f| %>
   <%= render 'shared/errors', object: @question %>
 
-  <div class="field">
+  <div>
     <%= f.label :content %>
     <%= f.text_area :content, rows: 7, cols: 60 %>
   </div>
 
-  <div class="actions">
+  <div>
     <%= f.submit "Submit" %>
   </div>
 <% end %>

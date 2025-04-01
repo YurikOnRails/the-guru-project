@@ -4,7 +4,7 @@
   <div>
     <%= link_to "Add answer", new_question_answer_path(question) %>
     <%= link_to "Edit", edit_question_path(question) %>
-    <%= button_to "Delete", question_path(question), method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= button_to "Delete", question_path(question), method: :delete %>
   </div>
 
   <% if question.answers.any? %>
@@ -14,7 +14,7 @@
           <%= answer.content %>
           <%= answer.correct? ? "✓" : "✗" %>
           <%= link_to "Edit", edit_answer_path(answer) %>
-          <%= button_to "Delete", answer_path(answer), method: :delete, data: { confirm: "Are you sure?" } %>
+          <%= button_to "Delete", answer_path(answer), method: :delete %>
         </li>
       <% end %>
     </ol>

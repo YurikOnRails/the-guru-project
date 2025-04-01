@@ -3,17 +3,17 @@
 <%= render 'shared/errors', object: @answer %>
 
 <%= form_with model: [@question, @answer], local: true do |f| %>
-  <div class="field">
+  <div>
     <%= f.label :content %>
     <%= f.text_area :content, rows: 3, cols: 60 %>
   </div>
 
-  <div class="field">
+  <div>
     <%= f.label :correct %>
     <%= f.check_box :correct %>
   </div>
 
-  <div class="actions">
+  <div>
     <%= f.submit "Submit" %>
   </div>
 <% end %>
