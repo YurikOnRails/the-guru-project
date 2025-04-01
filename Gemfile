@@ -14,7 +14,7 @@ gem "importmap-rails"
 gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
-# Build JSON APIs  with ease [https://github.com/rails/jbuilder]
+# Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
 gem "faker"
@@ -25,7 +25,7 @@ gem "faker"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
-# Use the ddatabase-backed adapters for Rails.cache, Active Job, and Action Cable
+# Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
