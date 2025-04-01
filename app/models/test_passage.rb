@@ -1,7 +1,7 @@
 class TestPassage < ApplicationRecord
   belongs_to :user
   belongs_to :test
-  belongs_to :current_question, class_name: 'Question', optional: true
+  belongs_to :current_question, class_name: "Question", optional: true
 
   validates :correct_questions, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validate :test_has_questions, on: :create
@@ -48,12 +48,12 @@ class TestPassage < ApplicationRecord
   end
 
   def next_question
-    test.questions.order(:id).where('id > ?', current_question.id).first
+    test.questions.order(:id).where("id > ?", current_question.id).first
   end
 
   def test_has_questions
     if test.questions.empty?
-      errors.add(:test, 'должен содержать хотя бы один вопрос')
+      errors.add(:test, "должен содержать хотя бы один вопрос")
     end
   end
 end
