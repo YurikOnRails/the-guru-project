@@ -44,7 +44,7 @@ class TestsController < ApplicationController
 
   def start
     if @test.questions.empty?
-      redirect_to tests_path, alert: 'Тест не содержит вопросов'
+      redirect_to tests_path, alert: "Тест не содержит вопросов"
       return
     end
 
