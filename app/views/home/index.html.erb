@@ -1,0 +1,21 @@
+<h1>Доступные тесты</h1>
+
+<div class="tests-container">
+  <% if @tests.any? %>
+    <table class="tests-table">
+      <thead>
+        <tr>
+          <th>Название теста</th>
+          <th>Уровень</th>
+          <th>Количество вопросов</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @tests %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="no-tests">Нет доступных тестов</p>
+  <% end %>
+</div> 
