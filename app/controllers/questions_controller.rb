@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
   def create
     @question = @test.questions.new(question_params)
     if @question.save
-      redirect_to @test, notice: 'Question was successfully created.'
+      redirect_to @test, notice: "Question was successfully created."
     else
       render :new
     end
@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      redirect_to @question.test, notice: 'Question was successfully updated.'
+      redirect_to @question.test, notice: "Question was successfully updated."
     else
       render :edit
     end
@@ -33,7 +33,7 @@ class QuestionsController < ApplicationController
     @test = @question.test
     @question.answers.destroy_all
     @question.destroy
-    redirect_to @test, notice: 'Question was successfully deleted.'
+    redirect_to @test, notice: "Question was successfully deleted."
   end
 
   private
@@ -49,4 +49,4 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:content)
   end
-end 
+end
