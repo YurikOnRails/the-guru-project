@@ -2,6 +2,20 @@
 
 <%= render 'shared/errors', object: @answer %>
 
-<%= render 'form', answer: @answer %>
+<%= form_with model: [@question, @answer], local: true do |f| %>
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content, rows: 3, cols: 60 %>
+  </div>
 
-<%= link_to 'Back', @question %>
+  <div class="field">
+    <%= f.label :correct %>
+    <%= f.check_box :correct %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', @question.test %>
