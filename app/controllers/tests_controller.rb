@@ -67,6 +67,6 @@ class TestsController < ApplicationController
   end
 
   def rescue_with_test_not_found
-    render plain: '404: Тест не найден'
+    render plain: "404: Тест не найден"
   end
 end
