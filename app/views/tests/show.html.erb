@@ -10,18 +10,14 @@
 
 <h2>Questions for <%= @test.title %></h2>
 
-<div class="questions-list">
-  <% if @test.questions.any? %>
-    <ul>
-      <%= render @test.questions %>
-    </ul>
-  <% else %>
-    <p>No questions yet.</p>
-  <% end %>
-</div>
+<% if @test.questions.any? %>
+  <ul>
+    <%= render @test.questions %>
+  </ul>
+<% else %>
+  <p>No questions yet.</p>
+<% end %>
 
-<div class="actions">
-  <%= button_to "Add a new question", new_test_question_path(@test), method: :get, class: "btn btn-primary" %>
-  <%= button_to "Edit title", edit_test_path(@test), method: :get, class: "btn btn-secondary" %>
-  <%= button_to "Back to Tests", tests_path, method: :get, class: "btn btn-link" %>
-</div>
+<%= link_to "Add a new question", new_test_question_path(@test), class: "btn btn-primary" %> |
+<%= link_to "Edit title", edit_test_path(@test) %> |
+<%= link_to "Back to Tests", tests_path %>

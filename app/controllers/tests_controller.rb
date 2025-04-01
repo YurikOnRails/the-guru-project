@@ -1,5 +1,4 @@
 class TestsController < ApplicationController
-  before_action :set_user
   before_action :set_test, only: :start
 
   def index
@@ -11,11 +10,11 @@ class TestsController < ApplicationController
   end
 
   def new
-    @test = @user.author_tests.new
+    @test = Test.new
   end
 
   def create
-    @test = @user.author_tests.new(test_params)
+    @test = Test.new(test_params)
     if @test.save
       redirect_to @test, notice: "Test successfully created!"
     else
@@ -48,15 +47,11 @@ class TestsController < ApplicationController
       return
     end
 
-    test_passage = @user.test_passages.create!(test: @test)
-    redirect_to test_passage_path(test_passage)
+    @test_passage = TestPassage.create!(test: @test)
+    redirect_to @test_passage
   end
 
   private
-
-  def set_user
-    @user = User.first # Заглушка: всегда используем первого пользователя
-  end
 
   def set_test
     @test = Test.find(params[:id])

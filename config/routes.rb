@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  resources :answers
   get "static_pages/about"
 
   resources :tests do
     member do
-      post :start  # Правильное расположение для маршрута start
+      post :start
     end
 
     resources :questions, shallow: true, except: :index do

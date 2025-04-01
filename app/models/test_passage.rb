@@ -1,5 +1,4 @@
 class TestPassage < ApplicationRecord
-  belongs_to :user
   belongs_to :test
   belongs_to :current_question, class_name: "Question", optional: true
 
@@ -53,7 +52,7 @@ class TestPassage < ApplicationRecord
 
   def test_has_questions
     if test.questions.empty?
-      errors.add(:test, "должен содержать хотя бы один вопрос")
+      errors.add(:base, "Тест не содержит вопросов")
     end
   end
 end
