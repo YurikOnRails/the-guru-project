@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
+  get "sessions/new"
+  get "users/new"
   get "static_pages/about"
+
+  get :signup, to: "users#new"
+  get :login, to: "sessions#new"
+
+  resources :users, only: :create
+  resources :sessions, only: :create
 
   resources :tests do
     member do
