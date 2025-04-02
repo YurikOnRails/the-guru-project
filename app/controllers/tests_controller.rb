@@ -2,7 +2,7 @@ class TestsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_test_not_found
 
   before_action :authenticate_user!
-  before_action :set_test, only: %i[show edit update destroy]
+  before_action :set_test, only: %i[show edit update destroy start]
   before_action :set_author, only: %i[new create]
 
   def index
@@ -16,11 +16,10 @@ class TestsController < ApplicationController
   end
 
   def create
-    @test = Test.new(test_params)
-    @test.author = @author
+    @test = current_user.author_tests.new(test_params)
 
     if @test.save
-      redirect_to @test, notice: "Test successfully created!"
+      redirect_to @test, notice: "Test was successfully created."
     else
       render :new
     end
@@ -42,14 +41,12 @@ class TestsController < ApplicationController
   end
 
   def start
-    test = Test.find(params[:id])
-
-    if test.questions.empty?
-      redirect_to tests_path, alert: "Тест не содержит вопросов"
+    if @test.questions.empty?
+      redirect_to tests_path, alert: "Test has no questions"
       return
     end
 
-    @test_passage = TestPassage.create!(test: test)
+    @test_passage = current_user.test_passages.create!(test: @test)
     redirect_to @test_passage
   end
 

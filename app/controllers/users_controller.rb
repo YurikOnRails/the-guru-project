@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_user!, only: [ :new, :create ]
+
   def new
     @user = User.new
   end
@@ -7,7 +9,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to tests_path
+      session[:user_id] = @user.id
+      redirect_to tests_path, notice: "Welcome to TestGuru!"
     else
       render :new
     end
