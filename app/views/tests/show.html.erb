@@ -18,6 +18,6 @@
   <p>No questions yet.</p>
 <% end %>
 
-<%= link_to "Add a new question", new_test_question_path(@test) %> |
+<%= link_to "Add a new question", new_test_question_path(@test), class: "btn btn-primary" %> |
 <%= link_to "Edit title", edit_test_path(@test) %> |
 <%= link_to "Back to Tests", tests_path %>

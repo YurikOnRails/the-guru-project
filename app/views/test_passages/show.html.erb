@@ -1,0 +1,36 @@
+<h1>Прохождение теста "<%= @test_passage.test.title %>"</h1>
+
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<div>
+  <p>
+    Вопрос <%= @test_passage.test.questions.index(@test_passage.current_question) + 1 %> 
+    из <%= @test_passage.test.questions.count %>
+  </p>
+  <div>
+    <div class="progress-fill" style="width: <%= (@test_passage.test.questions.index(@test_passage.current_question) + 1).to_f / @test_passage.test.questions.count * 100 %>%"></div>
+  </div>
+</div>
+
+<div>
+  <% if @test_passage.current_question.present? %>
+    <h2 class="question-body"><%= @test_passage.current_question.content %></h2>
+
+    <%= form_with url: test_passage_path(@test_passage), local: true, method: :put do |form| %>
+      <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.answers, :id, :content, include_hidden: false do |b| %>
+        <div class="answer-option">
+          <%= b.check_box id: "answer_ids_#{b.object.id}" %>
+          <%= b.label %>
+        </div>
+      <% end %>
+
+      <%= form.submit 'Ответить' %>
+    <% end %>
+  <% else %>
+    <p>Для этого теста нет доступных вопросов.</p>
+  <% end %>
+</div>
