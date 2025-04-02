@@ -2,8 +2,7 @@ class AnswersController < ApplicationController
   before_action :set_answer, only: %i[show edit update destroy]
   before_action :set_question, only: %i[new create]
 
-  def show
-  end
+  def show; end
 
   def new
     @answer = @question.answers.new
@@ -18,8 +17,7 @@ class AnswersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @answer.update(answer_params)
