@@ -1,6 +1,6 @@
 <h1>Edit Question</h1>
 
-<%= render 'shared/errors', object: @question %>
+<%= render 'shared/errors', resource: @question %>
 
 <%= form_with model: [@test, @question], local: true do |f| %>
   <div>
