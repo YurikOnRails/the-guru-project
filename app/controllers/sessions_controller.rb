@@ -10,8 +10,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
       cookies[:email] = user.email
-      redirect_to cookies[:target_url] || root_path, notice: "Welcome back!"
-      cookies.delete(:target_url)
+      redirect_to cookies.delete(:target_url) || root_path, notice: "Welcome back!"
     else
       flash.now[:alert] = "Are you a Guru? Verify your Email and Password please"
       render :new
