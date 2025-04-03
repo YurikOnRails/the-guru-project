@@ -11,8 +11,6 @@ class ApplicationController < ActionController::Base
       cookies[:target_url] = request.url if request.get?
       redirect_to login_path, alert: "Please log in to continue"
     end
-
-    cookies[:email] = current_user&.email
   end
 
   def current_user
