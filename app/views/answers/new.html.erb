@@ -1,19 +1,19 @@
 <h1>New Answer</h1>
 
-<%= render 'shared/errors', object: @answer %>
+<%= render 'shared/errors', resource: @answer %>
 
 <%= form_with model: [@question, @answer], local: true do |f| %>
-  <div>
+  <div class="field">
     <%= f.label :content %>
     <%= f.text_area :content, rows: 3, cols: 60 %>
   </div>
 
-  <div>
+  <div class="field">
     <%= f.label :correct %>
     <%= f.check_box :correct %>
   </div>
 
-  <div>
+  <div class="actions">
     <%= f.submit "Submit" %>
   </div>
 <% end %>
