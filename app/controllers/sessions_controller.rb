@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      cookies[:email] = user.email
       redirect_to cookies.delete(:target_url) || root_path, notice: "Welcome back!"
     else
       flash.now[:alert] = "Are you a Guru? Verify your Email and Password please"
@@ -19,7 +18,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
-    cookies.delete(:email)
     redirect_to root_path, notice: "Logged out successfully!"
   end
 end
