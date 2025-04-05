@@ -20,12 +20,12 @@ class User < ApplicationRecord
   # Возвращает полное имя пользователя или email, если имя не указано
   def full_name
     if first_name.present? || last_name.present?
-      [first_name, last_name].compact.join(' ')
+      [ first_name, last_name ].compact.join(" ")
     else
       email
     end
   end
-  
+
   # Метод для проверки, является ли пользователь администратором
   def admin?
     is_a?(Admin)

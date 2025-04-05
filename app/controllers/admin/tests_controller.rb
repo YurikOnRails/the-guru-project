@@ -1,5 +1,5 @@
 class Admin::TestsController < Admin::BaseController
-  before_action :set_test, only: [:show, :edit, :update, :destroy]
+  before_action :set_test, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @tests = Test.all
@@ -14,9 +14,9 @@ class Admin::TestsController < Admin::BaseController
 
   def create
     @test = current_user.author_tests.new(test_params)
-    
+
     if @test.save
-      redirect_to admin_test_path(@test), notice: 'Тест успешно создан'
+      redirect_to admin_test_path(@test), notice: "Тест успешно создан"
     else
       render :new
     end
@@ -27,7 +27,7 @@ class Admin::TestsController < Admin::BaseController
 
   def update
     if @test.update(test_params)
-      redirect_to admin_test_path(@test), notice: 'Тест успешно обновлен'
+      redirect_to admin_test_path(@test), notice: "Тест успешно обновлен"
     else
       render :edit
     end
@@ -35,7 +35,7 @@ class Admin::TestsController < Admin::BaseController
 
   def destroy
     @test.destroy
-    redirect_to admin_tests_path, notice: 'Тест успешно удален'
+    redirect_to admin_tests_path, notice: "Тест успешно удален"
   end
 
   private
