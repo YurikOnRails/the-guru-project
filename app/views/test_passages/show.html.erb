@@ -8,11 +8,20 @@
 
 <div>
   <p>
-    Вопрос <%= @test_passage.test.questions.index(@test_passage.current_question) + 1 %> 
-    из <%= @test_passage.test.questions.count %>
+    <% if @test_passage.current_question.present? %>
+      <% question_index = @test_passage.test.questions.index(@test_passage.current_question) %>
+      Вопрос <%= question_index.nil? ? "N/A" : question_index + 1 %> 
+      из <%= @test_passage.test.questions.count %>
+    <% else %>
+      Нет доступных вопросов
+    <% end %>
   </p>
   <div>
-    <div class="progress-fill" style="width: <%= (@test_passage.test.questions.index(@test_passage.current_question) + 1).to_f / @test_passage.test.questions.count * 100 %>%"></div>
+    <% if @test_passage.current_question.present? && @test_passage.test.questions.any? %>
+      <% question_index = @test_passage.test.questions.index(@test_passage.current_question) %>
+      <% progress_percentage = question_index.nil? ? 0 : (question_index + 1).to_f / @test_passage.test.questions.count * 100 %>
+      <div class="progress-fill" style="width: <%= progress_percentage %>%"></div>
+    <% end %>
   </div>
 </div>
 
