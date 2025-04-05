@@ -1,20 +1,41 @@
-class Admin::TestsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_test_not_found
-
-  before_action :set_test, only: %i[start]
-  before_action :set_author, only: %i[new create]
+class Admin::TestsController < Admin::BaseController
+  before_action :set_test, only: [:show, :edit, :update, :destroy]
 
   def index
     @tests = Test.all
   end
 
-  def start
-      current_user.tests.push(@test)
-      redirect_to current_user.test_passage(@test)
-    end
+  def show
+  end
 
-    @test_passage = current_user.test_passages.create!(test: @test)
-    redirect_to @test_passage
+  def new
+    @test = Test.new
+  end
+
+  def create
+    @test = current_user.author_tests.new(test_params)
+    
+    if @test.save
+      redirect_to admin_test_path(@test), notice: 'Тест успешно создан'
+    else
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @test.update(test_params)
+      redirect_to admin_test_path(@test), notice: 'Тест успешно обновлен'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @test.destroy
+    redirect_to admin_tests_path, notice: 'Тест успешно удален'
   end
 
   private
@@ -23,11 +44,7 @@ class Admin::TestsController < ApplicationController
     @test = Test.find(params[:id])
   end
 
-  def set_author
-    @author = User.first
-  end
-
-  def rescue_with_test_not_found
-    render plain: "404: Тест не найден"
+  def test_params
+    params.require(:test).permit(:title, :level, :category_id)
   end
 end
