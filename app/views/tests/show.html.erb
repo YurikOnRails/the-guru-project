@@ -1,0 +1,32 @@
+<h1><%= @test.title %></h1>
+
+<p>
+  <strong>Уровень:</strong>
+  <%= @test.level %>
+</p>
+
+<p>
+  <strong>Категория:</strong>
+  <%= @test.category.name %>
+</p>
+
+<p>
+  <strong>Автор:</strong>
+  <%= @test.author.email %>
+</p>
+
+<h2>Вопросы</h2>
+<% if @test.questions.any? %>
+  <ul>
+    <% @test.questions.each do |question| %>
+      <li>
+        <%= question.content %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>В тесте пока нет вопросов.</p>
+<% end %>
+
+<%= button_to 'Начать тест', start_test_path(@test), class: 'start-button' %>
+<%= link_to 'Назад к тестам', tests_path %> 
