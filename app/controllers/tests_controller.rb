@@ -1,6 +1,6 @@
 class TestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_test, only: [:show, :start]
+  before_action :set_test, only: [ :show, :start ]
 
   def index
     @tests = Test.all
@@ -11,7 +11,7 @@ class TestsController < ApplicationController
 
   def start
     if @test.questions.empty?
-      redirect_to tests_path, alert: 'Тест не содержит вопросов'
+      redirect_to tests_path, alert: "Тест не содержит вопросов"
       return
     end
 
@@ -24,4 +24,4 @@ class TestsController < ApplicationController
   def set_test
     @test = Test.find(params[:id])
   end
-end 
+end
