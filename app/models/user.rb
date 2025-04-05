@@ -1,11 +1,10 @@
-require "digest/sha1"
-
 class User < ApplicationRecord
+  devise  :database_authenticatable, :registerable, :recoverable,
+          :rememberable, :trackable, :validatable, :confirmable
+
   has_many :test_passages, dependent: :destroy # чтобы при удалении юзера удалялись и результаты
   has_many :tests, through: :test_passages, dependent: :destroy # соответв. будут удаляться и тесты при удалении юзера
   has_many :author_tests, class_name: "Test", foreign_key: "author_id"
-
-  has_secure_password
 
   validates :email, presence: true,
                    uniqueness: { case_sensitive: false },
