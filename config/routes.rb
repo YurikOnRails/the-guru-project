@@ -1,16 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "tests#index"
 
-  get "sessions/new"
-  get "users/new"
+  # Статическая страница О нас
   get "static_pages/about"
-
-  get :signup, to: "users#new"
-  get :login, to: "sessions#new"
-  delete :logout, to: "sessions#destroy"
-
-  resources :users, only: :create
-  resources :sessions, only: :create
 
   resources :tests do
     member do
@@ -28,4 +21,9 @@ Rails.application.routes.draw do
       get :result
     end
   end
+
+  namespace :admin do
+    resources :tests
+  end
+
 end

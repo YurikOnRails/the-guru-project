@@ -18,17 +18,15 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <% if logged_in? %>
-      <p class="nav user">Welcome, <b><%= current_user.email %></b> Guru</p>
-    <% end %>
-
-    <%= yield %>
-    <%= render 'layouts/footer' %>
-
+    <div class="container mt-3">
+      <%= render 'layouts/navigation' %>
+      <%= yield %>
+      <%= render 'layouts/footer' %>
+    </div>
   </body>
 </html>
