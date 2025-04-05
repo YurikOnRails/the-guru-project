@@ -1,49 +1,15 @@
-# Название вашего приложения
-service: the_guru_project
-
-# Название образа контейнера
+service: the-guru-project
 image: yurik7/kamal2-test
-
-# Серверы для деплоя
 servers:
-  web:
-    - 91.222.239.113
-
-# Настройка прокси-сервера без доменного имени (используется только IP)
-proxy:
-  ssl: false # SSL отключен, так как используется IP
-  host: 91.222.239.113
-
-# Учетные данные для хранилища образов
+  - 91.222.239.113
 registry:
   username: yurik7
   password:
-    - DOCKER_HUB_TOKEN # Используем прямой токен Docker Hub
-
-# Переменные окружения для контейнеров
-env:
-  secret:
-    - RAILS_MASTER_KEY # Убедитесь, что этот секрет добавлен в .kamal/secrets
-  clear:
-    SOLID_QUEUE_IN_PUMA: true
-    WEB_CONCURRENCY: 1 # SQLite3 не требует высокой нагрузки
-    RAILS_LOG_LEVEL: debug
-
-# Алиасы для удобного управления приложением
-aliases:
-  console: app exec --interactive --reuse "bin/rails console"
-  shell: app exec --interactive --reuse "bash"
-  logs: app logs -f
-  dbc: app exec --interactive --reuse "bin/rails dbconsole"
-
-# Настройка постоянного хранилища для SQLite3
-volumes:
-  - "the_guru_project_storage:/rails/storage"
-  - "the_guru_project_db:/rails/db"
-
-# Путь для ассетов
-asset_path: /rails/public/assets
-
-# Настройка сборщика образов
+    - KAMAL_REGISTRY_PASSWORD
 builder:
   arch: amd64
+env:
+  secret:
+    - RAILS_MASTER_KEY
+    - DOCKER_HUB_TOKEN
+    - KAMAL_REGISTRY_PASSWORD
