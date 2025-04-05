@@ -68,3 +68,5 @@ storage/.project
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+.kamal/secrets
+*.gpg
