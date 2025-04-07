@@ -19,8 +19,7 @@ class Admin::AnswersController < Admin::BaseController
     end
   end
 
-  def edit
-  end
+  def editend
 
   def update
     if @answer.update(answer_params)

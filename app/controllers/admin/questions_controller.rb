@@ -2,8 +2,7 @@ class Admin::QuestionsController < Admin::BaseController
   before_action :set_test, only: [ :new, :create ]
   before_action :set_question, only: [ :show, :edit, :update, :destroy ]
 
-  def show
-  end
+  def show; end
 
   def new
     @question = @test.questions.new
@@ -19,8 +18,7 @@ class Admin::QuestionsController < Admin::BaseController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @question.update(question_params)
