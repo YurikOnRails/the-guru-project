@@ -1,5 +1,5 @@
 puts "Clearing the database..."
-[ TestResult, Answer, Question, Test, Category, User ].each(&:delete_all)
+[ TestPassage, Answer, Question, Test, Category, User ].each(&:delete_all)
 puts "Database cleared successfully."
 
 puts "Seeding users..."
@@ -49,14 +49,5 @@ Answer.create!([
                  { content: 'E = mc²', correct: false, question: questions[3] }
                ])
 puts "Answers: #{Answer.count}"
-
-puts "Seeding test results..."
-TestResult.create!([
-                     { user: users[0], test: tests[0] },
-                     { user: users[1], test: tests[1] },
-                     { user: users[2], test: tests[2] },
-                     { user: users[0], test: tests[1] }
-                   ])
-puts "Test Results: #{TestResult.count}"
 
 puts "Seeding completed successfully!"

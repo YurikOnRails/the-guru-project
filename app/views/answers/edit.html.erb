@@ -1,0 +1,9 @@
+<h1>Editing Answer</h1>
+
+<p>
+  <%= @answer.question.content %>
+</p>
+
+<%= render 'form', answer: @answer %>
+
+<%= link_to 'Back', @answer.question.test %>

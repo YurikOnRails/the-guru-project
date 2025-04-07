@@ -1,51 +1,26 @@
 class TestsController < ApplicationController
-rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_test_not_found
+  before_action :authenticate_user!
+  before_action :set_test, only: [ :show, :start ]
 
   def index
     @tests = Test.all
   end
 
-  def show
-    @test = Test.find(params[:id])
-  end
+  def show; end
 
-  def edit
-    @test = Test.find(params[:id])
-  end
+  def start
+    if @test.questions.empty?
+      redirect_to tests_path, alert: "Тест не содержит вопросов"
+      return
+    end
 
-def update
-  @test = Test.find(params[:id])
-
-  if @test.update(test_params)
-    redirect_to @test
-  else
-    render :edit
+    @test_passage = current_user.test_passages.create!(test: @test)
+    redirect_to @test_passage
   end
-end
-def new
-  @test = current_user.author_tests.new
-end
-
-def create
-  @test = current_user.author_tests.new(test_params)
-  if @test.save
-    redirect_to @test, notice: "Test successfully created!"
-  else
-    render :new
-  end
-end
 
   private
 
-  def test_params
-    params.require(:test).permit(:title, :level)
-  end
-
-  def test_params
-    params.require(:test).permit(:title, :level, :category_id)
-  end
-
-  def rescue_with_test_not_found
-    render plain: "Test was not found"
+  def set_test
+    @test = Test.find(params[:id])
   end
 end

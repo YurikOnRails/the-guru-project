@@ -1,0 +1,26 @@
+<h1>Результат теста "<%= @test_passage.test.title %>"</h1>
+
+<div class="result-container">
+  <p>
+    Правильных ответов: <%= @test_passage.correct_questions %> из <%= @test_passage.test.questions.count %>
+  </p>
+
+  <p class="result-message <%= @test_passage.successful? ? 'success' : 'failure' %>">
+    <strong>
+      <% if @test_passage.successful? %>
+        Поздравляем! Вы успешно прошли тест!
+      <% else %>
+        К сожалению, тест не пройден. Попробуйте еще раз!
+      <% end %>
+    </strong>
+  </p>
+
+  <p>
+    Процент успеха: 
+    <span class="<%= @test_passage.successful? ? 'success' : 'failure' %>">
+      <%= @test_passage.success_percentage %>%
+    </span>
+  </p>
+
+  <%= link_to 'Вернуться к списку тестов', tests_path %>
+</div>

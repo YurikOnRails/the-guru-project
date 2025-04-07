@@ -1,8 +1,11 @@
 # Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+# Добавил для втоматической проверки и добавления пустой строки в конце файлов
+Layout/TrailingEmptyLines:
+  EnforcedStyle: final_newline
+
+# Использовать однострочный формат (def method; end)
+Style/EmptyMethod:
+  EnforcedStyle: compact 
