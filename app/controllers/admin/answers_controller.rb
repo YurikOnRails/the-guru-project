@@ -2,8 +2,7 @@ class Admin::AnswersController < Admin::BaseController
   before_action :set_question, only: [ :new, :create ]
   before_action :set_answer, only: [ :show, :edit, :update, :destroy ]
 
-  def show
-  end
+  def show; end
 
   def new
     @answer = @question.answers.new
@@ -19,7 +18,7 @@ class Admin::AnswersController < Admin::BaseController
     end
   end
 
-  def editend
+  def edit; end
 
   def update
     if @answer.update(answer_params)
