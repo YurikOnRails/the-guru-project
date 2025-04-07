@@ -1,0 +1,19 @@
+<h1>Просмотр ответа</h1>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Вопрос:</h5>
+    <p class="card-text"><%= @answer.question.body %></p>
+
+    <h5 class="card-title mt-3">Текст ответа:</h5>
+    <p class="card-text"><%= @answer.content %></p>
+
+    <h5 class="card-title mt-3">Правильный:</h5>
+    <p class="card-text"><%= @answer.correct ? 'Да' : 'Нет' %></p>
+  </div>
+</div>
+
+<div class="mt-3">
+  <%= link_to 'Редактировать', edit_admin_answer_path(@answer), class: 'btn btn-primary' %>
+  <%= link_to 'Назад', admin_test_path(@answer.question.test), class: 'btn btn-secondary' %>
+</div> 

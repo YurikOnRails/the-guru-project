@@ -5,3 +5,7 @@ inherit_gem:
 # Добавил для втоматической проверки и добавления пустой строки в конце файлов
 Layout/TrailingEmptyLines:
   EnforcedStyle: final_newline
+
+# Использовать однострочный формат (def method; end)
+Style/EmptyMethod:
+  EnforcedStyle: compact 
