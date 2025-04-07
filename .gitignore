@@ -70,3 +70,5 @@ storage/.project
 !/app/assets/builds/.keep
 .kamal/secrets
 *.gpg
+config/deploy.yml
+.kamal/secrets

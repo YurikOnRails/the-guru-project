@@ -3,7 +3,7 @@ image: yurik7/kamal2-test
 servers:
   - 91.222.239.113
 registry:
-  username: yurik7
+  username: registry-user-name
   password:
     - KAMAL_REGISTRY_PASSWORD
 builder:
@@ -11,5 +11,3 @@ builder:
 env:
   secret:
     - RAILS_MASTER_KEY
-    - DOCKER_HUB_TOKEN
-    - KAMAL_REGISTRY_PASSWORD
