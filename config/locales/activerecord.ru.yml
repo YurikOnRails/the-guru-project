@@ -1,14 +1,45 @@
-en:
+ru:
   activerecord:
     models:
       test: "Тест"
+      question: "Вопрос"
+      answer: "Ответ"
+      category: "Категория"
+      test_passage: "Прохождение теста"
+      gist: "Gist"
+      user: "Пользователь"
 
     attributes:
       test:
         title: "Название"
         level: "Уровень"
         category: "Категория"
+      question:
+        body: "Текст вопроса"
+        test: "Тест"
+      answer:
+        body: "Текст ответа"
+        correct: "Правильный"
+        question: "Вопрос"
+      category:
+        name: "Название"
+        title: "Название"
+      test_passage:
+        test: "Тест"
+        user: "Пользователь"
+        current_question: "Текущий вопрос"
+        correct_questions: "Правильных ответов"
+      user:
+        email: "Электронная почта"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        first_name: "Имя"
+        last_name: "Фамилия"
 
     errors:
       messages:
         blank: "не может быть пустым"
+        taken: "уже существует"
+        too_short: "слишком короткий (минимум %{count} символов)"
+        confirmation: "не совпадает с подтверждением"
+        invalid: "неверный формат"

@@ -1,23 +1,20 @@
-<p>
-  <strong>Title:</strong>
-  <%= @test.title %>
-</p>
+<h1><%= t('.title', title: @test.title) %></h1>
 
 <p>
-  <strong>Level:</strong>
-  <%= @test.level %>
+  <%= link_to t('.edit_title'), edit_admin_test_path(@test) %> |
+  <%= link_to t('.back'), admin_tests_path %>
 </p>
 
-<h2>Questions for <%= @test.title %></h2>
+<h2><%= t('.questions') %></h2>
 
 <% if @test.questions.any? %>
   <ul>
     <%= render partial: 'questions/question', collection: @test.questions %>
   </ul>
 <% else %>
-  <p>Вопросов пока нет</p>
+  <p><%= t('.no_questions') %></p>
 <% end %>
 
-<%= link_to "Add a new question", new_test_question_path(@test), class: "btn btn-primary" %> |
-<%= link_to "Edit title", edit_admin_test_path(@test) %> |
-<%= link_to "Back to Tests", admin_tests_path %>
+<%= link_to t('.add_question'), new_test_question_path(@test) %> |
+<%= link_to t('.edit_title'), edit_admin_test_path(@test) %> |
+<%= link_to t('.back'), admin_tests_path %>

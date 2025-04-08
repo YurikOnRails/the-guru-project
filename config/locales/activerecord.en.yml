@@ -2,13 +2,44 @@ en:
   activerecord:
     models:
       test: "Test"
+      question: "Question"
+      answer: "Answer"
+      category: "Category"
+      test_passage: "Test Passage"
+      gist: "Gist"
+      user: "User"
 
     attributes:
       test:
         title: "Title"
         level: "Level"
         category: "Category"
+      question:
+        body: "Question text"
+        test: "Test"
+      answer:
+        body: "Answer text"
+        correct: "Correct"
+        question: "Question"
+      category:
+        name: "Name"
+        title: "Title"
+      test_passage:
+        test: "Test"
+        user: "User"
+        current_question: "Current question"
+        correct_questions: "Correct answers"
+      user:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        first_name: "First name"
+        last_name: "Last name"
 
     errors:
       messages:
         blank: "can't be blank"
+        taken: "has already been taken"
+        too_short: "is too short (minimum is %{count} characters)"
+        confirmation: "doesn't match confirmation"
+        invalid: "is invalid"
