@@ -1,6 +1,8 @@
 <% if resource.errors.any? %>
   <div id="error_explanation" class="alert alert-danger">
-    <h2><%= pluralize(resource.errors.count, "error") %> prohibited this <%= resource.class.name.downcase %> from being saved:</h2>
+    <h2><%= pluralize(resource.errors.count, "error") %> detected:
+    <%= t('.header', count: resource.errors.count) %>
+    </h2>
     <ul>
       <% resource.errors.full_messages.each do |message| %>
         <li><%= message %></li>

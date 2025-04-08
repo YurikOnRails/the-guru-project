@@ -12,11 +12,10 @@
 
 <% if @test.questions.any? %>
   <ul>
-    <%= render @test.questions %>
     <%= render partial: 'questions/question', collection: @test.questions %>
   </ul>
 <% else %>
-  <p>No questions yet.</p>
+  <p>Вопросов пока нет</p>
 <% end %>
 
 <%= link_to "Add a new question", new_test_question_path(@test), class: "btn btn-primary" %> |
