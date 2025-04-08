@@ -1,23 +1,32 @@
-<p>
-  <strong>Title:</strong>
-  <%= @test.title %>
-</p>
+<h1><%= @test.title %></h1>
 
 <p>
-  <strong>Level:</strong>
+  <strong>Уровень:</strong>
   <%= @test.level %>
 </p>
 
-<h2>Questions for <%= @test.title %></h2>
+<p>
+  <strong>Категория:</strong>
+  <%= @test.category.name %>
+</p>
 
+<p>
+  <strong>Автор:</strong>
+  <%= @test.author.email %>
+</p>
+
+<h2>Вопросы</h2>
 <% if @test.questions.any? %>
   <ul>
-    <%= render @test.questions %>
+    <% @test.questions.each do |question| %>
+      <li>
+        <%= question.content %>
+      </li>
+    <% end %>
   </ul>
 <% else %>
-  <p>No questions yet.</p>
+  <p>В тесте пока нет вопросов.</p>
 <% end %>
 
-<%= link_to "Add a new question", new_test_question_path(@test), class: "btn btn-primary" %> |
-<%= link_to "Edit title", edit_test_path(@test) %> |
-<%= link_to "Back to Tests", tests_path %>
+<%= button_to 'Начать тест', start_test_path(@test), class: 'start-button' %>
+<%= link_to 'Назад к тестам', tests_path %> 

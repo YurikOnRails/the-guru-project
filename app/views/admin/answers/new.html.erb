@@ -1,0 +1,23 @@
+<h1>Новый ответ</h1>
+
+<%= render 'shared/errors', resource: @answer %>
+
+<%= form_with model: [:admin, @question, @answer], local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :content, 'Текст ответа' %>
+    <%= form.text_area :content, class: 'form-control' %>
+  </div>
+
+  <div class="form-check">
+    <%= form.check_box :correct, class: 'form-check-input' %>
+    <%= form.label :correct, 'Правильный', class: 'form-check-label' %>
+  </div>
+
+  <div class="actions mt-3">
+    <%= form.submit "Сохранить", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<div class="mt-3">
+  <%= link_to 'Назад', admin_test_path(@question.test), class: 'btn btn-secondary' %>
+</div> 

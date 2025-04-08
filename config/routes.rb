@@ -1,18 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users, path: :gurus, path_names: { sign_in: :login, sign_out: :logout, sign_up: :signup }, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
   root "tests#index"
 
-  get "sessions/new"
-  get "users/new"
+  # Статическая страница О нас
   get "static_pages/about"
 
-  get :signup, to: "users#new"
-  get :login, to: "sessions#new"
-  delete :logout, to: "sessions#destroy"
-
-  resources :users, only: :create
-  resources :sessions, only: :create
-
-  resources :tests do
+  resources :tests, only: [ :index, :show ] do
     member do
       post :start
     end
@@ -26,6 +19,14 @@ Rails.application.routes.draw do
   resources :test_passages, only: %i[show update] do
     member do
       get :result
+    end
+  end
+
+  namespace :admin do
+    resources :tests do
+      resources :questions, except: :index, shallow: true do
+        resources :answers, except: :index, shallow: true
+      end
     end
   end
 end
