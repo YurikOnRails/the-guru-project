@@ -52,7 +52,7 @@ ru:
       new:
         header: "Войти в Гуру"
         enter: "Войти"
-        remember_me: "Запомнить меня"
+        remember_me: "Запомнить"
     registrations:
       new:
         header: "Стать Гуру"
@@ -78,6 +78,10 @@ ru:
         sign_in_with: "Войти с помощью %{provider}"
 
   admin:
+    nav:
+      title: "Тест Гуру"
+      welcome: "Добро пожаловать"
+      logout: "Выход"
     tests:
       create:
         success: "Тест успешно создан."

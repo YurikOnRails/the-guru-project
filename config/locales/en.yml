@@ -20,6 +20,10 @@ en:
       add_question: "Add a new question"
 
   admin:
+    nav:
+      title: "Test Guru"
+      welcome: "Welcome"
+      logout: "Logout"
     tests:
       create:
         success: "Test was successfully created."
