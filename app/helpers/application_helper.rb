@@ -15,14 +15,14 @@ module ApplicationHelper
 
   def bootstrap_alert_class(key)
     case key.to_s
-    when 'notice', 'success'
-      'success'
-    when 'alert', 'error', 'danger'
-      'danger'
-    when 'warning'
-      'warning'
+    when "notice", "success"
+      "success"
+    when "alert", "error", "danger"
+      "danger"
+    when "warning"
+      "warning"
     else
-      'info'
+      "info"
     end
   end
 end
