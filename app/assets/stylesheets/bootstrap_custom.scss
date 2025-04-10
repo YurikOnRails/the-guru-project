@@ -1,2 +1,68 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-@import "bootstrap"; 
+
+// Переопределение основных цветов Bootstrap
+$primary: #FFD700;    // Золотисто-желтый вместо синего
+$secondary: #9932CC;  // Темно-орхидеевый вместо серого
+$success: #00CED1;    // Бирюзовый вместо зеленого
+$info: #FF6347;       // Томатный вместо голубого
+$warning: #9370DB;    // Средне-пурпурный вместо желтого
+$danger: #32CD32;     // Лаймовый вместо красного
+$light: #FFF8DC;      // Кремовый вместо светлого
+$dark: #4B0082;       // Индиго вместо темного
+
+// Настройка дополнительных переменных
+$body-bg: #F5F5F5;    // Цвет фона страницы
+$body-color: #483D8B; // Цвет текста по умолчанию
+$link-color: #FF4500; // Цвет ссылок
+$border-radius: 0.5rem; // Более скругленные углы
+$card-border-radius: 1rem; // Еще более скругленные углы для карточек
+$btn-border-radius: 0.75rem; // Скругленные углы для кнопок
+
+// Импорт Bootstrap после определения переменных
+@import "bootstrap";
+
+// Дополнительные кастомные стили
+.card {
+  border-width: 2px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.btn {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-width: 2px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Стили для навигации
+.navbar {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+// Стили для форм
+.form-control {
+  border-width: 2px;
+  
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+    border-color: $primary;
+  }
+}
+
+// Стили для бейджей
+.badge {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 0.5em 0.8em;
+}

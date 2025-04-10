@@ -8,6 +8,7 @@ en:
       level: "Level"
       category: "Category"
       questions_count: "Questions count"
+      actions: "Actions"
     test:
       show: "Show"
       edit: "Edit"
@@ -24,6 +25,7 @@ en:
       title: "Test Guru"
       welcome: "Welcome"
       logout: "Logout"
+      admin_panel: "Admin Panel"
     tests:
       create:
         success: "Test was successfully created."
@@ -51,6 +53,9 @@ en:
         back: "Back to Tests"
         add_question: "Add a new question"
         edit_title: "Edit title"
+        level: "Level"
+        category: "Category"
+        questions_count: "Questions"
       new:
         header: "Create new test"
         back: "Back to Tests"
@@ -72,6 +77,8 @@ en:
       header: "Passing the %{title} test"
       question_count: "Question %{current} of %{total}"
       next: "Next"
+      completed: "completed"
+      no_questions: "There are no questions available for this test."
     gist:
       success: "Gist was successfully created! %{url}"
       failure: "An error occurred while saving gist"
@@ -129,6 +136,9 @@ en:
       signup: "Sign up"
       admin_panel: "Admin Panel"
       profile: "Profile"
+      tests: "Tests"
+      back_to_tests: "Back to Tests"
+      gists: "Gists"
 
   tests_mailer:
     completed_test:

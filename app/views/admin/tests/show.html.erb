@@ -1,20 +1,68 @@
-<h1><%= t('.title', title: @test.title) %></h1>
-
-<p>
-  <%= link_to t('.edit_title'), edit_admin_test_path(@test) %> |
-  <%= link_to t('.back'), admin_tests_path %>
-</p>
-
-<h2><%= t('.questions') %></h2>
-
-<% if @test.questions.any? %>
-  <ul>
-    <%= render partial: 'questions/question', collection: @test.questions %>
-  </ul>
-<% else %>
-  <p><%= t('.no_questions') %></p>
-<% end %>
-
-<%= link_to t('.add_question'), new_test_question_path(@test) %> |
-<%= link_to t('.edit_title'), edit_admin_test_path(@test) %> |
-<%= link_to t('.back'), admin_tests_path %>
+<div class="container mt-4">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h1 class="h3 mb-0"><%= t('.title', title: @test.title) %></h1>
+      <div>
+        <%= link_to edit_admin_test_path(@test), class: 'btn btn-sm btn-outline-light me-2' do %>
+          <i class="bi bi-pencil me-1"></i> <%= t('.edit_title') %>
+        <% end %>
+        <%= link_to admin_tests_path, class: 'btn btn-sm btn-outline-light' do %>
+          <i class="bi bi-arrow-left me-1"></i> <%= t('.back') %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <div class="card bg-light">
+            <div class="card-body text-center">
+              <h5 class="card-title"><%= t('.level') %></h5>
+              <span class="badge bg-<%= @test.level > 2 ? 'danger' : (@test.level > 0 ? 'warning' : 'success') %> fs-5"><%= @test.level %></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-light">
+            <div class="card-body text-center">
+              <h5 class="card-title"><%= t('.category') %></h5>
+              <span class="badge bg-info text-dark fs-5"><%= @test.category.name %></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-light">
+            <div class="card-body text-center">
+              <h5 class="card-title"><%= t('.questions_count') %></h5>
+              <span class="badge bg-secondary fs-5"><%= @test.questions.count %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <h2 class="h4 mb-3 border-bottom pb-2"><%= t('.questions') %></h2>
+      
+      <% if @test.questions.any? %>
+        <div class="list-group mb-4">
+          <%= render partial: 'questions/question', collection: @test.questions %>
+        </div>
+      <% else %>
+        <div class="alert alert-info">
+          <i class="bi bi-info-circle me-2"></i> <%= t('.no_questions') %>
+        </div>
+      <% end %>
+      
+      <div class="d-flex mt-4">
+        <%= link_to new_test_question_path(@test), class: 'btn btn-success me-2' do %>
+          <i class="bi bi-plus-circle me-1"></i> <%= t('.add_question') %>
+        <% end %>
+        <%= link_to edit_admin_test_path(@test), class: 'btn btn-primary me-2' do %>
+          <i class="bi bi-pencil me-1"></i> <%= t('.edit_title') %>
+        <% end %>
+        <%= link_to admin_tests_path, class: 'btn btn-secondary' do %>
+          <i class="bi bi-arrow-left me-1"></i> <%= t('.back') %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

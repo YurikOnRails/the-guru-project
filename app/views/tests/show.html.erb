@@ -1,32 +1,70 @@
-<h1><%= @test.title %></h1>
-
-<p>
-  <strong>Уровень:</strong>
-  <%= @test.level %>
-</p>
-
-<p>
-  <strong>Категория:</strong>
-  <%= @test.category.name %>
-</p>
-
-<p>
-  <strong>Автор:</strong>
-  <%= @test.author.email %>
-</p>
-
-<h2>Вопросы</h2>
-<% if @test.questions.any? %>
-  <ul>
-    <% @test.questions.each do |question| %>
-      <li>
-        <%= question.content %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>В тесте пока нет вопросов.</p>
-<% end %>
-
-<%= button_to 'Начать тест', start_test_path(@test), class: 'start-button' %>
-<%= link_to 'Назад к тестам', tests_path %> 
+<div class="container mt-4">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h1 class="h3 mb-0"><%= @test.title %></h1>
+      <div>
+        <%= button_to start_test_path(@test), method: :post, class: 'btn btn-success' do %>
+          <i class="bi bi-play-fill me-1"></i> Начать тест
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="card bg-light h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title">Уровень</h5>
+              <span class="badge bg-<%= @test.level > 2 ? 'danger' : (@test.level > 0 ? 'warning' : 'success') %> fs-5"><%= @test.level %></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-light h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title">Категория</h5>
+              <span class="badge bg-info text-dark fs-5"><%= @test.category.name %></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-light h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title">Автор</h5>
+              <p class="mb-0"><%= @test.author.email %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <h2 class="h4 mb-3 border-bottom pb-2">Вопросы</h2>
+      
+      <% if @test.questions.any? %>
+        <div class="list-group mb-4">
+          <% @test.questions.each do |question| %>
+            <div class="list-group-item">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-question-circle me-2 text-primary"></i>
+                <span><%= question.content %></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="alert alert-info">
+          <i class="bi bi-info-circle me-2"></i> В тесте пока нет вопросов.
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="card-footer bg-light d-flex justify-content-between align-items-center">
+      <%= link_to tests_path, class: 'btn btn-secondary' do %>
+        <i class="bi bi-arrow-left me-1"></i> Назад к тестам
+      <% end %>
+      
+      <%= button_to start_test_path(@test), method: :post, class: 'btn btn-success' do %>
+        <i class="bi bi-play-fill me-1"></i> Начать тест
+      <% end %>
+    </div>
+  </div>
+</div>

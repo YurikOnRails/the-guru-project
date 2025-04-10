@@ -1,9 +1,14 @@
 <% if resource.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <h2><%= pluralize(resource.errors.count, "error") %> detected:
-    <%= t('.header', count: resource.errors.count) %>
-    </h2>
-    <ul>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible fade show">
+    <div class="d-flex align-items-center">
+      <i class="bi bi-exclamation-triangle-fill me-2 fs-4"></i>
+      <h5 class="mb-0">
+        <%= pluralize(resource.errors.count, "error") %> <%= t('.header', count: resource.errors.count) %>
+      </h5>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    
+    <ul class="mt-2 mb-0">
       <% resource.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>

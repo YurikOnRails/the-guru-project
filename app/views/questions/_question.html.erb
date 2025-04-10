@@ -1,24 +1,45 @@
-<li>
-  <%= question.content %>
-  
-  <div>
-    <%= link_to "Add answer", new_question_answer_path(question) %>
-    <%= link_to "Edit", edit_question_path(question) %>
-    <%= button_to "Delete", question_path(question), method: :delete %>
+<div class="list-group-item">
+  <div class="d-flex justify-content-between align-items-start mb-3">
+    <h5 class="mb-1"><%= question.content %></h5>
+    <div class="btn-group">
+      <%= link_to new_question_answer_path(question), class: 'btn btn-sm btn-success me-1' do %>
+        <i class="bi bi-plus-circle me-1"></i> <%= t('questions.question.add_answer') %>
+      <% end %>
+      <%= link_to edit_question_path(question), class: 'btn btn-sm btn-primary me-1' do %>
+        <i class="bi bi-pencil me-1"></i> <%= t('questions.question.edit') %>
+      <% end %>
+      <%= button_to question_path(question), method: :delete, class: 'btn btn-sm btn-danger', form: { data: { turbo_confirm: t('questions.question.confirm') } } do %>
+        <i class="bi bi-trash me-1"></i> <%= t('questions.question.delete') %>
+      <% end %>
+    </div>
   </div>
 
   <% if question.answers.any? %>
-    <ol>
+    <div class="list-group ms-4 mb-2">
       <% question.answers.each do |answer| %>
-        <li>
-          <%= answer.content %>
-          <%= answer.correct? ? "✓" : "✗" %>
-          <%= link_to "Edit", edit_answer_path(answer) %>
-          <%= button_to "Delete", answer_path(answer), method: :delete %>
-        </li>
+        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <div>
+            <% if answer.correct? %>
+              <span class="badge bg-success me-2"><i class="bi bi-check-lg"></i></span>
+            <% else %>
+              <span class="badge bg-danger me-2"><i class="bi bi-x-lg"></i></span>
+            <% end %>
+            <%= answer.content %>
+          </div>
+          <div>
+            <%= link_to edit_answer_path(answer), class: 'btn btn-sm btn-outline-primary me-1' do %>
+              <i class="bi bi-pencil me-1"></i> <%= t('answers.answer.edit') %>
+            <% end %>
+            <%= button_to answer_path(answer), method: :delete, class: 'btn btn-sm btn-outline-danger', form: { data: { turbo_confirm: t('answers.answer.confirm') } } do %>
+              <i class="bi bi-trash me-1"></i> <%= t('answers.answer.delete') %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
-    </ol>
+    </div>
   <% else %>
-    <p>No answers yet.</p>
+    <div class="alert alert-warning">
+      <i class="bi bi-exclamation-triangle me-2"></i> No answers yet.
+    </div>
   <% end %>
-</li>
+</div>
