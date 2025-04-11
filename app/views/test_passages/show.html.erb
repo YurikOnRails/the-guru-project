@@ -1,45 +1,68 @@
-<h1>Прохождение теста "<%= @test_passage.test.title %>"</h1>
-
-<% if flash[:alert] %>
-  <div class="alert alert-danger">
-    <%= flash[:alert] %>
-  </div>
-<% end %>
-
-<div>
-  <p>
-    <% if @test_passage.current_question.present? %>
-      <% question_index = @test_passage.test.questions.index(@test_passage.current_question) %>
-      Вопрос <%= question_index.nil? ? "N/A" : question_index + 1 %> 
-      из <%= @test_passage.test.questions.count %>
-    <% else %>
-      Нет доступных вопросов
-    <% end %>
-  </p>
-  <div>
-    <% if @test_passage.current_question.present? && @test_passage.test.questions.any? %>
-      <% question_index = @test_passage.test.questions.index(@test_passage.current_question) %>
-      <% progress_percentage = question_index.nil? ? 0 : (question_index + 1).to_f / @test_passage.test.questions.count * 100 %>
-      <div class="progress-fill" style="width: <%= progress_percentage %>%"></div>
-    <% end %>
-  </div>
-</div>
-
-<div>
-  <% if @test_passage.current_question.present? %>
-    <h2 class="question-body"><%= @test_passage.current_question.content %></h2>
-
-    <%= form_with url: test_passage_path(@test_passage), local: true, method: :put do |form| %>
-      <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.answers, :id, :content, include_hidden: false do |b| %>
-        <div class="answer-option">
-          <%= b.check_box id: "answer_ids_#{b.object.id}" %>
-          <%= b.label %>
+<div class="container mt-4">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+      <h1 class="h3 mb-0"><%= t('.header', title: @test_passage.test.title) %></h1>
+    </div>
+    
+    <div class="card-body">
+      <% if flash[:alert] %>
+        <div class="alert alert-danger alert-dismissible fade show">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          <%= flash[:alert] %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
-
-      <%= form.submit 'Ответить' %>
-    <% end %>
-  <% else %>
-    <p>Для этого теста нет доступных вопросов.</p>
-  <% end %>
+      
+      <% if @test_passage.current_question.present? %>
+        <div class="mb-4">
+          <% question_index = @test_passage.test.questions.index(@test_passage.current_question) %>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary fs-6">
+              <%= t('.question_count', current: question_index.nil? ? "N/A" : question_index + 1, total: @test_passage.test.questions.count) %>
+            </span>
+            <span class="text-muted">
+              <%= (question_index.nil? ? 0 : question_index + 1).to_f / @test_passage.test.questions.count * 100 %>% <%= t('.completed') %>
+            </span>
+          </div>
+          
+          <% if @test_passage.test.questions.any? %>
+            <% question_index = @test_passage.test.questions.index(@test_passage.current_question) %>
+            <% progress_percentage = question_index.nil? ? 0 : (question_index + 1).to_f / @test_passage.test.questions.count * 100 %>
+            <div class="progress" style="height: 10px;">
+              <div class="progress-bar bg-success" role="progressbar" style="width: <%= progress_percentage %>%" 
+                  aria-valuenow="<%= progress_percentage %>" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          <% end %>
+        </div>
+        
+        <div class="card mb-4">
+          <div class="card-header bg-light">
+            <h2 class="h5 mb-0"><%= @test_passage.current_question.content %></h2>
+          </div>
+          <div class="card-body">
+            <%= form_with url: test_passage_path(@test_passage), local: true, method: :put do |form| %>
+              <div class="list-group mb-4">
+                <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.answers, :id, :content, include_hidden: false do |b| %>
+                  <div class="list-group-item">
+                    <div class="form-check">
+                      <%= b.check_box id: "answer_ids_#{b.object.id}", class: 'form-check-input' %>
+                      <%= b.label class: 'form-check-label' %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+              
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <%= form.submit t('.next'), class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="alert alert-info">
+          <i class="bi bi-info-circle me-2"></i> <%= t('.no_questions') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

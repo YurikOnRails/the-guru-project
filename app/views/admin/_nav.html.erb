@@ -1,9 +1,30 @@
-<div class="nav nav-admin" >
-    <span class="nav-admin-title">
-        Test Guru
-    </span>
-    <div class="nav-admin user">
-    Welcome, <b class="nav-admin user-email"><%= current_user.email %></b> Guru |
-    <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
+  <div class="container">
+    <%= link_to t('admin.nav.title'), root_path, class: 'navbar-brand' %>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="adminNavbarContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to t('admin.tests.index.header'), admin_tests_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('shared.nav.gists'), admin_gists_path, class: 'nav-link' if defined?(admin_gists_path) %>
+        </li>
+      </ul>
+      
+      <div class="navbar-nav ms-auto">
+        <span class="nav-item nav-link"><%= t('admin.nav.welcome') %>, <b><%= current_user.email %></b></span>
+        <%= link_to t('shared.nav.back_to_tests'), tests_path, class: 'btn btn-outline-light me-2' %>
+        <%= button_to t('admin.nav.logout'), destroy_user_session_path, method: :delete, class: 'btn btn-outline-light' %>
+      </div>
     </div>
+  </div>
+</nav>
+
+<div class="container mb-3">
+  <h2 class="text-center text-primary"><%= t('admin.nav.admin_panel') %></h2>
 </div>

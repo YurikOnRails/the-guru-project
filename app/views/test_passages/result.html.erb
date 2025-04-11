@@ -1,26 +1,79 @@
-<h1>Результат теста "<%= @test_passage.test.title %>"</h1>
-
-<div class="result-container">
-  <p>
-    Правильных ответов: <%= @test_passage.correct_questions %> из <%= @test_passage.test.questions.count %>
-  </p>
-
-  <p class="result-message <%= @test_passage.successful? ? 'success' : 'failure' %>">
-    <strong>
-      <% if @test_passage.successful? %>
-        Поздравляем! Вы успешно прошли тест!
-      <% else %>
-        К сожалению, тест не пройден. Попробуйте еще раз!
-      <% end %>
-    </strong>
-  </p>
-
-  <p>
-    Процент успеха: 
-    <span class="<%= @test_passage.successful? ? 'success' : 'failure' %>">
-      <%= @test_passage.success_percentage %>%
-    </span>
-  </p>
-
-  <%= link_to 'Вернуться к списку тестов', tests_path %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header text-white text-center <%= @test_passage.successful? ? 'bg-success' : 'bg-info' %>">
+          <h2 class="h3 mb-0"><%= t('.header', title: @test_passage.test.title) %></h2>
+        </div>
+        
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <div class="display-1 mb-3">
+              <% if @test_passage.successful? %>
+                <i class="bi bi-emoji-smile"></i>
+              <% else %>
+                <i class="bi bi-emoji-frown"></i>
+              <% end %>
+            </div>
+            
+            <h3 class="<%= @test_passage.successful? ? 'text-success' : 'text-info' %> mb-4">
+              <% if @test_passage.successful? %>
+                <i class="bi bi-trophy me-2"></i><%= t('.success_message') %>
+              <% else %>
+                <i class="bi bi-exclamation-triangle me-2"></i><%= t('.failure_message') %>
+              <% end %>
+            </h3>
+          </div>
+          
+          <div class="row text-center">
+            <div class="col-md-4">
+              <div class="card mb-3 h-100">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="bi bi-check-circle me-2"></i><%= t('.correct_answers') %></h5>
+                  <p class="display-6 mb-0"><%= @test_passage.correct_questions %> / <%= @test_passage.test.questions.count %></p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="card mb-3 h-100">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="bi bi-percent me-2"></i><%= t('.success_percent') %></h5>
+                  <p class="display-6 mb-0"><%= @test_passage.success_percentage %>%</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="card mb-3 h-100">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="bi bi-award me-2"></i><%= t('.result') %></h5>
+                  <p class="display-6 mb-0 <%= @test_passage.successful? ? 'text-success' : 'text-info' %>">
+                    <%= @test_passage.successful? ? t('.passed') : t('.failed') %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="progress mt-4 mb-4" style="height: 25px;">
+            <div class="progress-bar <%= @test_passage.successful? ? 'bg-success' : 'bg-info' %>" 
+                 role="progressbar" 
+                 style="width: <%= @test_passage.success_percentage %>%;" 
+                 aria-valuenow="<%= @test_passage.success_percentage %>" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100">
+              <%= @test_passage.success_percentage %>%
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-light d-grid gap-2">
+          <%= link_to tests_path, class: 'btn btn-primary' do %>
+            <i class="bi bi-list-check me-2"></i><%= t('.back_to_tests') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

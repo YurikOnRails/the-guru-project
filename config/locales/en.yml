@@ -1,2 +1,146 @@
 en:
   hello: "Hello world"
+
+  tests:
+    index:
+      header: "Tricky tests"
+      title: "Title"
+      level: "Level"
+      category: "Category"
+      questions_count: "Questions count"
+      actions: "Actions"
+    test:
+      show: "Show"
+      edit: "Edit"
+      delete: "Delete"
+      start: "Start"
+      confirm: "Are you sure?"
+    show:
+      questions: "Questions"
+      back: "Back to Tests"
+      add_question: "Add a new question"
+
+  admin:
+    nav:
+      title: "Test Guru"
+      welcome: "Welcome"
+      logout: "Logout"
+      admin_panel: "Admin Panel"
+    tests:
+      create:
+        success: "Test was successfully created."
+      update:
+        success: "Test was successfully updated."
+      destroy:
+        success: "Test was successfully deleted."
+      index:
+        header: "Tricky tests"
+        new_test: "Create new test"
+        title: "Title"
+        level: "Level"
+        category: "Category"
+        questions_count: "Questions count"
+        actions: "Actions"
+      test:
+        show: "Show"
+        edit: "Edit"
+        delete: "Delete"
+        confirm: "Are you sure?"
+      show:
+        title: "Test title: %{title}"
+        questions: "Questions"
+        no_questions: "No questions yet."
+        back: "Back to Tests"
+        add_question: "Add a new question"
+        edit_title: "Edit title"
+        level: "Level"
+        category: "Category"
+        questions_count: "Questions"
+      new:
+        header: "Create new test"
+        back: "Back to Tests"
+      edit:
+        header: "Edit test: %{title}"
+        back: "Back to Tests"
+      form:
+        submit: "Submit"
+        back: "Back"
+
+  test_passages:
+    result:
+      header: "Test %{title} successfully completed!"
+      success: "Success rate: %{result}%"
+      passed: "You passed the test!"
+      failed: "You failed the test."
+      back: "Back to Tests"
+    show:
+      header: "Passing the %{title} test"
+      question_count: "Question %{current} of %{total}"
+      next: "Next"
+      completed: "completed"
+      no_questions: "There are no questions available for this test."
+    gist:
+      success: "Gist was successfully created! %{url}"
+      failure: "An error occurred while saving gist"
+
+  devise:
+    sessions:
+      new:
+        header: "Enter the Guru Gates"
+        enter: "Enter"
+        remember_me: "Remember me"
+    registrations:
+      new:
+        header: "Become a Guru"
+        sign_up: "Sign up"
+        characters_minimum: "%{length} characters minimum"
+      edit:
+        header: "Edit your profile"
+        waiting_confirmation: "Currently waiting confirmation for: %{email}"
+        leave_blank: "leave blank if you don't want to change it"
+        current_password_note: "we need your current password to confirm your changes"
+        update: "Update"
+        cancel_account: "Cancel my account"
+        unhappy: "Unhappy?"
+        confirm_cancel: "Are you sure?"
+        back: "Back"
+    shared:
+      links:
+        log_in: "Log in"
+        sign_up: "Sign up"
+        forgot_password: "Forgot your password?"
+        confirmation_instructions: "Didn't receive confirmation instructions?"
+        unlock_instructions: "Didn't receive unlock instructions?"
+        sign_in_with: "Sign in with %{provider}"
+
+  helpers:
+    submit:
+      test:
+        create: "Create test"
+        update: "Update test"
+    label:
+      test:
+        title: "Title"
+        level: "Level"
+        category: "Category"
+        category_prompt: "Choose category"
+
+  shared:
+    errors:
+      header:
+        one: "error detected"
+        other: "%{count} errors detected"
+    nav:
+      logout: "Logout"
+      login: "Log in"
+      signup: "Sign up"
+      admin_panel: "Admin Panel"
+      profile: "Profile"
+      tests: "Tests"
+      back_to_tests: "Back to Tests"
+      gists: "Gists"
+
+  tests_mailer:
+    completed_test:
+      subject: "You just completed the TESTGURU TEST: %{title}!!!"
+      body: "You have successfully completed the test %{title}"

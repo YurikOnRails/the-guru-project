@@ -1,12 +1,11 @@
 <%= form_with model: [@test, @question], local: true do |f| %>
-  <%= render 'shared/errors', resource: @question %>
-
-  <div class="field">
-    <%= f.label :content %>
-    <%= f.text_area :content, rows: 7, cols: 60 %>
+  <div class="mb-3">
+    <%= f.label :content, class: 'form-label fw-bold' %>
+    <%= f.text_area :content, rows: 7, class: 'form-control', placeholder: 'Enter your question here...' %>
+    <div class="form-text">Write a clear and concise question for the test.</div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Submit" %>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <%= f.submit "Create Question", class: 'btn btn-primary' %>
   </div>
 <% end %>

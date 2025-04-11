@@ -14,3 +14,175 @@ ru:
     errors:
       messages:
         blank: "не может быть пустым"
+  tests:
+    index:
+      header: "Доступные тесты"
+      title: "Название"
+      level: "Уровень"
+      category: "Категория"
+      questions_count: "Количество вопросов"
+      actions: "Действия"
+    test:
+      show: "Показать"
+      edit: "Редактировать"
+      delete: "Удалить"
+      start: "Начать"
+      confirm: "Вы уверены?"
+    show:
+      questions: "Вопросы"
+      back: "Назад к тестам"
+      add_question: "Добавить новый вопрос"
+
+  test_passages:
+    result:
+      header: "Тест %{title} успешно завершен!"
+      success: "Процент успеха: %{result}%"
+      passed: "Тест пройден"
+      failed: "Тест не пройден"
+      back_to_tests: "Вернуться к тестам"
+      success_message: "Поздравляем! Вы успешно прошли тест!"
+      failure_message: "К сожалению, тест не пройден. Попробуйте еще раз!"
+      correct_answers: "Правильные ответы"
+      success_percent: "Процент успеха"
+      result: "Результат"
+    show:
+      header: "Прохождение теста %{title}"
+      question_count: "Вопрос %{current} из %{total}"
+      next: "Далее"
+      completed: "завершено"
+      no_questions: "Для этого теста нет доступных вопросов."
+    gist:
+      success: "Gist успешно создан! %{url}"
+      failure: "Произошла ошибка при сохранении gist"
+
+  devise:
+    sessions:
+      new:
+        header: "Войти в Гуру"
+        enter: "Войти"
+        remember_me: "Запомнить"
+    registrations:
+      new:
+        header: "Стать Гуру"
+        sign_up: "Зарегистрироваться"
+        characters_minimum: "Минимум %{length} символов"
+      edit:
+        header: "Редактирование профиля"
+        waiting_confirmation: "Ожидает подтверждения: %{email}"
+        leave_blank: "оставьте пустым, если не хотите менять"
+        current_password_note: "введите текущий пароль для подтверждения изменений"
+        update: "Обновить"
+        cancel_account: "Удалить аккаунт"
+        unhappy: "Недовольны?"
+        confirm_cancel: "Вы уверены?"
+        back: "Назад"
+    shared:
+      links:
+        log_in: "Войти"
+        sign_up: "Зарегистрироваться"
+        forgot_password: "Забыли пароль?"
+        confirmation_instructions: "Не получили инструкцию по подтверждению?"
+        unlock_instructions: "Не получили инструкцию по разблокировке?"
+        sign_in_with: "Войти с помощью %{provider}"
+
+  admin:
+    nav:
+      title: "Тест Гуру"
+      welcome: "Добро пожаловать"
+      logout: "Выход"
+      admin_panel: "Панель администратора"
+    tests:
+      create:
+        success: "Тест успешно создан."
+      update:
+        success: "Тест успешно обновлен."
+      destroy:
+        success: "Тест успешно удален."
+      index:
+        header: "Доступные тесты"
+        new_test: "Создать новый тест"
+        title: "Название"
+        level: "Уровень"
+        category: "Категория"
+        questions_count: "Количество вопросов"
+        actions: "Действия"
+      test:
+        show: "Показать"
+        edit: "Редактировать"
+        delete: "Удалить"
+        confirm: "Вы уверены?"
+      show:
+        title: "Название теста: %{title}"
+        questions: "Вопросы"
+        no_questions: "Вопросов пока нет"
+        back: "Назад к тестам"
+        add_question: "Добавить новый вопрос"
+        edit_title: "Редактировать название"
+        level: "Уровень"
+        category: "Категория"
+        questions_count: "Вопросы"
+      new:
+        header: "Создание нового теста"
+        back: "Назад к тестам"
+      edit:
+        header: "Редактирование теста: %{title}"
+        back: "Назад к тестам"
+      form:
+        submit: "Отправить"
+        back: "Назад"
+        title_placeholder: "Введите название теста"
+        title_help: "Название теста должно быть конкретным и понятным"
+        level_help: "Уровень сложности теста: 0 - легкий, 1 - средний, 2+ - сложный"
+        
+  helpers:
+    submit:
+      test:
+        create: "Создать тест"
+        update: "Обновить тест"
+    label:
+      test:
+        title: "Название"
+        level: "Уровень"
+        category: "Категория"
+        category_prompt: "Выберите категорию"
+
+  shared:
+    errors:
+      header:
+        few: "Обнаружено %{count} ошибки"
+        many: "Обнаружено %{count} ошибок"
+        one: "Обнаружена %{count} ошибка"
+        other: "Обнаружено %{count} ошибок"
+        zero: "Ошибок не обнаружено"
+    buttons:
+      edit: "Редактировать"
+      delete: "Удалить"
+      confirm: "Вы уверены?"
+    nav:
+      logout: "Выйти"
+      login: "Войти"
+      signup: "Зарегистрироваться"
+      admin_panel: "Панель администратора"
+      profile: "Профиль"
+      tests: "Тесты"
+      back_to_tests: "Назад к тестам"
+      gists: "Гисты"
+
+  tests_mailer:
+    completed_test:
+      subject: "Вы только что прошли тест TESTGURU: %{title}!!!"
+      body: "Вы успешно прошли тест %{title}"
+
+  questions:
+    question:
+      add_answer: "Добавить ответ"
+      edit: "Редактировать"
+      delete: "Удалить"
+      confirm: "Вы уверены?"
+      no_answers: "Ответов пока нет."
+
+  answers:
+    answer:
+      edit: "Редактировать"
+      delete: "Удалить"
+      confirm: "Вы уверены?"

@@ -12,4 +12,17 @@ module ApplicationHelper
       content_tag :div, msg, class: "flash #{key}" if msg.present?
     end.join.html_safe
   end
+
+  def bootstrap_alert_class(key)
+    case key.to_s
+    when "notice", "success"
+      "success"
+    when "alert", "error", "danger"
+      "danger"
+    when "warning"
+      "warning"
+    else
+      "info"
+    end
+  end
 end

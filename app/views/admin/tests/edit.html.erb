@@ -1,5 +1,17 @@
-<h1>Edit <%= @test.title %> Test</h1>
-
-<%= render 'form' %>
-
-<%= link_to "Back to Tests", admin_tests_path %>
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h1 class="h3 mb-0"><%= t('.header', title: @test.title) %></h1>
+    </div>
+    
+    <div class="card-body p-4">
+      <%= render 'form', test: @test %>
+    </div>
+    
+    <div class="card-footer bg-light">
+      <%= link_to admin_tests_path, class: 'btn btn-secondary' do %>
+        <i class="bi bi-arrow-left me-1"></i> <%= t('.back') %>
+      <% end %>
+    </div>
+  </div>
+</div>
