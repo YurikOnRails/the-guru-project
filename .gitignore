@@ -72,3 +72,6 @@ storage/.project
 *.gpg
 config/deploy.yml
 .kamal/secrets
+
+# Ignore .env file with secrets
+.env

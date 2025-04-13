@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :test_passages, dependent: :destroy # чтобы при удалении юзера удалялись и результаты
   has_many :tests, through: :test_passages, dependent: :destroy # соответв. будут удаляться и тесты при удалении юзера
   has_many :author_tests, class_name: "Test", foreign_key: "author_id", dependent: :nullify
+  has_many :created_tests, class_name: "Test", foreign_key: :user_id, dependent: :destroy
+  has_many :gists, dependent: :destroy
 
   validates :email, presence: true,
                    uniqueness: { case_sensitive: false },

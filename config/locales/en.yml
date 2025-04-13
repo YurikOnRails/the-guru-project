@@ -65,6 +65,13 @@ en:
       form:
         submit: "Submit"
         back: "Back"
+    gists:
+      index:
+        header: "Gists"
+        question: "Question"
+        gist_url: "Gist URL"
+        user: "User"
+        created_at: "Created At"
 
   test_passages:
     result:
@@ -144,3 +151,16 @@ en:
     completed_test:
       subject: "You just completed the TESTGURU TEST: %{title}!!!"
       body: "You have successfully completed the test %{title}"
+
+  services:
+    gist_question_service:
+      description: "A question about %{title} from TestGuru"
+      filename: "test-guru-question.txt"
+
+  questions:
+    edit:
+      edit_question: "Edit Question"
+      question_placeholder: "Enter your question text here..."
+      question_help: "Write a clear and concise question for the test."
+      update_button: "Update Question"
+      back_to_test: "Back to Test"
