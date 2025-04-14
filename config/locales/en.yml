@@ -72,6 +72,9 @@ en:
         gist_url: "Gist URL"
         user: "User"
         created_at: "Created At"
+      create:
+        success: "Gist was successfully created! %{url}"
+        failure: "An error occurred while saving gist"
 
   test_passages:
     result:

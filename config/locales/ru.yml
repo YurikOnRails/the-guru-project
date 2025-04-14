@@ -140,6 +140,9 @@ ru:
         gist_url: "URL гиста"
         user: "Пользователь"
         created_at: "Создан"
+      create:
+        success: "Gist успешно сохранен! %{url}"
+        failure: "Во время сохранения gist произошла ошибка"
 
   helpers:
     submit:

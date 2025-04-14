@@ -1,8 +1,14 @@
 class GistQuestionService
-  def initialize(question, client: nil)
+  GistResult = Struct.new(:success, :url) do
+    def successful?
+      success
+    end
+  end
+
+  def initialize(question, client = default_client)
     @question = question
     @test = @question.test
-    @client = client || GitHubClient.new
+    @client = client
     @user = @question.test.author
   end
 
@@ -10,16 +16,24 @@ class GistQuestionService
     response = @client.create_gist(gist_params)
 
     if response.html_url.present?
-      save_gist(response.html_url)
-      { success: true, url: response.html_url }
+      save_gist!(response.html_url)
+      GistResult.new(true, response.html_url)
     else
-      { success: false }
+      GistResult.new(false, nil)
     end
   rescue Octokit::Error
-    { success: false }
+    GistResult.new(false, nil)
   end
 
   private
+
+  def default_client
+    Octokit::Client.new(access_token: fetch_github_token)
+  end
+
+  def fetch_github_token
+    ENV.fetch("GITHUB_TOKEN") { raise "GitHub token is missing. Please set the GITHUB_TOKEN environment variable." }
+  end
 
   def gist_params
     {
@@ -34,12 +48,10 @@ class GistQuestionService
   end
 
   def gist_content
-    content = [ @question.content ]
-    content += @question.answers.pluck(:content)
-    content.join("\n")
+    [ @question.content, *@question.answers.pluck(:content) ].join("\n")
   end
 
-  def save_gist(url)
+  def save_gist!(url)
     @user.gists.create!(
       question: @question,
       url: url

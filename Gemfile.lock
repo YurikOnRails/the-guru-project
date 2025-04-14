@@ -407,7 +407,6 @@ DEPENDENCIES
   devise (~> 4.0)
   dotenv-rails
   faker
-  faraday
   importmap-rails
   jbuilder
   jquery-rails
