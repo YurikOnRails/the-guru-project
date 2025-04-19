@@ -1,16 +1,29 @@
-<h1>Edit Question</h1>
+<div class="container mt-4">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+      <h1 class="h3 mb-0"><%= t('.edit_question') %></h1>
+    </div>
+    
+    <div class="card-body">
+      <%= render 'shared/errors', resource: @question %>
 
-<%= render 'shared/errors', resource: @question %>
+      <%= form_with model: [@test, @question], local: true do |f| %>
+        <div class="mb-3">
+          <%= f.label :content, class: 'form-label fw-bold' %>
+          <%= f.text_area :content, rows: 7, class: 'form-control', placeholder: t('.question_placeholder') %>
+          <div class="form-text"><%= t('.question_help') %></div>
+        </div>
 
-<%= form_with model: [@test, @question], local: true do |f| %>
-  <div>
-    <%= f.label :content %>
-    <%= f.text_area :content, rows: 7, cols: 60 %>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <%= f.submit t('.update_button'), class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="card-footer bg-light">
+      <%= link_to t('.back_to_test'), test_path(@question.test), class: 'btn btn-secondary' do %>
+        <i class="bi bi-arrow-left me-1"></i> <%= t('.back_to_test') %>
+      <% end %>
+    </div>
   </div>
-
-  <div>
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<%= link_to 'Back to Test', admin_test_path(@question.test) %>
+</div>

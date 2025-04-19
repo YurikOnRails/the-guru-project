@@ -52,8 +52,8 @@ ru:
       completed: "завершено"
       no_questions: "Для этого теста нет доступных вопросов."
     gist:
-      success: "Gist успешно создан! %{url}"
-      failure: "Произошла ошибка при сохранении gist"
+      success: "Gist успешно сохранен! %{url}"
+      failure: "Во время сохранения gist произошла ошибка"
 
   devise:
     sessions:
@@ -133,7 +133,17 @@ ru:
         title_placeholder: "Введите название теста"
         title_help: "Название теста должно быть конкретным и понятным"
         level_help: "Уровень сложности теста: 0 - легкий, 1 - средний, 2+ - сложный"
-        
+    gists:
+      index:
+        header: "Гисты"
+        question: "Вопрос"
+        gist_url: "URL гиста"
+        user: "Пользователь"
+        created_at: "Создан"
+      create:
+        success: "Gist успешно сохранен! %{url}"
+        failure: "Во время сохранения gist произошла ошибка"
+
   helpers:
     submit:
       test:
@@ -180,9 +190,20 @@ ru:
       delete: "Удалить"
       confirm: "Вы уверены?"
       no_answers: "Ответов пока нет."
+    edit:
+      edit_question: "Редактирование вопроса"
+      question_placeholder: "Введите текст вопроса здесь..."
+      question_help: "Напишите четкий и понятный вопрос для теста."
+      update_button: "Обновить вопрос"
+      back_to_test: "Назад к тесту"
 
   answers:
     answer:
       edit: "Редактировать"
       delete: "Удалить"
       confirm: "Вы уверены?"
+
+  services:
+    gist_question_service:
+      description: "Вопрос о %{title} от TestGuru"
+      filename: "test-guru-вопрос.txt"
