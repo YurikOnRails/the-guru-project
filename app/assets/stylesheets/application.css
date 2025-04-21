@@ -1,9 +1,0 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * Any CSS (and SCSS, if configured) within this directory and directories listed below
- * will be included in the output css file.
- *
- *= require_tree .
- *= require_self
- */

@@ -19,6 +19,7 @@ gem "jbuilder"
 
 # Bootstrap for styling
 gem "bootstrap", "~> 5.3.0"
+gem "octicons_helper"
 gem "sassc-rails"
 
 # AUTH
