@@ -21,8 +21,6 @@ class GistQuestionService
     else
       GistResult.new(false, nil)
     end
-  rescue Octokit::Error
-    GistResult.new(false, nil)
   end
 
   private
@@ -32,7 +30,7 @@ class GistQuestionService
   end
 
   def fetch_github_token
-    ENV.fetch("GITHUB_TOKEN") { raise "GitHub token is missing. Please set the GITHUB_TOKEN environment variable." }
+    ENV.fetch("GITHUB_TOKEN")
   end
 
   def gist_params
