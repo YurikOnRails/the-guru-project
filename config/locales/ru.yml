@@ -84,6 +84,10 @@ ru:
         confirmation_instructions: "Не получили инструкцию по подтверждению?"
         unlock_instructions: "Не получили инструкцию по разблокировке?"
         sign_in_with: "Войти с помощью %{provider}"
+    password_validation:
+      too_short: "Пароль должен содержать не менее %{count} символов"
+      passwords_match: "Пароли совпадают"
+      passwords_do_not_match: "Пароли не совпадают"
 
   admin:
     nav:

@@ -122,6 +122,10 @@ en:
         confirmation_instructions: "Didn't receive confirmation instructions?"
         unlock_instructions: "Didn't receive unlock instructions?"
         sign_in_with: "Sign in with %{provider}"
+    password_validation:
+      too_short: "Password must be at least %{count} characters"
+      passwords_match: "Passwords match"
+      passwords_do_not_match: "Passwords do not match"
 
   helpers:
     submit:

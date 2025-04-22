@@ -11,28 +11,30 @@
 
             <div class="mb-3">
               <%= f.label :first_name, class: "form-label" %>
-              <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+              <%= f.text_field :first_name, autofocus: true, required: true, class: "form-control" %>
             </div>
 
             <div class="mb-3">
               <%= f.label :last_name, class: "form-label" %>
-              <%= f.text_field :last_name, class: "form-control" %>
+              <%= f.text_field :last_name, required: true, class: "form-control" %>
             </div>
 
             <div class="mb-3">
               <%= f.label :email, class: "form-label" %>
-              <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+              <%= f.email_field :email, autocomplete: "email", required: true, class: "form-control" %>
             </div>
 
             <div class="mb-3">
               <%= f.label :password, class: "form-label" %>
               <% if @minimum_password_length %>
-                <small class="form-text text-muted">
+                <small class="form-text text-muted" data-password-validation-target="hint">
                   (<%= t('.characters_minimum', length: @minimum_password_length) %>)
                 </small>
               <% end %>
               <%= f.password_field :password, 
                   autocomplete: "new-password", 
+                  required: true,
+                  minlength: @minimum_password_length,
                   class: "form-control",
                   data: { 
                     password_validation_target: "password",
@@ -41,12 +43,14 @@
             </div>
 
             <div class="mb-3">
-              <div class="d-flex align-items-center">
-                <%= f.label :password_confirmation, class: "form-label me-2" %>
+              <div class="d-flex align-items-center gap-2">
+                <%= f.label :password_confirmation, class: "form-label mb-0" %>
                 <div data-password-validation-target="icon"></div>
               </div>
               <%= f.password_field :password_confirmation, 
                   autocomplete: "new-password", 
+                  required: true,
+                  minlength: @minimum_password_length,
                   class: "form-control",
                   data: { 
                     password_validation_target: "confirmation",
@@ -54,7 +58,7 @@
                   } %>
             </div>
 
-            <div class="d-grid gap-2">
+            <div class="d-grid">
               <%= f.submit t(".sign_up"), class: "btn btn-primary" %>
             </div>
           <% end %>
