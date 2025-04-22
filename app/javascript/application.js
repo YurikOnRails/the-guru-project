@@ -3,5 +3,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import * as bootstrap from "bootstrap"
 import "./utilities/sorting"
+import "./utilities/form_inline"
 
 window.bootstrap = bootstrap;

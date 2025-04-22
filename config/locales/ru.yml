@@ -32,6 +32,8 @@ ru:
       questions: "Вопросы"
       back: "Назад к тестам"
       add_question: "Добавить новый вопрос"
+    form_inline:
+      submit: "OK"
 
   test_passages:
     result:
