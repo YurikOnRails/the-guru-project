@@ -19,6 +19,8 @@ en:
       questions: "Questions"
       back: "Back to Tests"
       add_question: "Add a new question"
+    form_inline:
+      submit: "OK"
 
   admin:
     nav:
