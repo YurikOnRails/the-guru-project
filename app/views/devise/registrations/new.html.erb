@@ -5,7 +5,8 @@
         <div class="card-body">
           <h2 class="card-title text-center mb-4"><%= t(".header") %></h2>
 
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), 
+              data: { controller: "password-validation" }) do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
 
             <div class="mb-3">
@@ -30,12 +31,27 @@
                   (<%= t('.characters_minimum', length: @minimum_password_length) %>)
                 </small>
               <% end %>
-              <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+              <%= f.password_field :password, 
+                  autocomplete: "new-password", 
+                  class: "form-control",
+                  data: { 
+                    password_validation_target: "password",
+                    action: "input->password-validation#validatePasswords"
+                  } %>
             </div>
 
             <div class="mb-3">
-              <%= f.label :password_confirmation, class: "form-label" %>
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+              <div class="d-flex align-items-center">
+                <%= f.label :password_confirmation, class: "form-label me-2" %>
+                <div data-password-validation-target="icon"></div>
+              </div>
+              <%= f.password_field :password_confirmation, 
+                  autocomplete: "new-password", 
+                  class: "form-control",
+                  data: { 
+                    password_validation_target: "confirmation",
+                    action: "input->password-validation#validatePasswords"
+                  } %>
             </div>
 
             <div class="d-grid gap-2">
