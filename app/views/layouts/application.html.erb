@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>" data-password-too-short="<%= t('devise.password_validation.too_short', count: 6) %>"
+     data-passwords-match="<%= t('devise.password_validation.passwords_match') %>"
+     data-passwords-no-match="<%= t('devise.password_validation.passwords_do_not_match') %>">
   <head>
     <title><%= content_for(:title) || "The Guru Project" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,6 +27,7 @@
 
   <body>
     <div class="container mt-3">
+      <%= render 'shared/flash' if flash.any? %>
       <%= render 'layouts/navigation' %>
       <%= yield %>
       <%= render 'layouts/footer' %>
