@@ -26,7 +26,7 @@ class Admin::TestsController < Admin::BaseController
 
   def update
     if @test.update(test_params)
-      redirect_to admin_test_path(@test), notice: "Тест успешно обновлен"
+      redirect_to admin_test_path(@test), notice: t(".success")
     else
       render :edit
     end
@@ -34,7 +34,7 @@ class Admin::TestsController < Admin::BaseController
 
   def update_inline
     if @test.update(test_params)
-      redirect_to admin_tests_path
+      redirect_to admin_tests_path, notice: t(".success")
     else
       render :index
     end
@@ -42,7 +42,7 @@ class Admin::TestsController < Admin::BaseController
 
   def destroy
     @test.destroy
-    redirect_to admin_tests_path, notice: "Тест успешно удален"
+    redirect_to admin_tests_path, notice: t(".success")
   end
 
   private

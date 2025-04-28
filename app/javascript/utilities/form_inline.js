@@ -1,30 +1,56 @@
 // Флаг для отслеживания инициализации
 let formInlineInitialized = false
 
-document.addEventListener('turbo:load', initFormInline)
-document.addEventListener('DOMContentLoaded', initFormInline)
+// Правильная инициализация с поддержкой Turbo
+document.addEventListener('turbo:load', () => {
+  console.log('Turbo load triggered, initializing form inline')
+  // Проверяем, что jQuery доступен
+  if (typeof jQuery === 'undefined') {
+    console.error('jQuery is not loaded! Form inline cannot initialize.')
+    return
+  }
+  
+  initFormInline()
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM content loaded triggered, initializing form inline')
+  // Проверяем, что jQuery доступен
+  if (typeof jQuery === 'undefined') {
+    console.error('jQuery is not loaded! Form inline cannot initialize.')
+    return
+  }
+  
+  initFormInline()
+})
+
 // Сбрасываем флаг при навигации
 document.addEventListener('turbo:before-render', () => {
   formInlineInitialized = false
+  console.log('Form inline initialization flag reset')
 })
 
 function initFormInline() {
   // Если инлайн-формы уже инициализированы, не делаем ничего
   if (formInlineInitialized) {
+    console.log('Form inline already initialized, skipping')
     return
   }
   
   console.log('Initializing form inline functionality')
-  const controls = $('.form-inline-link')
+  
+  // Используем документ как контекст для надёжного поиска элементов
+  const controls = $(document).find('.form-inline-link')
   console.log('Found form-inline-link controls:', controls.length)
   
   if (controls.length) {
-    controls.on('click', formInlineLinkHandler)
+    // Удаляем существующие обработчики перед добавлением новых
+    controls.off('click').on('click', formInlineLinkHandler)
     formInlineInitialized = true
     console.log('Initialized form-inline-link click handlers')
   }
 
-  const errors = $('.resource-errors')
+  const errors = $(document).find('.resource-errors')
   console.log('Found resource-errors:', errors.length)
 
   if (errors.length) {
@@ -38,21 +64,8 @@ function formInlineLinkHandler(event) {
   event.preventDefault()
   console.log('Form inline link clicked')
 
-  // Атрибуты data-x в jQuery становятся camelCase: data('testId')
-  // Но также проверим вариант с дефисом: data('test-id')
-  let testId = $(this).data('testId')
-  if (!testId) {
-    testId = $(this).data('test-id')
-    console.log('Using kebab-case data attribute, test-id:', testId)
-  } else {
-    console.log('Using camelCase data attribute, testId:', testId)
-  }
-  
-  // Если всё ещё нет значения, попробуем получить атрибут напрямую
-  if (!testId) {
-    testId = $(this).attr('data-test-id')
-    console.log('Using direct attribute access, data-test-id:', testId)
-  }
+  const testId = $(this).data('testId')
+  console.log('Test ID from link:', testId)
   
   formInlineHandler(testId)
 }
@@ -60,72 +73,45 @@ function formInlineLinkHandler(event) {
 function formInlineHandler(testId) {
   console.log('Handling form inline for test ID:', testId)
   
-  // Проверяем оба варианта атрибутов: camelCase и kebab-case
-  let $link = $('.form-inline-link[data-test-id="' + testId + '"]')
-  let $testTitle = $('.test-title[data-test-id="' + testId + '"]')
-  let $formInline = $('.form-inline[data-test-id="' + testId + '"]')
+  // Используем более надёжный селектор для поиска элементов
+  const $link = $(document).find(`.form-inline-link[data-test-id="${testId}"]`)
+  const $testTitle = $(document).find(`.test-title[data-test-id="${testId}"]`)
+  const $formInline = $(document).find(`.form-inline[data-test-id="${testId}"]`)
   
-  console.log('Elements found with kebab-case:',
+  console.log('Elements found:',
     'link:', $link.length,
     'title:', $testTitle.length,
     'form:', $formInline.length
   )
-  
-  // Если не нашли с kebab-case, пробуем camelCase
-  if (!$link.length) {
-    $link = $('.form-inline-link[data-testId="' + testId + '"]')
-    console.log('Link with camelCase:', $link.length)
-  }
-  
-  if (!$testTitle.length) {
-    $testTitle = $('.test-title[data-testId="' + testId + '"]')
-    console.log('Title with camelCase:', $testTitle.length)
-  }
-  
-  if (!$formInline.length) {
-    $formInline = $('.form-inline[data-testId="' + testId + '"]')
-    console.log('Form with camelCase:', $formInline.length)
-  }
 
   if (!$link.length || !$testTitle.length || !$formInline.length) {
     console.error('One or more elements not found for test ID:', testId)
-    // Выведем все form-inline-link на странице для отладки
-    console.log('All form-inline-link elements:', $('.form-inline-link').length)
-    $('.form-inline-link').each(function(i, el) {
-      console.log(i, 'data-test-id:', $(el).attr('data-test-id'), 'data-testId:', $(el).data('testId'))
-    })
-    
-    console.log('All test-title elements:', $('.test-title').length)
-    $('.test-title').each(function(i, el) {
-      console.log(i, 'data-test-id:', $(el).attr('data-test-id'), 'data-testId:', $(el).data('testId'))
-    })
-    
-    console.log('All form-inline elements:', $('.form-inline').length)
-    $('.form-inline').each(function(i, el) {
-      console.log(i, 'data-test-id:', $(el).attr('data-test-id'), 'data-testId:', $(el).data('testId'))
+    console.log('Debug info:')
+    console.log('All form-inline-link elements:', $(document).find('.form-inline-link').length)
+    $(document).find('.form-inline-link').each(function(i, el) {
+      console.log(i, 'data-test-id:', $(el).attr('data-test-id'))
     })
     
     return
   }
 
+  // Переключаем отображение
   $formInline.toggle()
   $testTitle.toggle()
 
   if ($formInline.is(':visible')) {
     console.log('Form is now visible, changing link text to Cancel')
-    if (typeof Translations !== 'undefined') {
-      $link.text(Translations.cancel)
+    if (typeof Translations !== 'undefined' && Translations.cancel) {
+      $link.html('<i class="bi bi-x-circle me-1"></i>' + Translations.cancel)
     } else {
-      console.error('Translations object is not defined!')
-      $link.text('Cancel')
+      $link.html('<i class="bi bi-x-circle me-1"></i>Отмена')
     }
   } else {
     console.log('Form is now hidden, changing link text to Edit')
-    if (typeof Translations !== 'undefined') {
-      $link.text(Translations.edit)
+    if (typeof Translations !== 'undefined' && Translations.edit) {
+      $link.html('<i class="bi bi-pencil me-1"></i>' + Translations.edit)
     } else {
-      console.error('Translations object is not defined!')
-      $link.text('Edit')
+      $link.html('<i class="bi bi-pencil me-1"></i>Редактировать')
     }
   }
 } 

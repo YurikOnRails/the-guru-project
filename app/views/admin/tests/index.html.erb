@@ -8,7 +8,7 @@
     <% end %>
   </div>
 
-  <%= render 'admin/shared/errors', resource: @test %>
+  <%= render 'admin/shared/errors', resource: @test, data: { resource_id: @test&.id } %>
 
   <div class="card shadow-sm">
     <div class="card-body">
@@ -24,7 +24,7 @@
               <th><%= t('.level') %></th>
               <th><%= t('.category') %></th>
               <th><%= t('.questions_count') %></th>
-              <th class="text-center" colspan="3"><%= t('.actions') %></th>
+              <th class="text-center"><%= t('.actions') %></th>
             </tr>
           </thead>
           <tbody>

@@ -1,9 +1,11 @@
 <%= form_with model: [:admin, test], 
               url: update_inline_admin_test_path(test), 
-              local: true, 
+              method: :patch,
+              data: { test_id: test.id, turbo: false }, 
               class: 'form-inline',
-              html: { style: 'display: none' }, 
-              data: {test_id: test.id} do |form| %>
-  <%= form.text_field :title, class: 'form-control mr-2' %>
-  <%= form.submit t('.submit'), class: 'btn btn-primary' %>
+              html: { style: 'display: none' } do |form| %>
+  <div class="d-flex">
+    <%= form.text_field :title, class: 'form-control me-2' %>
+    <%= form.submit t('.submit'), class: 'btn btn-primary' %>
+  </div>
 <% end %> 

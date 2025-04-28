@@ -2,11 +2,15 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import * as bootstrap from "bootstrap"
-import "jquery"
+// jQuery импортируется через тег <script> в макете
 import "./utilities/sorting"
 import "./utilities/form_inline"
 // Импорт JS-кода для прогресс-бара
 import "./utilities/progress_bar_script"
+import "jquery"
 
+// Делаем bootstrap глобальным
 window.bootstrap = bootstrap;
-window.jQuery = window.$ = jQuery;
+
+// Проверим загрузку
+console.log("Application initialized, jQuery available:", (typeof jQuery !== 'undefined'));
