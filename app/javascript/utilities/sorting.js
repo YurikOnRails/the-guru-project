@@ -1,32 +1,35 @@
+// Флаг для отслеживания инициализации
+let sortingInitialized = false
+
 document.addEventListener('turbo:load', initSort)
-document.addEventListener('turbo:render', initSort)
+document.addEventListener('DOMContentLoaded', initSort)
+// Сбрасываем флаг при навигации
+document.addEventListener('turbo:before-render', () => {
+  sortingInitialized = false
+})
 
 function initSort() {
+  // Если сортировка уже инициализирована, не делаем ничего
+  if (sortingInitialized) {
+    return
+  }
+  
   const control = document.querySelector('.sort-by-title')
   if (control) {
-    console.log('Sort control found')
     control.addEventListener('click', sortRowsByTitle)
-  } else {
-    console.log('Sort control not found')
+    // Устанавливаем флаг, что сортировка инициализирована
+    sortingInitialized = true
   }
 }
 
 function sortRowsByTitle() {
-  console.log('Sort clicked')
   const table = this.closest('table')
-  if (!table) {
-    console.log('Table not found')
-    return
-  }
-
+  if (!table) return
+  
   const tbody = table.querySelector('tbody')
-  if (!tbody) {
-    console.log('Tbody not found')
-    return
-  }
+  if (!tbody) return
 
   const rows = Array.from(tbody.querySelectorAll('tr'))
-  console.log(`Found ${rows.length} rows to sort`)
   
   const sortedRows = rows.sort((row1, row2) => {
     const title1 = row1.querySelector('td')?.textContent?.trim() || ''

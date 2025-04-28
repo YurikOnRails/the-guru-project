@@ -1,4 +1,16 @@
-document.addEventListener('turbolinks:load', function() { 
+document.addEventListener('turbo:load', function() { 
+  $('.form-inline-link').on('click', formInlineLinkHandler)
+
+  var errors = $('.resource-errors')
+
+  if (errors.length) {
+    var resourceId = errors.data('resourceId')
+    formInlineHandler(resourceId)
+  }
+})
+
+// Код для обработки события DOMContentLoaded для первой загрузки
+document.addEventListener('DOMContentLoaded', function() {
   $('.form-inline-link').on('click', formInlineLinkHandler)
 
   var errors = $('.resource-errors')
