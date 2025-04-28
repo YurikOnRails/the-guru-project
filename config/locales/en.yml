@@ -146,6 +146,11 @@ en:
       header:
         one: "error detected"
         other: "%{count} errors detected"
+    buttons:
+      edit: "Edit"
+      delete: "Delete"
+      confirm: "Are you sure?"
+      cancel: "Cancel"
     nav:
       logout: "Logout"
       login: "Log in"

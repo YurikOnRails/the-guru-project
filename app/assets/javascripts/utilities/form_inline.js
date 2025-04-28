@@ -21,12 +21,17 @@ function formInlineHandler(testId) {
   var $testTitle = $('.test-title[data-test-id="' + testId + '"]')
   var $formInline = $('.form-inline[data-test-id="' + testId + '"]')
 
+  if (!$link.length || !$testTitle.length || !$formInline.length) {
+    console.error('One or more elements not found for test ID:', testId)
+    return
+  }
+
   $formInline.toggle()
   $testTitle.toggle()
 
   if ($formInline.is(':visible')) {
-    $link.text('Cancel')
+    $link.text(Translations.cancel)
   } else {
-    $link.text('Edit')
+    $link.text(Translations.edit)
   }
 } 

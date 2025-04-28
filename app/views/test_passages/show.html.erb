@@ -40,7 +40,7 @@
             <h2 class="h5 mb-0"><%= @test_passage.current_question.content %></h2>
           </div>
           <div class="card-body">
-            <%= form_with url: test_passage_path(@test_passage), local: true, method: :put do |form| %>
+            <%= form_with url: test_passage_path(@test_passage), method: :put, data: { turbo: false } do |form| %>
               <div class="list-group mb-4">
                 <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.answers, :id, :content, include_hidden: false do |b| %>
                   <div class="list-group-item">
