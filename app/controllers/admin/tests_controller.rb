@@ -50,7 +50,7 @@ class Admin::TestsController < Admin::BaseController
   def set_tests
     @tests = Test.all
   end
-  
+
   def set_test
     @test = Test.find(params[:id])
   end

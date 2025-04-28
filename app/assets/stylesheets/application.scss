@@ -1,6 +1,7 @@
 // Bootstrap и его зависимости
 @import "bootstrap";
 @import "bootstrap_custom";
+@import "progress_bar";
 
 .pointer {
   cursor: pointer;
@@ -8,4 +9,13 @@
 
 .hide {
   display: none;
+}
+
+// Стили для инлайн-форм
+.form-inline {
+  display: none; // По умолчанию скрыты
+}
+
+.form-inline.active {
+  display: block;
 }

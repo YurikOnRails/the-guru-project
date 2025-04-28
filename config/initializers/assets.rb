@@ -19,6 +19,7 @@ Rails.application.config.assets.precompile += %w[ .svg .eot .woff .ttf .scss ]
 Rails.application.config.assets.precompile += %w[ bootstrap.js ]
 Rails.application.config.assets.precompile += %w[ controllers/application.js controllers/index.js ]
 Rails.application.config.assets.precompile += %w[ application.js ]
+Rails.application.config.assets.precompile += %w[ utilities/progress_bar.js utilities/progress_bar_script.js ]
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets

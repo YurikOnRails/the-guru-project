@@ -14,8 +14,8 @@ class TestPassage < ApplicationRecord
     # Проверка, что answer_ids не nil
     answer_ids = [] if answer_ids.nil?
     # Преобразование в массив, если передан единичный ответ
-    answer_ids = [answer_ids] unless answer_ids.is_a?(Array)
-    
+    answer_ids = [ answer_ids ] unless answer_ids.is_a?(Array)
+
     if correct_answer?(answer_ids)
       self.correct_questions += 1
     end

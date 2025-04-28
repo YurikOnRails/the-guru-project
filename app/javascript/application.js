@@ -5,6 +5,8 @@ import * as bootstrap from "bootstrap"
 import "jquery"
 import "./utilities/sorting"
 import "./utilities/form_inline"
+// Импорт JS-кода для прогресс-бара
+import "./utilities/progress_bar_script"
 
 window.bootstrap = bootstrap;
 window.jQuery = window.$ = jQuery;
