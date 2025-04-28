@@ -65,6 +65,8 @@ en:
       form:
         submit: "Submit"
         back: "Back"
+      form_inline:
+        submit: "OK"
     gists:
       index:
         header: "Gists"
