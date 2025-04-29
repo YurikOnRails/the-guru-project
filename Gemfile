@@ -54,7 +54,7 @@ gem "thruster", require: false
 gem "rails-i18n"
 
 # UI
-gem "jquery-rails"
+# gem "jquery-rails"
 
 # API clients
 gem "octokit", "~> 6.1"

@@ -22,10 +22,11 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
-    
-    <%# Явно загружаем jQuery перед остальными скриптами %>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
             
+    <%# Явно загружаем jQuery перед остальными скриптами %>
+    <%# Удаляем jQuery, так как перешли на vanilla JavaScript %>
+    <%# <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script> %>
+
     <%= javascript_importmap_tags %>
   </head>
 

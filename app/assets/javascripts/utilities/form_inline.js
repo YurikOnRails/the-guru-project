@@ -1,22 +1,26 @@
 document.addEventListener('turbo:load', function() { 
-  $('.form-inline-link').on('click', formInlineLinkHandler)
+  document.querySelectorAll('.form-inline-link').forEach(link => {
+    link.addEventListener('click', formInlineLinkHandler)
+  })
 
-  var errors = $('.resource-errors')
+  const errors = document.querySelector('.resource-errors')
 
-  if (errors.length) {
-    var resourceId = errors.data('resourceId')
+  if (errors) {
+    const resourceId = errors.dataset.resourceId
     formInlineHandler(resourceId)
   }
 })
 
 // Код для обработки события DOMContentLoaded для первой загрузки
 document.addEventListener('DOMContentLoaded', function() {
-  $('.form-inline-link').on('click', formInlineLinkHandler)
+  document.querySelectorAll('.form-inline-link').forEach(link => {
+    link.addEventListener('click', formInlineLinkHandler)
+  })
 
-  var errors = $('.resource-errors')
+  const errors = document.querySelector('.resource-errors')
 
-  if (errors.length) {
-    var resourceId = errors.data('resourceId')
+  if (errors) {
+    const resourceId = errors.dataset.resourceId
     formInlineHandler(resourceId)
   }
 })
@@ -24,26 +28,27 @@ document.addEventListener('DOMContentLoaded', function() {
 function formInlineLinkHandler(event) {
   event.preventDefault()
 
-  var testId = $(this).data('testId')
+  const testId = this.dataset.testId
   formInlineHandler(testId)
 }
 
 function formInlineHandler(testId) {
-  var $link = $('.form-inline-link[data-test-id="' + testId + '"]')
-  var $testTitle = $('.test-title[data-test-id="' + testId + '"]')
-  var $formInline = $('.form-inline[data-test-id="' + testId + '"]')
+  const link = document.querySelector(`.form-inline-link[data-test-id="${testId}"]`)
+  const testTitle = document.querySelector(`.test-title[data-test-id="${testId}"]`)
+  const formInline = document.querySelector(`.form-inline[data-test-id="${testId}"]`)
 
-  if (!$link.length || !$testTitle.length || !$formInline.length) {
+  if (!link || !testTitle || !formInline) {
     console.error('One or more elements not found for test ID:', testId)
     return
   }
 
-  $formInline.toggle()
-  $testTitle.toggle()
+  // Используем toggle для переключения видимости
+  formInline.style.display = formInline.style.display === 'none' ? 'block' : 'none'
+  testTitle.style.display = testTitle.style.display === 'none' ? 'block' : 'none'
 
-  if ($formInline.is(':visible')) {
-    $link.text(Translations.cancel)
+  if (formInline.style.display !== 'none') {
+    link.textContent = Translations.cancel
   } else {
-    $link.text(Translations.edit)
+    link.textContent = Translations.edit
   }
 } 
