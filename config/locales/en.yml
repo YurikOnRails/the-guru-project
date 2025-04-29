@@ -31,6 +31,8 @@ en:
         success: "Test was successfully created."
       update:
         success: "Test was successfully updated."
+      update_inline:
+        success: "Test title was successfully updated."
       destroy:
         success: "Test was successfully deleted."
       index:

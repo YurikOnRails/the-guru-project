@@ -100,6 +100,8 @@ ru:
         success: "Тест успешно создан."
       update:
         success: "Тест успешно обновлен."
+      update_inline:
+        success: "Название теста успешно изменено."
       destroy:
         success: "Тест успешно удален."
       index:

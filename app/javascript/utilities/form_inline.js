@@ -1,35 +1,21 @@
 // Флаг для отслеживания инициализации
 let formInlineInitialized = false
 
-// Правильная инициализация с поддержкой Turbo
-document.addEventListener('turbo:load', () => {
-  console.log('Turbo load triggered, initializing form inline')
-  initFormInline()
-})
-
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM content loaded triggered, initializing form inline')
-  initFormInline()
-})
+// Инициализация с поддержкой Turbo и для первой загрузки
+document.addEventListener('turbo:load', initFormInline)
+document.addEventListener('DOMContentLoaded', initFormInline)
 
 // Сбрасываем флаг при навигации
 document.addEventListener('turbo:before-render', () => {
   formInlineInitialized = false
-  console.log('Form inline initialization flag reset')
 })
 
 function initFormInline() {
   // Если инлайн-формы уже инициализированы, не делаем ничего
-  if (formInlineInitialized) {
-    console.log('Form inline already initialized, skipping')
-    return
-  }
-  
-  console.log('Initializing form inline functionality')
+  if (formInlineInitialized) return
   
   // Получаем все кнопки редактирования
   const controls = document.querySelectorAll('.form-inline-link')
-  console.log('Found form-inline-link controls:', controls.length)
   
   if (controls.length) {
     // Добавляем обработчики клика
@@ -37,64 +23,80 @@ function initFormInline() {
       control.addEventListener('click', formInlineLinkHandler)
     })
     formInlineInitialized = true
-    console.log('Initialized form-inline-link click handlers')
   }
 
   // Обработка ошибок, если они есть
   const errors = document.querySelector('.resource-errors')
   if (errors) {
     const resourceId = errors.dataset.resourceId
-    console.log('Resource ID from errors:', resourceId)
     formInlineHandler(resourceId)
   }
 }
 
 function formInlineLinkHandler(event) {
   event.preventDefault()
-  console.log('Form inline link clicked')
 
   const testId = this.dataset.testId
-  console.log('Test ID from link:', testId)
   
-  formInlineHandler(testId)
+  // Определяем текущее состояние формы
+  const formInline = document.querySelector(`.form-inline[data-test-id="${testId}"]`)
+  const isEditMode = formInline && (formInline.style.display === 'block')
+  
+  if (isEditMode) {
+    // Если уже в режиме редактирования, отправляем форму
+    submitInlineForm(testId)
+  } else {
+    // Иначе показываем форму редактирования
+    formInlineHandler(testId)
+  }
+}
+
+function submitInlineForm(testId) {
+  const form = document.querySelector(`.form-inline[data-test-id="${testId}"]`)
+  
+  if (form) {
+    // Отправляем форму с обновленным названием
+    Rails.fire(form, 'submit')
+  } else {
+    console.error('Form not found for test ID:', testId)
+  }
 }
 
 function formInlineHandler(testId) {
-  console.log('Handling form inline for test ID:', testId)
-  
   // Находим элементы для переключения
-  const link = document.querySelector(`.form-inline-link[data-test-id="${testId}"]`)
-  const testTitle = document.querySelector(`.test-title[data-test-id="${testId}"]`)
-  const formInline = document.querySelector(`.form-inline[data-test-id="${testId}"]`)
+  const elements = {
+    link: document.querySelector(`.form-inline-link[data-test-id="${testId}"]`),
+    testTitle: document.querySelector(`.test-title[data-test-id="${testId}"]`),
+    formInline: document.querySelector(`.form-inline[data-test-id="${testId}"]`)
+  }
   
-  console.log('Elements found:',
-    'link:', link ? 'yes' : 'no',
-    'title:', testTitle ? 'yes' : 'no',
-    'form:', formInline ? 'yes' : 'no'
-  )
-
+  const { link, testTitle, formInline } = elements
+  
   if (!link || !testTitle || !formInline) {
     console.error('One or more elements not found for test ID:', testId)
     return
   }
+  
+  const titleInput = formInline.querySelector('input[type="text"]')
+  if (!titleInput) {
+    console.error('Title input not found for test ID:', testId)
+    return
+  }
+
+  // Определяем текущее состояние отображения
+  const isHidden = formInline.style.display === 'none' || formInline.style.display === ''
+  
+  // При первом открытии формы устанавливаем текущее значение заголовка в поле ввода
+  if (isHidden) {
+    titleInput.value = testTitle.textContent.trim()
+  }
 
   // Переключаем отображение
-  formInline.style.display = formInline.style.display === 'none' ? 'block' : 'none'
-  testTitle.style.display = testTitle.style.display === 'none' ? 'block' : 'none'
-
-  if (formInline.style.display !== 'none') {
-    console.log('Form is now visible, changing link text to Cancel')
-    if (typeof Translations !== 'undefined' && Translations.cancel) {
-      link.innerHTML = '<i class="bi bi-x-circle me-1"></i>' + Translations.cancel
-    } else {
-      link.innerHTML = '<i class="bi bi-x-circle me-1"></i>Отмена'
-    }
-  } else {
-    console.log('Form is now hidden, changing link text to Edit')
-    if (typeof Translations !== 'undefined' && Translations.edit) {
-      link.innerHTML = '<i class="bi bi-pencil me-1"></i>' + Translations.edit
-    } else {
-      link.innerHTML = '<i class="bi bi-pencil me-1"></i>Редактировать'
-    }
+  formInline.style.display = isHidden ? 'block' : 'none'
+  testTitle.style.display = isHidden ? 'none' : 'block'
+  
+  // Устанавливаем фокус при отображении формы
+  if (isHidden) {
+    titleInput.focus()
   }
 } 

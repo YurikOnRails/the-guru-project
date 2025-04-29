@@ -2,13 +2,10 @@
 @import "bootstrap";
 @import "bootstrap_custom";
 @import "progress_bar";
+@import "styles/utilities";
 
 .pointer {
   cursor: pointer;
-}
-
-.hide {
-  display: none;
 }
 
 // Стили для инлайн-форм
