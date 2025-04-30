@@ -16,21 +16,24 @@
       <% if @test_passage.current_question.present? %>
         <div class="mb-4">
           <% question_index = @test_passage.test.questions.index(@test_passage.current_question) %>
+          <% current_question_number = question_index.nil? ? 0 : question_index + 1 %>
+          <% total_questions = @test_passage.test.questions.count %>
+          <% progress_percentage = total_questions > 0 ? (current_question_number.to_f / total_questions * 100) : 0 %>
+          
           <div class="d-flex justify-content-between align-items-center mb-2">
             <span class="badge bg-primary fs-6">
-              <%= t('.question_count', current: question_index.nil? ? "N/A" : question_index + 1, total: @test_passage.test.questions.count) %>
+              <%= t('.question_count', current: current_question_number, total: total_questions) %>
             </span>
-            <span class="text-muted">
-              <%= (question_index.nil? ? 0 : question_index + 1).to_f / @test_passage.test.questions.count * 100 %>% <%= t('.completed') %>
+            <span class="text-muted" id="progress-percent" data-progress-percent="<%= progress_percentage %>">
+              <%= progress_percentage %>% <%= t('.completed') %>
             </span>
           </div>
           
           <% if @test_passage.test.questions.any? %>
-            <% question_index = @test_passage.test.questions.index(@test_passage.current_question) %>
-            <% progress_percentage = question_index.nil? ? 0 : (question_index + 1).to_f / @test_passage.test.questions.count * 100 %>
-            <div class="progress" style="height: 10px;">
-              <div class="progress-bar bg-success" role="progressbar" style="width: <%= progress_percentage %>%" 
-                  aria-valuenow="<%= progress_percentage %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress" style="height: 10px;" id="progress-container" data-total-questions="<%= total_questions %>" data-current-question="<%= current_question_number %>">
+              <div class="progress-bar bg-success" id="progress-bar" role="progressbar" style="width: <%= progress_percentage %>%" 
+                  aria-valuenow="<%= progress_percentage %>" aria-valuemin="0" aria-valuemax="100"
+                  data-progress-value="<%= progress_percentage %>"></div>
             </div>
           <% end %>
         </div>
@@ -40,7 +43,7 @@
             <h2 class="h5 mb-0"><%= @test_passage.current_question.content %></h2>
           </div>
           <div class="card-body">
-            <%= form_with url: test_passage_path(@test_passage), local: true, method: :put do |form| %>
+            <%= form_with url: test_passage_path(@test_passage), method: :put, data: { turbo: false } do |form| %>
               <div class="list-group mb-4">
                 <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.answers, :id, :content, include_hidden: false do |b| %>
                   <div class="list-group-item">

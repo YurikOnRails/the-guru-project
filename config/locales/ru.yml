@@ -100,6 +100,8 @@ ru:
         success: "Тест успешно создан."
       update:
         success: "Тест успешно обновлен."
+      update_inline:
+        success: "Название теста успешно изменено."
       destroy:
         success: "Тест успешно удален."
       index:
@@ -137,6 +139,8 @@ ru:
         title_placeholder: "Введите название теста"
         title_help: "Название теста должно быть конкретным и понятным"
         level_help: "Уровень сложности теста: 0 - легкий, 1 - средний, 2+ - сложный"
+      form_inline:
+        submit: "ОК"
     gists:
       index:
         header: "Гисты"
@@ -172,6 +176,7 @@ ru:
       edit: "Редактировать"
       delete: "Удалить"
       confirm: "Вы уверены?"
+      cancel: "Отмена"
     nav:
       logout: "Выйти"
       login: "Войти"

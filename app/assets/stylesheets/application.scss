@@ -1,11 +1,20 @@
 // Bootstrap и его зависимости
 @import "bootstrap";
 @import "bootstrap_custom";
+@import "progress_bar";
+@import "styles/utilities";
 
 .pointer {
   cursor: pointer;
 }
 
-.hide {
-  display: none;
+// Стили для инлайн-форм
+.form-inline {
+  display: none; // По умолчанию скрыты
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.form-inline.active {
+  display: block;
 }

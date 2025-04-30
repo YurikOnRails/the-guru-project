@@ -11,10 +11,7 @@ class TestPassage < ApplicationRecord
   SUCCESS_THRESHOLD = 85
 
   def accept!(answer_ids)
-    if correct_answer?(answer_ids)
-      self.correct_questions += 1
-    end
-
+    self.correct_questions += 1 if correct_answer?(answer_ids)
     self.current_question = next_question
     save!
   end
@@ -40,7 +37,7 @@ class TestPassage < ApplicationRecord
   end
 
   def correct_answer?(answer_ids)
-    correct_answers.ids.sort == answer_ids.to_a.map(&:to_i).sort
+    correct_answers.ids.sort == Array(answer_ids).map(&:to_i).sort
   end
 
   def correct_answers

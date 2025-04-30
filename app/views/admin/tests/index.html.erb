@@ -1,10 +1,14 @@
 <div class="container mt-4">
+  <%= render 'js_translations' %>
+  
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="mb-0"><%= t('.header') %></h1>
     <%= link_to new_admin_test_path, class: 'btn btn-primary' do %>
       <i class="bi bi-plus-circle me-1"></i> <%= t('.new_test') %>
     <% end %>
   </div>
+
+  <%= render 'admin/shared/errors', resource: @test, data: { resource_id: @test&.id } %>
 
   <div class="card shadow-sm">
     <div class="card-body">
@@ -20,7 +24,7 @@
               <th><%= t('.level') %></th>
               <th><%= t('.category') %></th>
               <th><%= t('.questions_count') %></th>
-              <th class="text-center" colspan="3"><%= t('.actions') %></th>
+              <th class="text-center"><%= t('.actions') %></th>
             </tr>
           </thead>
           <tbody>

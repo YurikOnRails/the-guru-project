@@ -31,6 +31,8 @@ en:
         success: "Test was successfully created."
       update:
         success: "Test was successfully updated."
+      update_inline:
+        success: "Test title was successfully updated."
       destroy:
         success: "Test was successfully deleted."
       index:
@@ -65,6 +67,8 @@ en:
       form:
         submit: "Submit"
         back: "Back"
+      form_inline:
+        submit: "OK"
     gists:
       index:
         header: "Gists"
@@ -144,6 +148,11 @@ en:
       header:
         one: "error detected"
         other: "%{count} errors detected"
+    buttons:
+      edit: "Edit"
+      delete: "Delete"
+      confirm: "Are you sure?"
+      cancel: "Cancel"
     nav:
       logout: "Logout"
       login: "Log in"
