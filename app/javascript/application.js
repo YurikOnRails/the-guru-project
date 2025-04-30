@@ -8,6 +8,3 @@ import "./utilities/progress_bar_script"
 
 // Делаем bootstrap глобальным
 window.bootstrap = bootstrap;
-
-// Проверим загрузку
-console.log("Application initialized");

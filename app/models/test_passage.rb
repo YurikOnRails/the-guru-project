@@ -11,15 +11,7 @@ class TestPassage < ApplicationRecord
   SUCCESS_THRESHOLD = 85
 
   def accept!(answer_ids)
-    # Проверка, что answer_ids не nil
-    answer_ids = [] if answer_ids.nil?
-    # Преобразование в массив, если передан единичный ответ
-    answer_ids = [ answer_ids ] unless answer_ids.is_a?(Array)
-
-    if correct_answer?(answer_ids)
-      self.correct_questions += 1
-    end
-
+    self.correct_questions += 1 if correct_answer?(answer_ids)
     self.current_question = next_question
     save!
   end
@@ -45,9 +37,7 @@ class TestPassage < ApplicationRecord
   end
 
   def correct_answer?(answer_ids)
-    # Преобразование answer_ids в массив целых чисел
-    answer_ids = answer_ids.map(&:to_i) if answer_ids.present?
-    correct_answers.ids.sort == answer_ids.sort
+    correct_answers.ids.sort == Array(answer_ids).map(&:to_i).sort
   end
 
   def correct_answers

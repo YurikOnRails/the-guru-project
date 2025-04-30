@@ -53,9 +53,6 @@ gem "thruster", require: false
 # LOCALISATION
 gem "rails-i18n"
 
-# UI
-# gem "jquery-rails"
-
 # API clients
 gem "octokit", "~> 6.1"
 
