@@ -4,8 +4,8 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.1"
 # Use the Sprockets asset pipeline [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 2.1"
+# Use PostgreSQL as the database for Active Record
+gem "pg"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -16,6 +16,9 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
+
+# jQuery для JavaScript-функциональности
+gem "jquery-rails"
 
 # Bootstrap for styling
 gem "bootstrap", "~> 5.3.0"

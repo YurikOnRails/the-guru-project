@@ -75,3 +75,5 @@ config/deploy.yml
 
 # Ignore .env file with secrets
 .env
+kamal-env-setup.md
+deploy-instructions.md
