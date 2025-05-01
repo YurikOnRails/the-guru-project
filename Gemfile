@@ -28,6 +28,8 @@ gem "devise", "~> 4.0"
 
 gem 'faraday-retry'
 
+gem 'pg', '>= 1.1'
+
 gem "faker"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
