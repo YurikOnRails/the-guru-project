@@ -1,5 +1,4 @@
 # syntax=docker/dockerfile:1
-# check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
 # docker build -t the_guru_project .
@@ -11,7 +10,6 @@
 ARG RUBY_VERSION=3.2.6
 ARG NODE_VERSION=20
 ARG YARN_VERSION=1.22.19
-ARG BUNDLER_VERSION=2.4.21
 
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
@@ -25,8 +23,7 @@ ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
     RAILS_LOG_TO_STDOUT="1" \
     RAILS_SERVE_STATIC_FILES="true" \
-    LANG=C.UTF-8 \
-    BUNDLER_VERSION=$BUNDLER_VERSION
+    LANG=C.UTF-8
 
 # Install base packages
 RUN apt-get update -qq && \
@@ -41,9 +38,6 @@ RUN apt-get update -qq && \
     npm \
     git \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-# Install specific bundler version
-RUN gem install bundler:$BUNDLER_VERSION
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
