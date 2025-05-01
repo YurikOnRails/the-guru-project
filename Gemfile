@@ -22,6 +22,7 @@ gem "bootstrap", "~> 5.3.0"
 gem "octicons_helper"
 gem "sassc-rails"
 
+gem 'jquery-rails'
 # AUTH
 gem "devise", "~> 4.0"
 
