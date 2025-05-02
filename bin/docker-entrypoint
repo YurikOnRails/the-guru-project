@@ -6,6 +6,12 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
+# Если RAILS_MASTER_KEY передан как переменная окружения, создаем файл config/master.key
+if [ -n "$RAILS_MASTER_KEY" ] && [ ! -f config/master.key ]; then
+    echo "$RAILS_MASTER_KEY" > config/master.key
+    chmod 600 config/master.key
+fi
+
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare

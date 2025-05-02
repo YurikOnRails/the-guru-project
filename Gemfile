@@ -17,7 +17,9 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem 'faraday'
+# HTTP клиент и middleware для повторов запросов
+gem "faraday"
+gem "faraday-retry"
 
 # jQuery для JavaScript-функциональности
 gem "jquery-rails"

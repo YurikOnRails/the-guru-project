@@ -23,6 +23,7 @@ ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
     RAILS_LOG_TO_STDOUT="1" \
     RAILS_SERVE_STATIC_FILES="true" \
+    SECRET_KEY_BASE_DUMMY="1" \
     LANG=C.UTF-8
 
 # Install base packages
@@ -61,11 +62,29 @@ RUN bundle config set --local without 'development test' && \
 # Copy application code
 COPY . .
 
+# Преобразуем переменную окружения RAILS_MASTER_KEY в файл master.key, если она доступна
+RUN if [ -n "$RAILS_MASTER_KEY" ]; then \
+        echo "$RAILS_MASTER_KEY" > config/master.key; \
+        chmod 600 config/master.key; \
+    fi
+
+# Проверка наличия master.key или установка переменной окружения
+RUN if [ ! -f config/master.key ] && [ -z "$RAILS_MASTER_KEY" ]; then \
+        echo "WARNING: Neither config/master.key nor RAILS_MASTER_KEY environment variable exist."; \
+        echo "         Using a dummy SECRET_KEY_BASE for asset compilation."; \
+        echo "         Real RAILS_MASTER_KEY will be required at runtime!"; \
+    fi
+
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# Используем переданный RAILS_MASTER_KEY если он есть или DUMMY значение
+RUN if [ -f config/master.key ] || [ -n "$RAILS_MASTER_KEY" ]; then \
+        SECRET_KEY_BASE=$(bin/rails runner "puts Rails.application.credentials.secret_key_base") bundle exec rails assets:precompile; \
+    else \
+        SECRET_KEY_BASE=dummy bundle exec rails assets:precompile; \
+    fi
 
 # Final stage for app image
 FROM base
