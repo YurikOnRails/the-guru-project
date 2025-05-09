@@ -41,18 +41,18 @@ plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
 
 # Настройки для production-окружения
-if ENV['RAILS_ENV'] == 'production'
+if ENV["RAILS_ENV"] == "production"
   # Количество рабочих процессов (workers)
   workers ENV.fetch("WEB_CONCURRENCY") { 2 }
-  
+
   # Предварительная загрузка приложения для экономии памяти
   preload_app!
-  
+
   # Перед разветвлением рабочих процессов (fork)
   before_fork do
     ActiveRecord::Base.connection_pool.disconnect! if defined?(ActiveRecord)
   end
-  
+
   # После разветвления рабочих процессов
   on_worker_boot do
     ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
