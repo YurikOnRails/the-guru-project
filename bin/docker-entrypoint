@@ -6,15 +6,26 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
-# Если RAILS_MASTER_KEY передан как переменная окружения, создаем файл config/master.key
+# Создаем config/master.key из переменной окружения если она доступна
 if [ -n "$RAILS_MASTER_KEY" ] && [ ! -f config/master.key ]; then
     echo "$RAILS_MASTER_KEY" > config/master.key
     chmod 600 config/master.key
 fi
 
+# Устанавливаем порт по умолчанию, если не определен
+if [ -z "$PORT" ]; then
+    export PORT=3000
+    echo "PORT not set, defaulting to $PORT"
+fi
+
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
-  ./bin/rails db:prepare
+    echo "Preparing database..."
+    ./bin/rails db:prepare
 fi
+
+# Вывод информации о запуске
+echo "Starting server on port $PORT..."
+echo "RAILS_ENV: $RAILS_ENV"
 
 exec "${@}"

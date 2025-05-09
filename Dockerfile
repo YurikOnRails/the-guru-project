@@ -1,10 +1,7 @@
 # syntax=docker/dockerfile:1
 
-# This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t the_guru_project .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name the_guru_project the_guru_project
-
-# For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
+# This Dockerfile is designed for production, not development.
+# Optimized for deployment on render.com
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.2.6
@@ -62,29 +59,17 @@ RUN bundle config set --local without 'development test' && \
 # Copy application code
 COPY . .
 
-# Преобразуем переменную окружения RAILS_MASTER_KEY в файл master.key, если она доступна
+# Создаем master.key из переменной окружения если она доступна
 RUN if [ -n "$RAILS_MASTER_KEY" ]; then \
         echo "$RAILS_MASTER_KEY" > config/master.key; \
         chmod 600 config/master.key; \
     fi
 
-# Проверка наличия master.key или установка переменной окружения
-RUN if [ ! -f config/master.key ] && [ -z "$RAILS_MASTER_KEY" ]; then \
-        echo "WARNING: Neither config/master.key nor RAILS_MASTER_KEY environment variable exist."; \
-        echo "         Using a dummy SECRET_KEY_BASE for asset compilation."; \
-        echo "         Real RAILS_MASTER_KEY will be required at runtime!"; \
-    fi
-
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-# Используем переданный RAILS_MASTER_KEY если он есть или DUMMY значение
-RUN if [ -f config/master.key ] || [ -n "$RAILS_MASTER_KEY" ]; then \
-        SECRET_KEY_BASE=$(bin/rails runner "puts Rails.application.credentials.secret_key_base") bundle exec rails assets:precompile; \
-    else \
-        SECRET_KEY_BASE=dummy bundle exec rails assets:precompile; \
-    fi
+# Precompiling assets for production using dummy key
+RUN SECRET_KEY_BASE=dummy bundle exec rails assets:precompile
 
 # Final stage for app image
 FROM base
@@ -108,11 +93,11 @@ RUN groupadd --system --gid 1000 rails && \
 USER 1000:1000
 
 # Health check to ensure container is running properly
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD curl -f http://localhost/ || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD curl -f http://localhost:${PORT:-3000}/ || exit 1
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Start server via Thruster by default, this can be overwritten at runtime
-EXPOSE 80
-CMD ["./bin/thrust", "./bin/rails", "server"]
+# Start server with dynamic port
+EXPOSE ${PORT:-3000}
+CMD ./bin/thrust ./bin/rails server -p ${PORT:-3000} -b 0.0.0.0

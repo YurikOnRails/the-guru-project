@@ -5,7 +5,7 @@ gem "rails", "~> 8.0.1"
 # Use the Sprockets asset pipeline [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use PostgreSQL as the database for Active Record
-gem "pg"
+gem "pg", "~> 1.5.3"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
