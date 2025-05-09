@@ -46,10 +46,12 @@ Rails.application.configure do
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  config.assume_ssl = true
+  # Отключаем assume_ssl на Render.com, так как оно уже настроено на уровне платформы
+  config.assume_ssl = false
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  # Отключаем force_ssl на Render.com, так как SSL терминируется на уровне прокси
+  config.force_ssl = false
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
@@ -66,16 +68,14 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
-  # Настраиваем SolidCache с использованием primary соединения вместо cache
-  config.cache_store = :solid_cache_store, {
-    connection: :primary, # Используем primary соединение
-    expires_in: 1.day
-  }
+  # Заменяем SolidCache на более простое хранилище памяти, чтобы исключить проблемы с кэшем
+  config.cache_store = :memory_store, { size: 64.megabytes }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "test_guru_production"
-  config.active_job.queue_adapter = :solid_queue
+  # Используем встроенный синхронный адаптер вместо solid_queue
+  config.active_job.queue_adapter = :inline
 
   config.action_mailer.perform_caching = false
 
