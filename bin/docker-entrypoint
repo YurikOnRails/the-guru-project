@@ -7,9 +7,27 @@ if [ -z "${LD_PRELOAD+x}" ]; then
 fi
 
 # Создаем config/master.key из переменной окружения если она доступна
-if [ -n "$RAILS_MASTER_KEY" ] && [ ! -f config/master.key ]; then
+if [ -n "$RAILS_MASTER_KEY" ]; then
     echo "$RAILS_MASTER_KEY" > config/master.key
     chmod 600 config/master.key
+    echo "Created config/master.key from environment variable"
+else
+    echo "WARNING: RAILS_MASTER_KEY environment variable is not set!"
+    if [ ! -f config/master.key ]; then
+        echo "ERROR: config/master.key file does not exist and RAILS_MASTER_KEY is not set. Rails credentials will not work!"
+    fi
+fi
+
+# Генерируем SECRET_KEY_BASE если он не задан
+if [ -z "$SECRET_KEY_BASE" ]; then
+    export SECRET_KEY_BASE=$(openssl rand -hex 64)
+    echo "SECRET_KEY_BASE not set, generated random value"
+fi
+
+# Генерируем DEVISE_SECRET_KEY если он не задан
+if [ -z "$DEVISE_SECRET_KEY" ]; then
+    export DEVISE_SECRET_KEY=$(openssl rand -hex 64)
+    echo "DEVISE_SECRET_KEY not set, generated random value"
 fi
 
 # Устанавливаем порт по умолчанию, если не определен

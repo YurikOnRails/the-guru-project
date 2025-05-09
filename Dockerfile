@@ -59,12 +59,6 @@ RUN bundle config set --local without 'development test' && \
 # Copy application code
 COPY . .
 
-# Создаем master.key из переменной окружения если она доступна
-RUN if [ -n "$RAILS_MASTER_KEY" ]; then \
-        echo "$RAILS_MASTER_KEY" > config/master.key; \
-        chmod 600 config/master.key; \
-    fi
-
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
