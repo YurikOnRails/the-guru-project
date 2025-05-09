@@ -83,22 +83,27 @@ RUN mkdir -p /rails/tmp/pids && \
     mkdir -p /rails/log && \
     mkdir -p /rails/storage && \
     mkdir -p /rails/config && \
+    mkdir -p /rails/public/assets && \
+    mkdir -p /rails/public/packs && \
     chmod -R 777 /rails/tmp && \
     chmod -R 777 /rails/log && \
     chmod -R 777 /rails/storage && \
+    chmod -R 777 /rails/public/assets && \
+    chmod -R 777 /rails/public/packs && \
     chmod 775 /rails/config
 
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp config
+    chown -R rails:rails db log storage tmp config public/assets public/packs
 USER 1000:1000
 
 # Health check to ensure container is running properly
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD curl -f http://localhost:${PORT:-3000}/ || exit 1
 
 # Скрипт для проверки переменных окружения сделаем исполняемым
-RUN chmod +x /rails/bin/check_env || echo "Warning: could not make check_env executable"
+COPY --chmod=755 ./bin/check_env /rails/bin/
+COPY --chmod=755 ./bin/docker-entrypoint /rails/bin/
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
