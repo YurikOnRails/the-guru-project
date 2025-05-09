@@ -9,9 +9,9 @@ module EncryptedFilePatch
       super
     rescue ActiveSupport::MessageEncryptor::InvalidMessage => e
       Rails.logger.warn "WARNING: Cannot decrypt #{content_path} - using fallback mechanism"
-      
+
       # Если это credentials, возвращаем пустой YAML
-      if content_path.to_s.end_with?('credentials.yml.enc')
+      if content_path.to_s.end_with?("credentials.yml.enc")
         "---\n"
       else
         # Для других файлов просто возвращаем пустую строку
@@ -31,21 +31,21 @@ module CredentialsPatch
     begin
       # Сначала пытаемся использовать оригинальный метод
       original_config = super
-      
+
       # Проверим, что данные доступны, чтобы выявить случаи, когда credentials пустые
       original_config&.to_h
-      
+
       # Если все в порядке, используем оригинальные данные
       original_config
     rescue StandardError => e
       Rails.logger.warn "WARNING: Cannot use credentials - using ENV variables instead: #{e.message}"
-      
+
       # Создаем ActiveSupport::OrderedOptions для имитации структуры credentials
       fallback = ActiveSupport::OrderedOptions.new
-      
+
       # Добавляем базовые атрибуты из ENV переменных
       fallback.secret_key_base = ENV["SECRET_KEY_BASE"]
-      
+
       # Добавляем другие часто используемые атрибуты
       # AWS
       aws = ActiveSupport::OrderedOptions.new
@@ -53,7 +53,7 @@ module CredentialsPatch
       aws.secret_access_key = ENV["AWS_SECRET_ACCESS_KEY"]
       aws.region = ENV["AWS_REGION"]
       fallback.aws = aws
-      
+
       # Почтовый сервер
       smtp = ActiveSupport::OrderedOptions.new
       smtp.address = ENV["SMTP_SERVER"]
@@ -62,23 +62,23 @@ module CredentialsPatch
       smtp.user_name = ENV["SMTP_USERNAME"]
       smtp.password = ENV["SMTP_PASSWORD"]
       fallback.smtp = smtp
-      
+
       # Другие API ключи
       api_keys = ActiveSupport::OrderedOptions.new
       api_keys.stripe = ENV["STRIPE_API_KEY"]
       api_keys.google_maps = ENV["GOOGLE_MAPS_API_KEY"]
       fallback.api_keys = api_keys
-      
+
       # Специфичные для Devise
       devise = ActiveSupport::OrderedOptions.new
       devise.secret_key = ENV["DEVISE_SECRET_KEY"]
       fallback.devise = devise
-      
+
       # Возвращаем созданный объект вместо реальных credentials
       fallback
     end
   end
-  
+
   # Патч для метода options, который используется для доступа к секциям
   def options
     begin
@@ -99,4 +99,4 @@ end
 if defined?(ActiveSupport::EncryptedConfiguration)
   Rails.logger.info "Applying CredentialsPatch to ActiveSupport::EncryptedConfiguration"
   ActiveSupport::EncryptedConfiguration.prepend(CredentialsPatch)
-end 
+end

@@ -105,4 +105,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start server with dynamic port
 EXPOSE ${PORT:-3000}
-CMD ./bin/thrust ./bin/rails server -p ${PORT:-3000} -b 0.0.0.0
+CMD ./bin/rails server -p ${PORT:-3000} -b 0.0.0.0

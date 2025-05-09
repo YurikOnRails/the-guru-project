@@ -17,6 +17,16 @@ services:
         value: production
       - key: RAILS_SERVE_STATIC_FILES
         value: true
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: DEVISE_SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 2
+      - key: RAILS_MAX_THREADS
+        value: 5
+      - key: RAILS_LOG_TO_STDOUT
+        value: true
 
   - type: postgresql
     name: the-guru-db

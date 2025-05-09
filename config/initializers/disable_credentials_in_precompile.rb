@@ -2,7 +2,7 @@
 # чтобы избежать ошибок, связанных с отсутствием master.key
 
 # Проверяем, запущен ли процесс для assets:precompile
-if $PROGRAM_NAME =~ /assets:(?:precompile|clean)/ || ENV['PRECOMPILING_ASSETS']
+if $PROGRAM_NAME =~ /assets:(?:precompile|clean)/ || ENV["PRECOMPILING_ASSETS"]
   # Переопределяем метод credentials для Application
   module DisableCredentialsInPrecompile
     def credentials
@@ -12,13 +12,13 @@ if $PROGRAM_NAME =~ /assets:(?:precompile|clean)/ || ENV['PRECOMPILING_ASSETS']
       end
     end
   end
-  
+
   # Применяем патч к Rails.application
   if defined?(Rails) && Rails.respond_to?(:application) && Rails.application
     Rails.logger.info "Disabled credentials during asset precompilation"
     Rails.application.singleton_class.prepend(DisableCredentialsInPrecompile)
   end
-  
+
   # Также сообщаем об этом
   puts "Note: Credentials disabled during asset precompilation (using dummy values)"
-end 
+end

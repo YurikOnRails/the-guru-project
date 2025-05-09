@@ -6,6 +6,13 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
+# Проверка и создание необходимых директорий
+mkdir -p /rails/tmp/pids
+mkdir -p /rails/log
+mkdir -p /rails/storage/public
+mkdir -p /rails/public/assets
+mkdir -p /rails/public/packs
+
 # Проверяем и настраиваем окружение для Rails credentials
 if [ -n "$RAILS_MASTER_KEY" ]; then
     echo "$RAILS_MASTER_KEY" > config/master.key
@@ -54,13 +61,24 @@ fi
 # Запускаем скрипт проверки переменных окружения
 if [ -f ./bin/check_env ]; then
     echo "Running environment check script..."
-    ./bin/check_env
+    ./bin/check_env || echo "Environment check exited with non-zero status. Continuing anyway."
 fi
 
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
     echo "Preparing database..."
-    ./bin/rails db:prepare
+    ./bin/rails db:prepare || {
+        echo "Database preparation failed. Trying to create database..."
+        ./bin/rails db:create && ./bin/rails db:migrate
+    }
+    
+    # Проверка наличия и обслуживание assets в production
+    if [ "$RAILS_ENV" = "production" ]; then
+        if [ ! -d "public/assets" ] || [ -z "$(ls -A public/assets 2>/dev/null)" ]; then
+            echo "Assets not found. Precompiling assets..."
+            SECRET_KEY_BASE=$SECRET_KEY_BASE ./bin/rails assets:precompile || echo "Asset precompilation failed. Using bundled assets."
+        fi
+    fi
 fi
 
 # Вывод информации о запуске

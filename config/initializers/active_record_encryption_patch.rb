@@ -44,4 +44,4 @@ end
 if defined?(ActiveRecord::Encryption::Configurable)
   Rails.logger.info "Applying ActiveRecordEncryptionPatch"
   ActiveRecord::Encryption::Configurable.prepend(ActiveRecordEncryptionPatch)
-end 
+end

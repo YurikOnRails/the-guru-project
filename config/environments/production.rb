@@ -27,7 +27,7 @@ Rails.application.configure do
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false
   # For render.com, enable static file serving
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
@@ -96,26 +96,26 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-  
+
   # Разрешаем запросы от всех хостов на render.com
   config.hosts.clear
-  
+
   # Настройка Action Mailer для production
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV['SMTP_SERVER'] || 'smtp.gmail.com',
-    port:                 ENV['SMTP_PORT'] || 587,
-    domain:               ENV['SMTP_DOMAIN'] || 'your-app-domain.com',
-    user_name:            ENV['SMTP_USERNAME'],
-    password:             ENV['SMTP_PASSWORD'],
-    authentication:       'plain',
+    address:              ENV["SMTP_SERVER"] || "smtp.gmail.com",
+    port:                 ENV["SMTP_PORT"] || 587,
+    domain:               ENV["SMTP_DOMAIN"] || "your-app-domain.com",
+    user_name:            ENV["SMTP_USERNAME"],
+    password:             ENV["SMTP_PASSWORD"],
+    authentication:       "plain",
     enable_starttls_auto: true
   }
-  
+
   # Устанавливаем URL по умолчанию для mailer
-  config.action_mailer.default_url_options = { 
-    host: ENV['APP_HOST'] || 'your-app-name.onrender.com', 
-    protocol: 'https' 
+  config.action_mailer.default_url_options = {
+    host: ENV["APP_HOST"] || "your-app-name.onrender.com",
+    protocol: "https"
   }
 
   # Установка ключей шифрования для Rails из переменных окружения
