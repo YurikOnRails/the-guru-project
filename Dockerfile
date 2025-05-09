@@ -82,14 +82,16 @@ COPY --from=build /rails /rails
 RUN mkdir -p /rails/tmp/pids && \
     mkdir -p /rails/log && \
     mkdir -p /rails/storage && \
+    mkdir -p /rails/config && \
     chmod -R 777 /rails/tmp && \
     chmod -R 777 /rails/log && \
-    chmod -R 777 /rails/storage
+    chmod -R 777 /rails/storage && \
+    chmod 775 /rails/config
 
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
+    chown -R rails:rails db log storage tmp config
 USER 1000:1000
 
 # Health check to ensure container is running properly
