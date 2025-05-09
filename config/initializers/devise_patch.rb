@@ -14,29 +14,31 @@ end
 
 # frozen_string_literal: true
 
-# Патч для Devise, чтобы использовать либо credentials, либо ENV переменные,
-# либо фиксированное значение для secret_key, если credentials недоступны
-module Devise
-  module SecretKeyFinder
-    alias_method :original_find, :find
+# Более безопасный патч для Devise, чтобы использовать ENV или фиксированные значения
+# если credentials недоступны
+module DeviseSecretKeyPatch
+  def find
+    # Сначала пытаемся использовать стандартный метод через super
+    super
+  rescue ActiveSupport::MessageEncryptor::InvalidMessage
+    # Если credentials недоступны, используем ENV или генерируем ключ
+    Rails.logger.warn "WARNING: Rails credentials unavailable, using alternative for Devise secret key"
     
-    def find
-      # Сначала пытаемся использовать стандартный метод
-      original_find
-    rescue ActiveSupport::MessageEncryptor::InvalidMessage => e
-      # Если credentials недоступны, используем ENV или фиксированное значение
-      if ENV["DEVISE_SECRET_KEY"].present?
-        ENV["DEVISE_SECRET_KEY"]
-      else
-        # В production нужно будет задать DEVISE_SECRET_KEY в переменных окружения
-        # Это временное решение для успешного деплоя
-        if Rails.env.production?
-          puts "WARNING: Using hardcoded DEVISE_SECRET_KEY in production. This is not secure!"
-          puts "Please set DEVISE_SECRET_KEY environment variable."
-        end
-        # Генерируем случайный ключ, который будет использоваться только для этого запуска
-        SecureRandom.hex(64)
+    if ENV["DEVISE_SECRET_KEY"].present?
+      ENV["DEVISE_SECRET_KEY"]
+    else
+      if Rails.env.production?
+        Rails.logger.warn "WARNING: Using randomly generated DEVISE_SECRET_KEY. This is not secure for persistent sessions!"
+        Rails.logger.warn "Please set DEVISE_SECRET_KEY environment variable."
       end
+      # Генерируем случайный ключ, который будет использоваться только для этого запуска
+      SecureRandom.hex(64)
     end
   end
+end
+
+# Выборочно патчим Devise::SecretKeyFinder только если он определен
+if defined?(Devise::SecretKeyFinder)
+  Rails.logger.info "Applying DeviseSecretKeyPatch"
+  Devise::SecretKeyFinder.prepend(DeviseSecretKeyPatch)
 end

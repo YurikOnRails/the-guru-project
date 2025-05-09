@@ -62,8 +62,15 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Precompiling assets for production using dummy key
-RUN SECRET_KEY_BASE=dummy bundle exec rails assets:precompile
+# Precompiling assets for production using dummy key and temporary master.key
+RUN if [ -n "$RAILS_MASTER_KEY" ]; then \
+        echo "$RAILS_MASTER_KEY" > config/master.key; \
+        chmod 600 config/master.key; \
+        SECRET_KEY_BASE=dummy bundle exec rails assets:precompile; \
+        rm -f config/master.key; \
+    else \
+        SECRET_KEY_BASE=dummy bundle exec rails assets:precompile; \
+    fi
 
 # Final stage for app image
 FROM base
