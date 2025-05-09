@@ -75,3 +75,43 @@ config/deploy.yml
 
 # Ignore .env file with secrets
 .env
+kamal-env-setup.md
+deploy-instructions.md
+
+# Игнорируем .env файлы
+.env.*
+
+# Игнорируем логи и временные файлы
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Игнорируем секретные ключи и токены
+/.kamal/secrets-*
+
+# Игнорируем загруженные файлы в локальной разработке
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/.keep
+
+# Обрабатываем собранные asset-ы
+/public/assets
+
+# Игнорируем файлы с паролями и ключами
+*.key
+*.pem
+*.gpg
+deployment_keys.txt*
+
+# Игнорируем IDE-специфические файлы
+.idea
+.vscode
+.cursor
+
+# Игнорируем файлы операционной системы
+.DS_Store
+Thumbs.db
+deployment_issues_fixed.md
+README-deploy.md

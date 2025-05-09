@@ -1,0 +1,77 @@
+#!/usr/bin/env ruby
+#
+# Скрипт для проверки критически важных переменных окружения
+# Запускается перед bin/rails server
+
+require 'securerandom'
+
+# Вывод цветного сообщения
+def print_warning(msg)
+  puts "\e[33m#{msg}\e[0m"
+end
+
+def print_error(msg)
+  puts "\e[31m#{msg}\e[0m"
+end
+
+def print_success(msg)
+  puts "\e[32m#{msg}\e[0m"
+end
+
+def print_info(msg)
+  puts "\e[36m#{msg}\e[0m"
+end
+
+print_info "Проверка критически важных переменных окружения:"
+
+# Проверка RAILS_MASTER_KEY
+if ENV["RAILS_MASTER_KEY"].nil?
+  print_warning "⚠️ RAILS_MASTER_KEY не установлен. Rails credentials не будут доступны."
+  print_warning "   Будут использованы альтернативные источники настроек."
+else
+  print_success "✓ RAILS_MASTER_KEY установлен."
+end
+
+# Проверка SECRET_KEY_BASE
+if ENV["SECRET_KEY_BASE"].nil?
+  print_warning "⚠️ SECRET_KEY_BASE не установлен. Будет сгенерирован случайный ключ."
+  print_warning "   Сессии будут сброшены при перезапуске сервера."
+  
+  # Генерируем временный ключ
+  ENV["SECRET_KEY_BASE"] = SecureRandom.hex(64)
+  print_info "   Сгенерирован временный SECRET_KEY_BASE: #{ENV["SECRET_KEY_BASE"][0..10]}..."
+else
+  print_success "✓ SECRET_KEY_BASE установлен."
+end
+
+# Проверка DEVISE_SECRET_KEY
+if ENV["DEVISE_SECRET_KEY"].nil?
+  print_warning "⚠️ DEVISE_SECRET_KEY не установлен. Будет использоваться производный ключ от SECRET_KEY_BASE."
+  
+  # Генерируем временный ключ на основе SECRET_KEY_BASE
+  if ENV["SECRET_KEY_BASE"]
+    require 'digest'
+    ENV["DEVISE_SECRET_KEY"] = Digest::SHA256.hexdigest(ENV["SECRET_KEY_BASE"] + "devise_key")
+    print_info "   Сгенерирован DEVISE_SECRET_KEY на основе SECRET_KEY_BASE."
+  else
+    ENV["DEVISE_SECRET_KEY"] = SecureRandom.hex(64)
+    print_info "   Сгенерирован случайный DEVISE_SECRET_KEY."
+  end
+else
+  print_success "✓ DEVISE_SECRET_KEY установлен."
+end
+
+# Проверка ключей шифрования
+if ENV["RAILS_ENCRYPTION_PRIMARY_KEY"].nil?
+  print_info "ℹ️ RAILS_ENCRYPTION_PRIMARY_KEY не установлен. Будет использоваться производный ключ от SECRET_KEY_BASE."
+end
+
+if ENV["RAILS_ENCRYPTION_DETERMINISTIC_KEY"].nil?
+  print_info "ℹ️ RAILS_ENCRYPTION_DETERMINISTIC_KEY не установлен. Будет использоваться производный ключ от SECRET_KEY_BASE."
+end
+
+if ENV["RAILS_ENCRYPTION_KEY_DERIVATION_SALT"].nil?
+  print_info "ℹ️ RAILS_ENCRYPTION_KEY_DERIVATION_SALT не установлен. Будет использоваться производный ключ от SECRET_KEY_BASE."
+end
+
+print_info "\nПроверка завершена. Переменные окружения готовы для запуска приложения.\n\n" 

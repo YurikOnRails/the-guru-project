@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   # Статическая страница О нас
   get "static_pages/about"
 
+  # GitHub API демонстрация
+  get "github", to: "github#index"
+  get "github/search", to: "github#search", as: "search_github"
+
   resources :tests, only: [ :index, :show ] do
     member do
       post :start
