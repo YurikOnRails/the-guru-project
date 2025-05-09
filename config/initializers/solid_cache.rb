@@ -4,7 +4,7 @@
 # Патч решает проблему с отсутствием конфигурации cache в production
 
 # Пропускаем настройку SolidCache в режиме прекомпиляции активов
-if !Rails.configuration.precompiling_assets
+unless Rails.application.config.respond_to?(:precompiling_assets) && Rails.application.config.precompiling_assets
 
   # Определяем патч для SolidCache::Record
   module SolidCachePrimaryConnectionPatch
@@ -31,7 +31,7 @@ if !Rails.configuration.precompiling_assets
   # Применяем патч на старте приложения
   Rails.application.config.after_initialize do
     # Не применяем патч, если отключен в режиме прекомпиляции
-    unless Rails.application.config.assets_precompile_mode
+    unless Rails.application.config.respond_to?(:assets_precompile_mode) && Rails.application.config.assets_precompile_mode
       SolidCachePrimaryConnectionPatch.apply! if Rails.env.production?
 
       # Проверяем работоспособность SolidCache

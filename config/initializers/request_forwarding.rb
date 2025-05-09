@@ -4,7 +4,7 @@
 # при использовании прокси на Render.com
 
 # Пропускаем настройку в режиме прекомпиляции активов
-if !Rails.configuration.precompiling_assets
+unless Rails.application.config.respond_to?(:precompiling_assets) && Rails.application.config.precompiling_assets
 
   # Включаем доверенные прокси для Render.com
   trusted_proxies = [
@@ -17,8 +17,8 @@ if !Rails.configuration.precompiling_assets
   ]
 
   # Настраиваем доверенные прокси на уровне конфигурации
-  Rails.application.config.action_dispatch.trusted_proxies = ActionDispatch::RemoteIp::TRUSTED_PROXIES +
-    trusted_proxies +
+  Rails.application.config.action_dispatch.trusted_proxies = ActionDispatch::RemoteIp::TRUSTED_PROXIES + 
+    trusted_proxies + 
     (ENV["TRUSTED_PROXIES"]&.split(",") || [])
 
   # Отключаем проверку подделки IP, чтобы заголовки X-Forwarded-* работали корректно
@@ -26,12 +26,12 @@ if !Rails.configuration.precompiling_assets
 
   Rails.application.config.after_initialize do
     # Пропускаем выполнение в режиме прекомпиляции активов
-    unless Rails.application.config.respond_to?(:assets_precompile_mode) &&
+    unless Rails.application.config.respond_to?(:assets_precompile_mode) && 
            Rails.application.config.assets_precompile_mode
-
+      
       # Лог о применении конфигурации
       Rails.logger.info "Применены настройки для обработки проксированных запросов на Render.com"
-
+      
       # Вместо изменения middleware stack (что приводит к ошибке с замороженным массивом),
       # настраиваем конфигурацию и оставляем существующий ActionDispatch::RemoteIp middleware
       if defined?(ActionDispatch::RemoteIp)
@@ -39,5 +39,5 @@ if !Rails.configuration.precompiling_assets
       end
     end
   end
-
+  
 end

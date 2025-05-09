@@ -4,7 +4,7 @@
 # Патч решает проблему с отсутствием конфигурации cable в production
 
 # Пропускаем настройку SolidCable в режиме прекомпиляции активов
-if !Rails.configuration.precompiling_assets
+unless Rails.application.config.respond_to?(:precompiling_assets) && Rails.application.config.precompiling_assets
 
   Rails.application.config.to_prepare do
     # Проверяем, что не находимся в режиме прекомпиляции активов
