@@ -1,3 +1,4 @@
+disable_features_in_asset_precompile.rb
 credentials_patch.rb
 secret_key_base.rb
 devise_patch.rb

@@ -4,49 +4,40 @@
 # Проблема может быть в том, что Render.com терминирует SSL на уровне прокси,
 # но ActionDispatch::SSL может неправильно обрабатывать заголовки
 
-Rails.application.config.after_initialize do
-  if defined?(ActionDispatch::SSL)
-    module ActionDispatchSSLPatch
-      def call(env)
-        # Проверяем заголовки, которые Render.com добавляет для проксированных запросов
-        request = ActionDispatch::Request.new(env)
-        
-        # Если запрос уже пришел через HTTPS или имеет специальный заголовок от Render.com
-        if request.ssl? || 
-           env["HTTP_X_FORWARDED_PROTO"] == "https" || 
-           env["HTTP_X_FORWARDED_SSL"] == "on" ||
-           env["HTTP_CF_VISITOR"]&.include?("https") # Для Cloudflare
-          
-          # Пропускаем проверку SSL и обработку редиректов
-          # Просто вызываем следующее middleware в цепочке
-          return @app.call(env)
-        end
-        
-        # В противном случае, используем стандартное поведение
-        super
+# Пропускаем настройку SSL в режиме прекомпиляции активов
+if !Rails.configuration.precompiling_assets
+
+  # Более безопасный подход: не патчим сам middleware класс, а настраиваем опции для SSL через конфигурацию
+  Rails.application.config.ssl_options = {
+    redirect: {
+      exclude: ->(request) {
+        # Не редиректим, если запрос уже пришел через HTTPS или от прокси с HTTPS
+        request.ssl? ||
+        request.headers["X-Forwarded-Proto"] == "https" ||
+        request.headers["X-Forwarded-SSL"] == "on" ||
+        request.headers["CF-Visitor"]&.include?("https")
+      }
+    },
+    hsts: { expires: 180.days, subdomains: true }
+  }
+
+  Rails.application.config.after_initialize do
+    # Пропускаем выполнение в режиме прекомпиляции активов
+    unless Rails.application.config.respond_to?(:assets_precompile_mode) &&
+           Rails.application.config.assets_precompile_mode
+
+      Rails.logger.info "Применены настройки для ActionDispatch::SSL через ssl_options"
+
+      # Если ActionDispatch::AssumeSSL уже в стеке, дополнительно логируем
+      if defined?(ActionDispatch::AssumeSSL) && Rails.application.config.assume_ssl
+        Rails.logger.info "Обнаружен ActionDispatch::AssumeSSL в middleware stack"
+      end
+
+      # Добавляем логирование для обработки SSL запросов
+      if Rails.env.production?
+        Rails.logger.info "SSL настройки в production: force_ssl=#{Rails.application.config.force_ssl}, assume_ssl=#{Rails.application.config.assume_ssl}"
       end
     end
-    
-    # Применяем патч к middleware SSL для обхода проблем с прокси
-    Rails.logger.info "Применяем патч ActionDispatchSSLPatch для ActionDispatch::SSL"
-    ActionDispatch::SSL.prepend(ActionDispatchSSLPatch)
   end
-  
-  # Проверяем, есть ли ActionDispatch::AssumeSSL в цепочке middleware и патчим его тоже
-  if defined?(ActionDispatch::AssumeSSL)
-    module ActionDispatchAssumeSSLPatch
-      def call(env)
-        # Устанавливаем "https" в scheme для всех запросов
-        request = ActionDispatch::Request.new(env)
-        request.set_header("rack.url_scheme", "https")
-        
-        # Продолжаем цепочку middleware
-        @app.call(env)
-      end
-    end
-    
-    # Применяем патч к AssumeSSL middleware
-    Rails.logger.info "Применяем патч ActionDispatchAssumeSSLPatch для ActionDispatch::AssumeSSL"
-    ActionDispatch::AssumeSSL.prepend(ActionDispatchAssumeSSLPatch)
-  end
-end 
+
+end

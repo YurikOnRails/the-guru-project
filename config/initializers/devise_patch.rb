@@ -28,7 +28,7 @@ module DeviseSecretKeyPatch
       # Логируем ошибку более детально
       Rails.logger.warn "WARNING: Error in Devise secret key finder: #{e.class} - #{e.message}"
       Rails.logger.warn "Backtrace: #{e.backtrace[0..5].join("\n")}" if e.backtrace.present?
-      
+
       # Если credentials недоступны, используем ENV или генерируем ключ
       Rails.logger.warn "Using alternative method for Devise secret key"
 
@@ -39,13 +39,13 @@ module DeviseSecretKeyPatch
         Rails.logger.info "Using SECRET_KEY_BASE as base for Devise secret key"
         return key
       end
-      
+
       # Последний вариант - генерируем случайный ключ
       if Rails.env.production?
         Rails.logger.warn "WARNING: Using randomly generated DEVISE_SECRET_KEY. This is not secure for persistent sessions!"
         Rails.logger.warn "Please set DEVISE_SECRET_KEY or SECRET_KEY_BASE environment variable."
       end
-      
+
       # Генерируем случайный ключ, который будет использоваться только для этого запуска
       SecureRandom.hex(64)
     end
