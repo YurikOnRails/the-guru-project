@@ -6,7 +6,7 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
-# Создаем config/master.key из переменной окружения если она доступна
+# Проверяем и настраиваем окружение для Rails credentials
 if [ -n "$RAILS_MASTER_KEY" ]; then
     echo "$RAILS_MASTER_KEY" > config/master.key
     chmod 600 config/master.key
@@ -14,7 +14,12 @@ if [ -n "$RAILS_MASTER_KEY" ]; then
 else
     echo "WARNING: RAILS_MASTER_KEY environment variable is not set!"
     if [ ! -f config/master.key ]; then
-        echo "ERROR: config/master.key file does not exist and RAILS_MASTER_KEY is not set. Rails credentials will not work!"
+        echo "WARNING: config/master.key file does not exist and RAILS_MASTER_KEY is not set."
+        
+        # Не создаем фиктивный credentials.yml.enc, а используем SECRET_KEY_BASE
+        if [ -f config/credentials.yml.enc ]; then
+            echo "config/credentials.yml.enc exists but cannot be decrypted. Using environment variables instead."
+        fi
     fi
 fi
 
@@ -30,10 +35,26 @@ if [ -z "$DEVISE_SECRET_KEY" ]; then
     echo "DEVISE_SECRET_KEY not set, generated random value"
 fi
 
+# Настраиваем дополнительные переменные для Rails
+# Убеждаемся, что Rails будет использовать SECRET_KEY_BASE вместо credentials
+# когда credentials недоступны
+if [ ! -f config/master.key ] || [ ! -f config/credentials.yml.enc ]; then
+    export RAILS_USE_FIPS=false
+    export RAILS_DISABLE_DEPRECATED_TO_S_CONVERSION=true
+    export RAILS_ENCRYPTION_PRIMARY_KEY=$SECRET_KEY_BASE
+    echo "Set fallback encryption keys via environment variables"
+fi
+
 # Устанавливаем порт по умолчанию, если не определен
 if [ -z "$PORT" ]; then
     export PORT=3000
     echo "PORT not set, defaulting to $PORT"
+fi
+
+# Запускаем скрипт проверки переменных окружения
+if [ -f ./bin/check_env ]; then
+    echo "Running environment check script..."
+    ./bin/check_env
 fi
 
 # If running the rails server then create or migrate existing database

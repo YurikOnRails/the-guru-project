@@ -21,6 +21,7 @@ Rails.application.configure do
 
   # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], config/master.key, or an environment
   # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
+  # Отключаем требование master.key, так как у нас есть патч
   config.require_master_key = false
 
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
@@ -116,4 +117,11 @@ Rails.application.configure do
     host: ENV['APP_HOST'] || 'your-app-name.onrender.com', 
     protocol: 'https' 
   }
+
+  # Установка ключей шифрования для Rails из переменных окружения
+  if ENV["SECRET_KEY_BASE"].present?
+    config.active_record.encryption.primary_key = ENV.fetch("RAILS_ENCRYPTION_PRIMARY_KEY", ENV["SECRET_KEY_BASE"][0..31])
+    config.active_record.encryption.deterministic_key = ENV.fetch("RAILS_ENCRYPTION_DETERMINISTIC_KEY", Digest::SHA256.hexdigest(ENV["SECRET_KEY_BASE"])[0..31])
+    config.active_record.encryption.key_derivation_salt = ENV.fetch("RAILS_ENCRYPTION_KEY_DERIVATION_SALT", Digest::SHA256.hexdigest(ENV["SECRET_KEY_BASE"] + "salt")[0..31])
+  end
 end

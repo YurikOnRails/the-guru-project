@@ -1,0 +1,5 @@
+credentials_patch.rb
+secret_key_base.rb
+devise_patch.rb
+active_record_encryption_patch.rb
+disable_credentials_in_precompile.rb 

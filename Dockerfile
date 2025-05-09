@@ -20,7 +20,6 @@ ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
     RAILS_LOG_TO_STDOUT="1" \
     RAILS_SERVE_STATIC_FILES="true" \
-    SECRET_KEY_BASE_DUMMY="1" \
     LANG=C.UTF-8
 
 # Install base packages
@@ -62,13 +61,13 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Precompiling assets for production using dummy key and temporary master.key
+# Precompiling assets for production without deleting master.key
 RUN if [ -n "$RAILS_MASTER_KEY" ]; then \
         echo "$RAILS_MASTER_KEY" > config/master.key; \
         chmod 600 config/master.key; \
-        SECRET_KEY_BASE=dummy bundle exec rails assets:precompile; \
-        rm -f config/master.key; \
+        RAILS_MASTER_KEY="$RAILS_MASTER_KEY" SECRET_KEY_BASE=dummy bundle exec rails assets:precompile; \
     else \
+        # Если нет RAILS_MASTER_KEY, создаем временный ключ только для компиляции
         SECRET_KEY_BASE=dummy bundle exec rails assets:precompile; \
     fi
 
@@ -97,6 +96,9 @@ USER 1000:1000
 
 # Health check to ensure container is running properly
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD curl -f http://localhost:${PORT:-3000}/ || exit 1
+
+# Скрипт для проверки переменных окружения сделаем исполняемым
+RUN chmod +x /rails/bin/check_env || echo "Warning: could not make check_env executable"
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
