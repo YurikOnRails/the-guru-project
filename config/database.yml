@@ -19,7 +19,7 @@ test:
   <<: *default
   database: test_guru_test
 
-# Production настройки с поддержкой соединений для SolidCable
+# Production настройки с поддержкой соединений для SolidCable и SolidCache
 production:
   primary: # Основное соединение для приложения
     <<: *default
@@ -36,3 +36,9 @@ production:
     url: <%= ENV['DATABASE_URL'] %>
     database: test_guru_production
     # В продакшене используем ту же базу данных для Action Cable
+    
+  cache: # Соединение для SolidCache
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
+    database: test_guru_production
+    # В продакшене используем ту же базу данных для кэширования
