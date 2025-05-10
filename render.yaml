@@ -14,9 +14,9 @@ services:
       - key: RAILS_LOG_TO_STDOUT
         value: true
       - key: SECRET_KEY_BASE
-        generateValue: true
+        value: "8c4c7c3c1c2c3c4c5c6c7c8c9c0c1c2c3c4c5c6c7c8c9c0c1c2c3c4c5c6c7c8c9c0"
       - key: DEVISE_SECRET_KEY
-        generateValue: true
+        value: "9d5d8d3d1d2d3d4d5d6d7d8d9d0d1d2d3d4d5d6d7d8d9d0d1d2d3d4d5d6d7d8d9d0"
       - key: RAILS_MAX_THREADS
         value: 5
       - key: SMTP_HOST
