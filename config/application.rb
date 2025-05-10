@@ -28,6 +28,8 @@ module TheGuruProject
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Set the secret key base
-    config.secret_key_base = ENV['SECRET_KEY_BASE']
+    if Rails.env.production?
+      config.secret_key_base = ENV['SECRET_KEY_BASE']
+    end
   end
 end
