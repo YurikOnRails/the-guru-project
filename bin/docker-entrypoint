@@ -6,9 +6,12 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
-# If running the rails server then create or migrate existing database
-if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
-  ./bin/rails db:prepare
-fi
+# Always run database migrations and seed data when container starts
+./bin/rails db:prepare
 
+# Added for debugging - list all database files
+echo "Available database files:"
+ls -la storage/
+
+# Execute the command
 exec "${@}"
