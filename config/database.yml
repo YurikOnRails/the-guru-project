@@ -20,8 +20,8 @@ test:
   <<: *default
   database: storage/test.sqlite3
 
-# Настройки для PostgreSQL в production
-production:
+# Общие настройки PostgreSQL для production
+production: &production_settings
   adapter: postgresql
   encoding: unicode
   # Для Render достаточно использовать только DATABASE_URL
@@ -38,3 +38,8 @@ production:
   password: <%= ENV['POSTGRES_PASSWORD'] %>
   host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>
   port: <%= ENV['POSTGRES_PORT'] || 5432 %>
+
+# Настройка для ActionCable в production
+cable:
+  <<: *production_settings
+  database: <%= ENV['POSTGRES_DB'] ? "#{ENV['POSTGRES_DB']}_cable" : 'the_guru_production_cable' %>
