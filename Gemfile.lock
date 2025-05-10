@@ -221,6 +221,7 @@ GEM
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
+    pg (1.5.9)
     popper_js (2.11.8)
     psych (5.2.2)
       date
@@ -417,6 +418,7 @@ DEPENDENCIES
   letter_opener
   octicons_helper
   octokit (~> 6.1)
+  pg (~> 1.5)
   puma (>= 5.0)
   rails (~> 8.0.1)
   rails-erd
