@@ -43,3 +43,8 @@ production: &production_settings
 cable:
   <<: *production_settings
   database: <%= ENV['POSTGRES_DB'] ? "#{ENV['POSTGRES_DB']}_cable" : 'the_guru_production_cable' %>
+
+# Настройка для SolidCache в production
+cache:
+  <<: *production_settings
+  database: <%= ENV['POSTGRES_DB'] ? "#{ENV['POSTGRES_DB']}_cache" : 'the_guru_production_cache' %>

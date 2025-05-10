@@ -28,18 +28,20 @@ done
 
 echo "PostgreSQL is available"
 
-# Создаем базу данных для ActionCable, если она не существует
-CABLE_DB_NAME=$(bundle exec rails runner "puts ActiveRecord::Base.configurations.configs_for(env_name: 'cable', name: 'primary').database")
-echo "Checking/creating ActionCable database: $CABLE_DB_NAME"
-
-# Используем psql для создания базы данных cable, игнорируя ошибки, если она уже существует
-# Извлекаем параметры подключения
+# Получаем параметры подключения к PostgreSQL
 DB_HOST=$(bundle exec rails runner "puts ActiveRecord::Base.connection_db_config.host")
 DB_PORT=$(bundle exec rails runner "puts ActiveRecord::Base.connection_db_config.port")
 DB_USER=$(bundle exec rails runner "puts ActiveRecord::Base.connection_db_config.username")
 
-# Создаем базу данных для ActionCable
+# Создаем базу данных для ActionCable, если она не существует
+CABLE_DB_NAME=$(bundle exec rails runner "puts ActiveRecord::Base.configurations.configs_for(env_name: 'cable', name: 'primary').database")
+echo "Checking/creating ActionCable database: $CABLE_DB_NAME"
 PGPASSWORD=$POSTGRES_PASSWORD psql -h $DB_HOST -p $DB_PORT -U $DB_USER -c "CREATE DATABASE $CABLE_DB_NAME;" -d postgres || echo "Cable database already exists or couldn't be created"
+
+# Создаем базу данных для SolidCache, если она не существует
+CACHE_DB_NAME=$(bundle exec rails runner "puts ActiveRecord::Base.configurations.configs_for(env_name: 'cache', name: 'primary').database")
+echo "Checking/creating SolidCache database: $CACHE_DB_NAME"
+PGPASSWORD=$POSTGRES_PASSWORD psql -h $DB_HOST -p $DB_PORT -U $DB_USER -c "CREATE DATABASE $CACHE_DB_NAME;" -d postgres || echo "Cache database already exists or couldn't be created"
 
 # Run database migrations
 ./bin/rails db:prepare
