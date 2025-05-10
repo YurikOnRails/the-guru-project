@@ -2,8 +2,11 @@ services:
   - type: web
     name: the-guru-project
     env: ruby
+    plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
+    healthCheckPath: /up
+    autoDeploy: true
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
@@ -25,7 +28,13 @@ services:
         value: andrei.iurik@gmail.com
       - key: SMTP_PASSWORD
         value: zusl auyn wqxy obzy
-    disk:
-      name: sqlite-data
-      mountPath: /rails/storage
-      sizeGB: 1 
+      - key: DATABASE_URL
+        fromDatabase:
+          name: the-guru-db
+          property: connectionString
+
+databases:
+  - name: the-guru-db
+    plan: free
+    postgresMajorVersion: 15
+    ipAllowList: [] 

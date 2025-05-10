@@ -20,7 +20,7 @@ RUN apt-get update -qq && \
     curl \
     libjemalloc2 \
     libvips \
-    sqlite3 \
+    postgresql-client \
     libpq-dev \
     node-gyp \
     python-is-python3 \

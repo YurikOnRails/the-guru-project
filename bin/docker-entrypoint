@@ -6,24 +6,29 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
-# Check if database files exist and are accessible
-if [ ! -f "storage/production.sqlite3" ]; then
-    echo "Warning: production.sqlite3 does not exist. Creating..."
-    mkdir -p storage
-    touch storage/production.sqlite3
-    chmod 644 storage/production.sqlite3
-fi
+# Проверка подключения к PostgreSQL
+echo "Checking PostgreSQL connection..."
+# Пытаемся подключиться к БД, используя DATABASE_URL
+DB_RETRY_DELAY=3
+DB_MAX_RETRIES=20
+DB_RETRY_COUNT=0
+
+until bundle exec rails runner "ActiveRecord::Base.connection.execute('SELECT 1')"; do
+  DB_RETRY_COUNT=$((DB_RETRY_COUNT + 1))
+  echo "Waiting for PostgreSQL to become available... (attempt $DB_RETRY_COUNT/$DB_MAX_RETRIES)"
+  
+  if [ $DB_RETRY_COUNT -eq $DB_MAX_RETRIES ]; then
+    echo "Failed to connect to PostgreSQL after $DB_MAX_RETRIES attempts!"
+    exit 1
+  fi
+  
+  sleep $DB_RETRY_DELAY
+done
+
+echo "PostgreSQL is available"
 
 # Run database migrations
-export DATABASE_URL=sqlite3:storage/production.sqlite3
 ./bin/rails db:prepare
-
-# Check if migrations were successful by checking the schema_migrations table
-if ./bin/rails runner "puts ActiveRecord::Base.connection.table_exists?(:schema_migrations)" | grep -q "true"; then
-    echo "Migrations successfully applied"
-else
-    echo "Warning: Migrations may not have been applied correctly"
-fi
 
 # Execute the command
 exec "${@}"

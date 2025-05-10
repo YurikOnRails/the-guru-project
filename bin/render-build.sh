@@ -2,9 +2,9 @@
 # exit on error
 set -o errexit
 
-# Ensure storage directory exists and is writable
-mkdir -p storage
-chmod -R 755 storage
+# Print текущей среды и переменных
+echo "RAILS_ENV: $RAILS_ENV"
+echo "DATABASE_URL is set: $(if [ -n "$DATABASE_URL" ]; then echo "YES"; else echo "NO"; fi)"
 
 # Install gems
 bundle install
@@ -13,19 +13,15 @@ bundle install
 bundle exec rake assets:precompile
 bundle exec rake assets:clean
 
-# Create database files if they don't exist
-[ -f storage/production.sqlite3 ] || touch storage/production.sqlite3
-[ -f storage/production_cache.sqlite3 ] || touch storage/production_cache.sqlite3
-[ -f storage/production_queue.sqlite3 ] || touch storage/production_queue.sqlite3
-[ -f storage/production_cable.sqlite3 ] || touch storage/production_cable.sqlite3
-
-# Make sure database files have correct permissions (only if needed)
-chmod 644 storage/*.sqlite3
+# Проверка подключения к БД перед миграцией
+echo "Проверка соединения с базой данных..."
+bundle exec rails runner "puts \"БД доступна: \#{ActiveRecord::Base.connection.active?}\""
 
 # Run migrations and seed data
-RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rake db:migrate
-RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rake db:seed
+echo "Запуск миграций..."
+bundle exec rake db:migrate
+echo "Миграции выполнены успешно!"
 
-# Show available database files for debugging 2
-echo "Available database files after build:"
-ls -la storage/ 
+echo "Заполнение начальными данными..."
+bundle exec rake db:seed
+echo "База данных успешно настроена!" 

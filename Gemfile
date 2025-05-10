@@ -4,8 +4,8 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.1"
 # Use the Sprockets asset pipeline [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 2.1"
+# PostgreSQL для production
+gem "pg", "~> 1.5"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -61,6 +61,9 @@ gem "octokit", "~> 6.1"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  
+  # SQLite только для разработки и тестирования
+  gem "sqlite3", ">= 2.1"
 
   gem "dotenv-rails"
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
