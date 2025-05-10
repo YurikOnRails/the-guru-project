@@ -22,6 +22,8 @@ gem "bootstrap", "~> 5.3.0"
 gem "octicons_helper"
 gem "sassc-rails"
 
+gem "faraday-retry"
+
 # AUTH
 gem "devise", "~> 4.0"
 
