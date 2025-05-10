@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: the-guru-project
+    env: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    healthCheckPath: /up
+    autoDeploy: true
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: SECRET_KEY_BASE
+        sync: false
+      - key: DEVISE_SECRET_KEY
+        sync: false
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
+      - key: RAILS_LOG_TO_STDOUT
+        value: true
+      - key: RAILS_MAX_THREADS
+        value: 5
+      - key: SMTP_HOST
+        value: the-guru-project-6.onrender.com
+      - key: SMTP_USERNAME
+        value: andrei.iurik@gmail.com
+      - key: SMTP_PASSWORD
+        value: zusl auyn wqxy obzy
+      - key: DATABASE_URL
+        fromDatabase:
+          name: the-guru-db
+          property: connectionString
+
+databases:
+  - name: the-guru-db
+    plan: free
+    postgresMajorVersion: 15
+    ipAllowList: [] 

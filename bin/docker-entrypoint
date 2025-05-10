@@ -6,9 +6,45 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
-# If running the rails server then create or migrate existing database
-if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
-  ./bin/rails db:prepare
-fi
+# Настройки для повторных попыток подключения
+DB_RETRY_DELAY=3
+DB_MAX_RETRIES=20
+DB_RETRY_COUNT=0
 
+# Проверка подключения к основной PostgreSQL БД
+echo "Checking PostgreSQL connection..."
+
+until bundle exec rails runner "ActiveRecord::Base.connection.execute('SELECT 1')"; do
+  DB_RETRY_COUNT=$((DB_RETRY_COUNT + 1))
+  echo "Waiting for PostgreSQL to become available... (attempt $DB_RETRY_COUNT/$DB_MAX_RETRIES)"
+  
+  if [ $DB_RETRY_COUNT -eq $DB_MAX_RETRIES ]; then
+    echo "Failed to connect to PostgreSQL after $DB_MAX_RETRIES attempts!"
+    exit 1
+  fi
+  
+  sleep $DB_RETRY_DELAY
+done
+
+echo "PostgreSQL is available"
+
+# Получаем параметры подключения к PostgreSQL
+DB_HOST=$(bundle exec rails runner "puts ActiveRecord::Base.connection_db_config.host")
+DB_PORT=$(bundle exec rails runner "puts ActiveRecord::Base.connection_db_config.port")
+DB_USER=$(bundle exec rails runner "puts ActiveRecord::Base.connection_db_config.username")
+
+# Создаем базу данных для ActionCable, если она не существует
+CABLE_DB_NAME=$(bundle exec rails runner "puts ActiveRecord::Base.configurations.configs_for(env_name: 'cable', name: 'primary').database")
+echo "Checking/creating ActionCable database: $CABLE_DB_NAME"
+PGPASSWORD=$POSTGRES_PASSWORD psql -h $DB_HOST -p $DB_PORT -U $DB_USER -c "CREATE DATABASE $CABLE_DB_NAME;" -d postgres || echo "Cable database already exists or couldn't be created"
+
+# Создаем базу данных для SolidCache, если она не существует
+CACHE_DB_NAME=$(bundle exec rails runner "puts ActiveRecord::Base.configurations.configs_for(env_name: 'cache', name: 'primary').database")
+echo "Checking/creating SolidCache database: $CACHE_DB_NAME"
+PGPASSWORD=$POSTGRES_PASSWORD psql -h $DB_HOST -p $DB_PORT -U $DB_USER -c "CREATE DATABASE $CACHE_DB_NAME;" -d postgres || echo "Cache database already exists or couldn't be created"
+
+# Run database migrations
+./bin/rails db:prepare
+
+# Execute the command
 exec "${@}"

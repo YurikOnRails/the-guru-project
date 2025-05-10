@@ -75,3 +75,12 @@ config/deploy.yml
 
 # Ignore .env file with secrets
 .env
+config/master.key
+
+# Postgres dump files
+*.dump
+*.sql
+*.pgsql
+
+# Render.com specific files
+.render-buildpacks/

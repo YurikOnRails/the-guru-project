@@ -20,22 +20,31 @@ test:
   <<: *default
   database: storage/test.sqlite3
 
+# Общие настройки PostgreSQL для production
+production: &production_settings
+  adapter: postgresql
+  encoding: unicode
+  # Для Render достаточно использовать только DATABASE_URL
+  # Он автоматически настроит все параметры подключения
+  url: <%= ENV['DATABASE_URL'] %>
+  # Настройки пула соединений
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # Дополнительные настройки для повышения надежности
+  connect_timeout: 2
+  reconnect: true
+  # Если DATABASE_URL не определен, используются эти настройки:
+  database: <%= ENV['POSTGRES_DB'] || 'the_guru_production' %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>
+  port: <%= ENV['POSTGRES_PORT'] || 5432 %>
 
-# Store production database in the storage/ directory, which by default
-# is mounted as a persistent Docker volume in config/deploy.yml.
-production:
-  primary:
-    <<: *default
-    database: storage/production.sqlite3
-  cache:
-    <<: *default
-    database: storage/production_cache.sqlite3
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *default
-    database: storage/production_queue.sqlite3
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *default
-    database: storage/production_cable.sqlite3
-    migrations_paths: db/cable_migrate
+# Настройка для ActionCable в production
+cable:
+  <<: *production_settings
+  database: <%= ENV['POSTGRES_DB'] ? "#{ENV['POSTGRES_DB']}_cable" : 'the_guru_production_cable' %>
+
+# Настройка для SolidCache в production
+cache:
+  <<: *production_settings
+  database: <%= ENV['POSTGRES_DB'] ? "#{ENV['POSTGRES_DB']}_cache" : 'the_guru_production_cache' %>
