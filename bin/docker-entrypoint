@@ -6,12 +6,24 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
-# Always run database migrations and seed data when container starts
+# Check if database files exist and are accessible
+if [ ! -f "storage/production.sqlite3" ]; then
+    echo "Warning: production.sqlite3 does not exist. Creating..."
+    mkdir -p storage
+    touch storage/production.sqlite3
+    chmod 644 storage/production.sqlite3
+fi
+
+# Run database migrations
+export DATABASE_URL=sqlite3:storage/production.sqlite3
 ./bin/rails db:prepare
 
-# Added for debugging - list all database files
-echo "Available database files:"
-ls -la storage/
+# Check if migrations were successful by checking the schema_migrations table
+if ./bin/rails runner "puts ActiveRecord::Base.connection.table_exists?(:schema_migrations)" | grep -q "true"; then
+    echo "Migrations successfully applied"
+else
+    echo "Warning: Migrations may not have been applied correctly"
+fi
 
 # Execute the command
 exec "${@}"
