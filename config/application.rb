@@ -26,10 +26,5 @@ module TheGuruProject
 
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
-    # Set the secret key base
-    if Rails.env.production?
-      config.secret_key_base = ENV['SECRET_KEY_BASE']
-    end
   end
 end
