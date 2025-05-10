@@ -26,6 +26,6 @@ chmod 644 storage/*.sqlite3
 RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rake db:migrate
 RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rake db:seed
 
-# Show available database files for debugging
+# Show available database files for debugging 2
 echo "Available database files after build:"
 ls -la storage/ 
