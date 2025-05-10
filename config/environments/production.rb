@@ -4,7 +4,9 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Set the secret key base first
-  config.secret_key_base = ENV.fetch('SECRET_KEY_BASE') { raise "Missing SECRET_KEY_BASE environment variable" }
+  config.secret_key_base = ENV.fetch('SECRET_KEY_BASE') { 
+    ENV.fetch('SECRET_KEY_BASE_DUMMY') { raise "Missing SECRET_KEY_BASE environment variable" }
+  }
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
