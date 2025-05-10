@@ -16,4 +16,12 @@ services:
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: DEVISE_SECRET_KEY
-        generateValue: true 
+        generateValue: true
+      - key: RAILS_MAX_THREADS
+        value: 5
+      - key: SMTP_HOST
+        value: the-guru-project-6.onrender.com
+      - key: SMTP_USERNAME
+        value: andrei.iurik@gmail.com
+      - key: SMTP_PASSWORD
+        value: zusl auyn wqxy obzy 
