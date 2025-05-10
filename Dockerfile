@@ -28,8 +28,6 @@ RUN apt-get update -qq && \
 
 # Set production environment
 ENV RAILS_ENV="production" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development:test" \
     RAILS_SERVE_STATIC_FILES="true" \
     RAILS_LOG_TO_STDOUT="true"
@@ -50,8 +48,10 @@ RUN apt-get update -qq && \
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+RUN bundle config set frozen false && \
+    bundle install --path=${BUNDLE_PATH:-/usr/local/bundle} && \
+    bundle config set frozen true && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH:-/usr/local/bundle}"/ruby/*/cache "${BUNDLE_PATH:-/usr/local/bundle}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
 # Copy application code
@@ -66,8 +66,11 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 # Final stage for app image
 FROM base
 
+# Set path for bundled gems
+ENV BUNDLE_PATH="/usr/local/bundle"
+
 # Copy built artifacts: gems, application
-COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build "${BUNDLE_PATH:-/usr/local/bundle}" "${BUNDLE_PATH:-/usr/local/bundle}"
 COPY --from=build /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
