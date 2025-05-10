@@ -12,4 +12,8 @@ services:
       - key: RAILS_SERVE_STATIC_FILES
         value: true
       - key: RAILS_LOG_TO_STDOUT
-        value: true 
+        value: true
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: DEVISE_SECRET_KEY
+        generateValue: true 
