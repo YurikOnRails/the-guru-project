@@ -2,55 +2,78 @@ namespace :users do
   desc "Создает администратора и тестового пользователя"
   task create_admin_and_user: :environment do
     # Создаем администратора
-    admin_email = ENV["ADMIN_EMAIL"] || "pavel_admin@pochta.ru"
-    admin_password = ENV["ADMIN_PASSWORD"] || "pavel_admin"
-
-    admin = Admin.find_by(email: admin_email)
-
-    if admin
-      puts "Администратор с email #{admin_email} уже существует"
-    else
-      admin = Admin.new(
-        email: admin_email,
-        password: admin_password,
-        password_confirmation: admin_password,
+    admin = Admin.find_or_initialize_by(email: "pavel_admin@pochta.ru")
+    
+    unless admin.persisted?
+      admin.assign_attributes(
+        password: "pavel_admin",
+        password_confirmation: "pavel_admin",
         first_name: "Админ",
         last_name: "Системы"
       )
-
-      admin.skip_confirmation!
-
+      
+      # Пропускаем подтверждение email
+      admin.skip_confirmation! if admin.respond_to?(:skip_confirmation!)
+      admin.confirm if admin.respond_to?(:confirm)
+      
       if admin.save
-        puts "Администратор создан успешно: #{admin_email}"
+        puts "Администратор создан успешно: #{admin.email}"
       else
         puts "Ошибка при создании администратора: #{admin.errors.full_messages.join(', ')}"
       end
+    else
+      puts "Администратор с email #{admin.email} уже существует"
     end
 
     # Создаем обычного пользователя
-    user_email = ENV["USER_EMAIL"] || "andrey_user@example.com"
-    user_password = ENV["USER_PASSWORD"] || "andrey_user"
-
-    user = User.find_by(email: user_email)
-
-    if user
-      puts "Пользователь с email #{user_email} уже существует"
-    else
-      user = User.new(
-        email: user_email,
-        password: user_password,
-        password_confirmation: user_password,
+    user = User.find_or_initialize_by(email: "andrey_user@pochta.ru")
+    
+    unless user.persisted?
+      user.assign_attributes(
+        password: "andrey_user",
+        password_confirmation: "andrey_user",
         first_name: "Тестовый",
         last_name: "Пользователь"
       )
-
-      user.skip_confirmation!
-
+      
+      # Пропускаем подтверждение email
+      user.skip_confirmation! if user.respond_to?(:skip_confirmation!)
+      user.confirm if user.respond_to?(:confirm)
+      
       if user.save
-        puts "Пользователь создан успешно: #{user_email}"
+        puts "Пользователь создан успешно: #{user.email}"
       else
         puts "Ошибка при создании пользователя: #{user.errors.full_messages.join(', ')}"
       end
+    else
+      puts "Пользователь с email #{user.email} уже существует"
+    end
+  end
+
+  # Добавим отдельную задачу только для администратора (для простоты использования в production)
+  desc "Создает только администратора"
+  task create_admin: :environment do
+    admin = Admin.find_or_initialize_by(email: "pavel_admin@pochta.ru")
+    
+    unless admin.persisted?
+      admin.assign_attributes(
+        password: "pavel_admin",
+        password_confirmation: "pavel_admin",
+        first_name: "Админ",
+        last_name: "Системы"
+      )
+      
+      # Пропускаем подтверждение email несколькими способами для большей совместимости
+      admin.skip_confirmation! if admin.respond_to?(:skip_confirmation!)
+      admin.confirm if admin.respond_to?(:confirm)
+      
+      if admin.save
+        puts "Администратор создан успешно: #{admin.email}"
+      else
+        puts "Ошибка при создании администратора: #{admin.errors.full_messages.join(', ')}"
+      end
+    else
+      puts "Администратор с email #{admin.email} уже существует"
     end
   end
 end
