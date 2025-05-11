@@ -22,9 +22,9 @@ services:
       - key: SMTP_HOST
         value: the-guru-project-6.onrender.com
       - key: SMTP_USERNAME
-        value: andrei.iurik@gmail.com
+        sync: false
       - key: SMTP_PASSWORD
-        value: zusl auyn wqxy obzy
+        sync: false
     disk:
       name: sqlite-data
       mountPath: /rails/storage

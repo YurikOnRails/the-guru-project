@@ -63,7 +63,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: 'the-guru-project-6.onrender.com' }
+  config.action_mailer.default_url_options = { host: ENV['SMTP_HOST'] || 'the-guru-project-6.onrender.com' }
 
   # Configure Gmail SMTP
   config.action_mailer.delivery_method = :smtp
@@ -71,8 +71,8 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     port: 587,
     domain: 'gmail.com',
-    user_name: 'andrei.iurik@gmail.com',
-    password: 'zusl auyn wqxy obzy',
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
     authentication: :plain,
     enable_starttls_auto: true
   }
