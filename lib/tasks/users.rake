@@ -3,7 +3,7 @@ namespace :users do
   task create_admin_and_user: :environment do
     # Создаем администратора
     admin = Admin.find_or_initialize_by(email: "pavel_admin@pochta.ru")
-    
+
     unless admin.persisted?
       admin.assign_attributes(
         password: "pavel_admin",
@@ -11,11 +11,11 @@ namespace :users do
         first_name: "Админ",
         last_name: "Системы"
       )
-      
+
       # Пропускаем подтверждение email
       admin.skip_confirmation! if admin.respond_to?(:skip_confirmation!)
       admin.confirm if admin.respond_to?(:confirm)
-      
+
       if admin.save
         puts "Администратор создан успешно: #{admin.email}"
       else
@@ -27,7 +27,7 @@ namespace :users do
 
     # Создаем обычного пользователя
     user = User.find_or_initialize_by(email: "andrey_user@pochta.ru")
-    
+
     unless user.persisted?
       user.assign_attributes(
         password: "andrey_user",
@@ -35,11 +35,11 @@ namespace :users do
         first_name: "Тестовый",
         last_name: "Пользователь"
       )
-      
+
       # Пропускаем подтверждение email
       user.skip_confirmation! if user.respond_to?(:skip_confirmation!)
       user.confirm if user.respond_to?(:confirm)
-      
+
       if user.save
         puts "Пользователь создан успешно: #{user.email}"
       else
@@ -54,7 +54,7 @@ namespace :users do
   desc "Создает только администратора"
   task create_admin: :environment do
     admin = Admin.find_or_initialize_by(email: "pavel_admin@pochta.ru")
-    
+
     unless admin.persisted?
       admin.assign_attributes(
         password: "pavel_admin",
@@ -62,11 +62,11 @@ namespace :users do
         first_name: "Админ",
         last_name: "Системы"
       )
-      
+
       # Пропускаем подтверждение email несколькими способами для большей совместимости
       admin.skip_confirmation! if admin.respond_to?(:skip_confirmation!)
       admin.confirm if admin.respond_to?(:confirm)
-      
+
       if admin.save
         puts "Администратор создан успешно: #{admin.email}"
       else
