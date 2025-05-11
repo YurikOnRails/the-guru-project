@@ -2,8 +2,8 @@ namespace :users do
   desc "Создает администратора и тестового пользователя"
   task create_admin_and_user: :environment do
     # Создаем администратора
-    admin_email = ENV["ADMIN_EMAIL"] || "admin@example.com"
-    admin_password = ENV["ADMIN_PASSWORD"] || "password"
+    admin_email = ENV["ADMIN_EMAIL"] || "pavel_admin@pochta.ru"
+    admin_password = ENV["ADMIN_PASSWORD"] || "pavel_admin"
 
     admin = Admin.find_by(email: admin_email)
 
@@ -28,8 +28,8 @@ namespace :users do
     end
 
     # Создаем обычного пользователя
-    user_email = ENV["USER_EMAIL"] || "user@example.com"
-    user_password = ENV["USER_PASSWORD"] || "password"
+    user_email = ENV["USER_EMAIL"] || "andrey_user@example.com"
+    user_password = ENV["USER_PASSWORD"] || "andrey_user"
 
     user = User.find_by(email: user_email)
 
