@@ -4,8 +4,8 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Set the secret key base first
-  config.secret_key_base = ENV.fetch('SECRET_KEY_BASE') { 
-    ENV.fetch('SECRET_KEY_BASE_DUMMY') { raise "Missing SECRET_KEY_BASE environment variable" }
+  config.secret_key_base = ENV.fetch("SECRET_KEY_BASE") {
+    ENV.fetch("SECRET_KEY_BASE_DUMMY") { raise "Missing SECRET_KEY_BASE environment variable" }
   }
 
   # Code is not reloaded between requests.
@@ -63,16 +63,16 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: ENV['SMTP_HOST'] || 'the-guru-project-6.onrender.com' }
+  config.action_mailer.default_url_options = { host: ENV["SMTP_HOST"] || "the-guru-project-6.onrender.com" }
 
   # Configure Gmail SMTP
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
+    address: "smtp.gmail.com",
     port: 587,
-    domain: 'gmail.com',
-    user_name: ENV['SMTP_USERNAME'],
-    password: ENV['SMTP_PASSWORD'],
+    domain: "gmail.com",
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"],
     authentication: :plain,
     enable_starttls_auto: true
   }

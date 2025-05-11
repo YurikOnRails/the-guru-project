@@ -30,4 +30,4 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     sign_in(resource)
     root_path
   end
-end 
+end
