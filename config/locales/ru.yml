@@ -186,6 +186,7 @@ ru:
       tests: "Тесты"
       back_to_tests: "Назад к тестам"
       gists: "Гисты"
+      feedback: "Обратная связь"
 
   tests_mailer:
     completed_test:
@@ -216,3 +217,22 @@ ru:
     gist_question_service:
       description: "Вопрос о %{title} от TestGuru"
       filename: "test-guru-вопрос.txt"
+
+  feedback:
+    new:
+      title: "Обратная связь"
+      name: "Ваше имя"
+      email: "Email"
+      message: "Сообщение"
+      send: "Отправить"
+      back: "Вернуться на главную"
+      errors_header: "Ошибки при заполнении формы:"
+    create:
+      success: "Ваше сообщение успешно отправлено!"
+
+  feedback_mailer:
+    feedback_email:
+      subject: "Новое сообщение обратной связи"
+      from: "От"
+      message: "Сообщение"
+      footer: "Это сообщение было отправлено через форму обратной связи на вашем сайте Тест Гуру."

@@ -1,0 +1,43 @@
+<div class="card col-md-6 mx-auto mt-4">
+  <div class="card-header">
+    <h1 class="h4 mb-0"><%= t('feedback.new.title') %></h1>
+  </div>
+  
+  <div class="card-body">
+    <%= form_with model: @feedback, url: feedbacks_path, local: true do |f| %>
+      <% if @feedback.errors.any? %>
+        <div class="alert alert-danger">
+          <h2 class="h6"><%= t('feedback.new.errors_header') %></h2>
+          <ul>
+            <% @feedback.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="mb-3">
+        <%= f.label :name, t('feedback.new.name'), class: "form-label" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :email, t('feedback.new.email'), class: "form-label" %>
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :message, t('feedback.new.message'), class: "form-label" %>
+        <%= f.text_area :message, rows: 5, class: "form-control" %>
+      </div>
+
+      <div class="d-grid">
+        <%= f.submit t('feedback.new.send'), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="card-footer text-center">
+    <%= link_to t('feedback.new.back'), root_path, class: "btn btn-outline-secondary" %>
+  </div>
+</div> 
