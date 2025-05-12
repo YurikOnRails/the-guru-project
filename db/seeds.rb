@@ -8,7 +8,7 @@ admin = Admin.create!(
   last_name: 'Administrator',
   email: 'pavel@pochta.ru',
   password: 'pavel_thinknetica',
-  password_confirmation: 'password',
+  password_confirmation: 'pavel_thinknetica',
   confirmed_at: Time.current
 )
 
