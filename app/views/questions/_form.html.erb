@@ -1,11 +1,11 @@
 <%= form_with model: [@test, @question], local: true do |f| %>
   <div class="mb-3">
     <%= f.label :content, class: 'form-label fw-bold' %>
-    <%= f.text_area :content, rows: 7, class: 'form-control', placeholder: 'Enter your question here...' %>
-    <div class="form-text">Write a clear and concise question for the test.</div>
+    <%= f.text_area :content, rows: 7, class: 'form-control', placeholder: t('questions.form.placeholder') %>
+    <div class="form-text"><%= t('questions.form.help_text') %></div>
   </div>
 
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <%= f.submit "Create Question", class: 'btn btn-primary' %>
+    <%= f.submit t('questions.form.create_button'), class: 'btn btn-primary' %>
   </div>
 <% end %>

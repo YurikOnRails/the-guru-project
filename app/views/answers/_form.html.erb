@@ -1,15 +1,15 @@
 <%= form_with model: [@question, @answer], local: true do |f| %>
-  <div class="field">
-    <%= f.label :content %>
-    <%= f.text_area :content, rows: 7, cols: 60 %>
+  <div class="mb-3">
+    <%= f.label :content, t('answers.form.content'), class: 'form-label fw-bold' %>
+    <%= f.text_area :content, rows: 5, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= f.label :correct %>
-    <%= f.check_box :correct %>
+  <div class="mb-3 form-check">
+    <%= f.check_box :correct, class: 'form-check-input' %>
+    <%= f.label :correct, t('answers.form.correct'), class: 'form-check-label' %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Submit" %>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <%= f.submit t('answers.form.submit'), class: 'btn btn-primary' %>
   </div>
 <% end %>

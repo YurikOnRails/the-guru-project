@@ -224,18 +224,35 @@ ru:
       delete: "Удалить"
       confirm: "Вы уверены?"
       no_answers: "Ответов пока нет."
+    new:
+      header: "Новый вопрос для \"%{title}\""
+      back_to_test: "Назад к тесту"
     edit:
       edit_question: "Редактирование вопроса"
       question_placeholder: "Введите текст вопроса здесь..."
       question_help: "Напишите четкий и понятный вопрос для теста."
       update_button: "Обновить вопрос"
       back_to_test: "Назад к тесту"
+    form:
+      create_button: "Создать вопрос"
+      placeholder: "Введите вопрос здесь..."
+      help_text: "Напишите четкий и понятный вопрос для теста."
 
   answers:
     answer:
       edit: "Редактировать"
       delete: "Удалить"
       confirm: "Вы уверены?"
+    new:
+      header: "Новый ответ"
+      back: "Назад"
+    edit:
+      header: "Редактирование ответа"
+      back: "Назад"
+    form:
+      content: "Содержание"
+      correct: "Правильный"
+      submit: "Сохранить"
 
   services:
     gist_question_service:

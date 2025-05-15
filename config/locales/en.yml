@@ -180,3 +180,26 @@ en:
       question_help: "Write a clear and concise question for the test."
       update_button: "Update Question"
       back_to_test: "Back to Test"
+    new:
+      header: "New Question for \"%{title}\""
+      back_to_test: "Back to Test"
+    form:
+      create_button: "Create Question"
+      placeholder: "Enter your question here..."
+      help_text: "Write a clear and concise question for the test."
+
+  answers:
+    answer:
+      edit: "Edit"
+      delete: "Delete"
+      confirm: "Are you sure?"
+    new:
+      header: "New Answer"
+      back: "Back"
+    edit:
+      header: "Edit Answer"
+      back: "Back"
+    form:
+      content: "Content"
+      correct: "Correct"
+      submit: "Submit"
