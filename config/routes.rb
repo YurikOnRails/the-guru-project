@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users, path: :gurus, path_names: { sign_in: :login, sign_out: :logout, sign_up: :signup }, controllers: { sessions: "users/sessions", registrations: "users/registrations", confirmations: "users/confirmations" }
+  
+  # Явно определяем маршруты для подтверждения аккаунта
+  devise_scope :user do
+    resource :confirmation, only: [:show, :create, :new], 
+                           controller: 'users/confirmations',
+                           path: '/gurus/confirmation',
+                           as: :user_confirmation
+  end
+  
   root "tests#index"
 
   # Статическая страница О нас

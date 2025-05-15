@@ -8,8 +8,8 @@ Rails.application.configure do
     ENV.fetch("SECRET_KEY_BASE_DUMMY") { raise "Missing SECRET_KEY_BASE environment variable" }
   }
 
-  # Установка email администратора, если не задан через переменную окружения
-  ENV["ADMIN_EMAIL"] = "andrei.iurik@gmail.com"
+  # Установка email администратора через конфигурацию вместо прямой установки ENV
+  config.x.admin_email = ENV.fetch("ADMIN_EMAIL", "andrei.iurik@gmail.com")
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
@@ -66,7 +66,15 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: ENV["SMTP_HOST"] || "the-guru-project-6.onrender.com" }
+  config.action_mailer.default_url_options = { 
+    host: ENV.fetch("SMTP_HOST", "the-guru-project-6.onrender.com"),
+    protocol: 'https'
+  }
+
+  # Указываем разрешенные хосты вместо разрешения всех
+  config.hosts << "the-guru-project-6.onrender.com"
+  config.hosts << "www.the-guru-project-6.onrender.com"
+  config.hosts << /.*\.onrender\.com/
 
   # Configure Gmail SMTP
   config.action_mailer.delivery_method = :smtp
@@ -74,8 +82,8 @@ Rails.application.configure do
     address: "smtp.gmail.com",
     port: 587,
     domain: "gmail.com",
-    user_name: ENV["SMTP_USERNAME"],
-    password: ENV["SMTP_PASSWORD"],
+    user_name: ENV.fetch("SMTP_USERNAME", nil),
+    password: ENV.fetch("SMTP_PASSWORD", nil),
     authentication: :plain,
     enable_starttls_auto: true
   }
