@@ -5,7 +5,7 @@ class FeedbacksController < ApplicationController
 
   def create
     @feedback = Feedback.new(feedback_params)
-    
+
     if @feedback.valid?
       begin
         FeedbackMailer.feedback_email(@feedback).deliver_now

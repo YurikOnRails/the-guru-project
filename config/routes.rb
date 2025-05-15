@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, path: :gurus, path_names: { sign_in: :login, sign_out: :logout, sign_up: :signup }, controllers: { sessions: "users/sessions", registrations: "users/registrations", confirmations: "users/confirmations" }
-  
+
   root "tests#index"
 
   # Статическая страница О нас
@@ -39,11 +39,11 @@ Rails.application.routes.draw do
 
   # Маршруты для формы обратной связи
   resources :feedbacks, only: [ :new, :create ]
-  
+
   # Маршрут для просмотра писем через letter_opener в среде разработки
   if Rails.env.development?
     begin
-      require 'letter_opener_web'
+      require "letter_opener_web"
       mount LetterOpenerWeb::Engine, at: "/letter_opener"
     rescue LoadError => e
       Rails.logger.debug("letter_opener_web не установлен: #{e.message}")

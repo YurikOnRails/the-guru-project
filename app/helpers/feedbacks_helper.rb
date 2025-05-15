@@ -7,10 +7,10 @@ module FeedbacksHelper
       class: css_class,
       placeholder: t("feedback.new.help.#{field}")
     }.merge(options.except(:as, :type))
-    
+
     content_tag :div, class: "mb-3" do
       concat form.label(field, t("feedback.new.#{field}"), class: "form-label")
-      
+
       if options[:as] == :text_area
         concat form.text_area(field, field_options)
       elsif options[:type] == :email
@@ -18,10 +18,10 @@ module FeedbacksHelper
       else
         concat form.text_field(field, field_options)
       end
-      
+
       if form.object.errors[field].any?
-        concat content_tag(:div, form.object.errors[field].join(', '), class: "invalid-feedback")
+        concat content_tag(:div, form.object.errors[field].join(", "), class: "invalid-feedback")
       end
     end
   end
-end 
+end

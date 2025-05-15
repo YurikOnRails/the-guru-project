@@ -66,9 +66,9 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { 
+  config.action_mailer.default_url_options = {
     host: ENV.fetch("SMTP_HOST", "the-guru-project-6.onrender.com"),
-    protocol: 'https'
+    protocol: "https"
   }
 
   # Указываем разрешенные хосты вместо разрешения всех

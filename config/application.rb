@@ -7,9 +7,9 @@ require "rails/all"
 Bundler.require(*Rails.groups)
 
 # Загрузка переменных окружения из .env файла, если он существует
-if File.exist?(File.join(File.dirname(__FILE__), '..', '.env'))
-  require 'dotenv'
-  Dotenv.load(File.join(File.dirname(__FILE__), '..', '.env'))
+if File.exist?(File.join(File.dirname(__FILE__), "..", ".env"))
+  require "dotenv"
+  Dotenv.load(File.join(File.dirname(__FILE__), "..", ".env"))
 end
 
 module TheGuruProject
