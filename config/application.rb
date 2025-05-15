@@ -6,6 +6,12 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Загрузка переменных окружения из .env файла, если он существует
+if File.exist?(File.join(File.dirname(__FILE__), '..', '.env'))
+  require 'dotenv'
+  Dotenv.load(File.join(File.dirname(__FILE__), '..', '.env'))
+end
+
 module TheGuruProject
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

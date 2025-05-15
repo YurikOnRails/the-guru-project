@@ -14,6 +14,28 @@ ru:
     errors:
       messages:
         blank: "не может быть пустым"
+  activemodel:
+    attributes:
+      feedback:
+        name: "Имя"
+        email: "Email"
+        message: "Сообщение"
+    errors:
+      models:
+        feedback:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+              too_short: "должно содержать не менее %{count} символов"
+              too_long: "должно содержать не более %{count} символов"
+            email:
+              blank: "не может быть пустым"
+              invalid: "имеет неверный формат"
+            message:
+              blank: "не может быть пустым"
+              too_short: "должно содержать не менее %{count} символов"
+              too_long: "должно содержать не более %{count} символов"
+  
   tests:
     index:
       header: "Доступные тесты"
@@ -157,6 +179,8 @@ ru:
       test:
         create: "Создать тест"
         update: "Обновить тест"
+      feedback:
+        create: "Отправить сообщение"
     label:
       test:
         title: "Название"
@@ -227,8 +251,13 @@ ru:
       send: "Отправить"
       back: "Вернуться на главную"
       errors_header: "Ошибки при заполнении формы:"
+      help:
+        name: "Введите ваше имя (от 2 до 50 символов)"
+        email: "Введите ваш действующий email"
+        message: "Введите ваше сообщение (от 10 до 1000 символов)"
     create:
       success: "Ваше сообщение успешно отправлено!"
+      error: "Произошла ошибка при отправке сообщения"
 
   feedback_mailer:
     feedback_email:

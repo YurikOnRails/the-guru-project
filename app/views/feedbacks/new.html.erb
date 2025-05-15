@@ -16,20 +16,9 @@
         </div>
       <% end %>
 
-      <div class="mb-3">
-        <%= f.label :name, t('feedback.new.name'), class: "form-label" %>
-        <%= f.text_field :name, class: "form-control" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.label :email, t('feedback.new.email'), class: "form-label" %>
-        <%= f.email_field :email, class: "form-control" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.label :message, t('feedback.new.message'), class: "form-label" %>
-        <%= f.text_area :message, rows: 5, class: "form-control" %>
-      </div>
+      <%= form_group_with_error(f, :name) %>
+      <%= form_group_with_error(f, :email, type: :email) %>
+      <%= form_group_with_error(f, :message, as: :text_area, rows: 5) %>
 
       <div class="d-grid">
         <%= f.submit t('feedback.new.send'), class: "btn btn-primary" %>

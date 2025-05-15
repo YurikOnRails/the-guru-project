@@ -38,4 +38,14 @@ Rails.application.routes.draw do
 
   # Маршруты для формы обратной связи
   resources :feedbacks, only: [ :new, :create ]
+  
+  # Маршрут для просмотра писем через letter_opener в среде разработки
+  if Rails.env.development?
+    begin
+      require 'letter_opener_web'
+      mount LetterOpenerWeb::Engine, at: "/letter_opener"
+    rescue LoadError => e
+      Rails.logger.debug("letter_opener_web не установлен: #{e.message}")
+    end
+  end
 end

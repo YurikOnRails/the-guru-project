@@ -22,7 +22,7 @@
           
           <% if current_user.is_a?(Admin) %>
             <%= link_to admin_tests_path, class: 'nav-link', title: t('shared.nav.admin_panel') do %>
-              <i class="bi bi-gear-fill"></i>
+              <i class="bi bi-gear-fill"></i> <%= t('admin.nav.admin_panel') %>
             <% end %>
           <% end %>
           

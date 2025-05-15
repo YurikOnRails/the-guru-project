@@ -1,13 +1,17 @@
 class FeedbackMailer < ApplicationMailer
+  # Константа с email администратора
+  ADMIN_EMAIL = "andrei.iurik@gmail.com"
+  
   def feedback_email(feedback)
     @feedback = feedback
-    # Получаем email администратора из кеша или из базы данных
-    admin_email = Rails.cache.fetch("admin_email", expires_in: 1.hour) do
-      Admin.first&.email
-    end || "admin@example.com"
-
+    
+    # Используем заданный email администратора
+    # Приоритет: переменная окружения > константа
+    admin_email = ENV["ADMIN_EMAIL"] || ADMIN_EMAIL
+    
     mail(
       to: admin_email,
+      cc: Rails.env.development? ? @feedback.email : nil,
       subject: I18n.t("feedback_mailer.feedback_email.subject"),
       reply_to: @feedback.email
     )
