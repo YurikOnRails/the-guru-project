@@ -54,6 +54,11 @@ ru:
       questions: "Вопросы"
       back: "Назад к тестам"
       add_question: "Добавить новый вопрос"
+      start: "Начать тест"
+      level: "Уровень"
+      category: "Категория"
+      author: "Автор"
+      no_questions: "В тесте пока нет вопросов."
 
   test_passages:
     result:

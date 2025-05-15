@@ -19,6 +19,11 @@ en:
       questions: "Questions"
       back: "Back to Tests"
       add_question: "Add a new question"
+      start: "Start Test"
+      level: "Level"
+      category: "Category"
+      author: "Author"
+      no_questions: "There are no questions in this test yet."
 
   admin:
     nav:
