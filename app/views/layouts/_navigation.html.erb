@@ -27,10 +27,12 @@
         <% if user_signed_in? %>
           <span class="nav-item nav-link"><%= t('admin.nav.welcome') %>, <b><%= current_user.email %></b></span>
           
-          <% if current_user.is_a?(Admin) %>
-            <%= link_to admin_tests_path, class: 'nav-link', title: t('shared.nav.admin_panel') do %>
-              <i class="bi bi-gear-fill"></i> <%= t('admin.nav.admin_panel') %>
-            <% end %>
+          <% if current_user&.admin? %>
+            <li class="nav-item">
+              <%= link_to admin_tests_path, class: 'nav-link text-primary fw-bold' do %>
+                <i class="bi bi-speedometer2 me-1"></i><%= t('shared.nav.admin_panel') %>
+              <% end %>
+            </li>
           <% end %>
           
           <%= button_to t('shared.nav.logout'), destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger btn-sm ms-2' %>

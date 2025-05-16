@@ -79,7 +79,7 @@ ru:
       completed: "завершено"
       no_questions: "Для этого теста нет доступных вопросов."
     gist:
-      success: "Gist успешно сохранен! %{url}"
+      success: "Gist успешно сохранен!"
       failure: "Во время сохранения gist произошла ошибка"
 
   devise:
@@ -176,7 +176,7 @@ ru:
         user: "Пользователь"
         created_at: "Создан"
       create:
-        success: "Gist успешно сохранен! %{url}"
+        success: "Gist успешно сохранен!"
         failure: "Во время сохранения gist произошла ошибка"
         view_gist: "Просмотреть Gist"
 
@@ -298,6 +298,6 @@ ru:
       
   gists:
     create:
-      success: "Gist успешно сохранен! %{url}"
+      success: "Gist успешно сохранен!"
       failure: "Во время сохранения gist произошла ошибка"
       view_gist: "Просмотреть Gist"
