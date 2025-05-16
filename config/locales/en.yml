@@ -214,3 +214,8 @@ en:
       content: "Content"
       correct: "Correct"
       submit: "Submit"
+      
+  gists:
+    create:
+      success: "Gist was successfully created! %{url}"
+      failure: "An error occurred while saving gist"
