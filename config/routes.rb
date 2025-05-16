@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, path: :gurus, path_names: { sign_in: :login, sign_out: :logout, sign_up: :signup }, controllers: { sessions: "users/sessions", registrations: "users/registrations", confirmations: "users/confirmations" }
 
-  # Явное определение маршрутов для подтверждения электронной почты
-  devise_scope :user do
-    get '/gurus/confirmation', to: 'users/confirmations#show', as: :user_confirmation
-  end
-
   root "tests#index"
 
   # Статическая страница О нас
