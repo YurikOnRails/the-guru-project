@@ -240,8 +240,8 @@ ru:
       back_to_test: "Назад к тесту"
     form:
       create_button: "Создать вопрос"
-      placeholder: "Введите вопрос здесь..."
-      help_text: "Напишите четкий и понятный вопрос для теста."
+      placeholder: "Введите здесь свой вопрос..."
+      help_text: "Напишите емкий и понятный вопрос для теста."
 
   answers:
     answer:
@@ -258,6 +258,12 @@ ru:
       content: "Содержание"
       correct: "Правильный"
       submit: "Сохранить"
+    create:
+      success: "Ответ успешно создан."
+    update:
+      success_update: "Ответ успешно обновлен."
+    destroy:
+      success_delete: "Ответ успешно удален."
 
   services:
     gist_question_service:
