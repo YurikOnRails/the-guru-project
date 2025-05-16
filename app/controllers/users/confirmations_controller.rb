@@ -11,6 +11,13 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
+    Rails.logger.info "Received confirmation token: #{params[:confirmation_token]}"
+    
+    if params[:confirmation_token].blank?
+      flash[:alert] = "Токен подтверждения отсутствует"
+      redirect_to root_path and return
+    end
+    
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
 
     if resource.errors.empty?
