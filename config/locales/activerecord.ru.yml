@@ -16,6 +16,7 @@ ru:
         category: "Категория"
       question:
         body: "Текст вопроса"
+        content: "Содержание"
         test: "Тест"
       answer:
         body: "Текст ответа"

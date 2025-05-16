@@ -16,6 +16,7 @@ en:
         category: "Category"
       question:
         body: "Question text"
+        content: "Content"
         test: "Test"
       answer:
         body: "Answer text"
