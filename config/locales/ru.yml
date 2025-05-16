@@ -178,6 +178,7 @@ ru:
       create:
         success: "Gist успешно сохранен! %{url}"
         failure: "Во время сохранения gist произошла ошибка"
+        view_gist: "Просмотреть Gist"
 
   helpers:
     submit:
@@ -298,3 +299,4 @@ ru:
     create:
       success: "Gist успешно сохранен! %{url}"
       failure: "Во время сохранения gist произошла ошибка"
+      view_gist: "Просмотреть Gist"
