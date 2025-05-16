@@ -62,7 +62,7 @@ ru:
 
   test_passages:
     result:
-      header: "Тест %{title} успешно завершен!"
+      header: "Тест %{title} завершен!"
       success: "Процент успеха: %{result}%"
       passed: "Тест пройден"
       failed: "Тест не пройден"
@@ -221,7 +221,7 @@ ru:
 
   tests_mailer:
     completed_test:
-      subject: "Вы только что прошли тест TESTGURU: %{title}!!!"
+      subject: "Поздравляем! Вы только что прошли тест от TESTGURU!"
       body: "Вы успешно прошли тест %{title}"
 
   questions:

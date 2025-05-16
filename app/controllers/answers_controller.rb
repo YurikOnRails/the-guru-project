@@ -11,9 +11,9 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answer_params)
     if @answer.save
-      redirect_to admin_test_path(@question.test), notice: t(".success")
+      redirect_to @question.test, notice: t(".success")
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -23,7 +23,7 @@ class AnswersController < ApplicationController
     if @answer.update(answer_params)
       redirect_to @answer.question.test, notice: t(".success_update")
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
