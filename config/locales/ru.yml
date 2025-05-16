@@ -217,6 +217,7 @@ ru:
       back_to_tests: "Назад к тестам"
       gists: "Гисты"
       feedback: "Обратная связь"
+      about: "О нас"
 
   tests_mailer:
     completed_test:

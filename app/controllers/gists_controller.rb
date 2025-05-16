@@ -6,7 +6,7 @@ class GistsController < ApplicationController
     result = GistQuestionService.new(@test_passage.current_question).call
 
     flash_options = if result.successful?
-      { 
+      {
         notice: t(".success"),
         gist_url: result.url
       }

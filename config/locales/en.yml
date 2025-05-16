@@ -167,6 +167,7 @@ en:
       tests: "Tests"
       back_to_tests: "Back to Tests"
       gists: "Gists"
+      about: "About"
 
   tests_mailer:
     completed_test:
