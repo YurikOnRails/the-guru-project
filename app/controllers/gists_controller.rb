@@ -6,9 +6,10 @@ class GistsController < ApplicationController
     result = GistQuestionService.new(@test_passage.current_question).call
 
     flash_options = if result.successful?
-      { notice: t(".success", url: view_context.link_to(t(".view_gist"), result.url,
-          class: "btn btn-sm btn-outline-primary ms-2",
-          target: "_blank")).html_safe }
+      { 
+        notice: t(".success"),
+        gist_url: result.url
+      }
     else
       { alert: t(".failure") }
     end

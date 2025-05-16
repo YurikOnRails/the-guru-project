@@ -1,6 +1,9 @@
 <% flash.each do |key, message| %>
   <div class="alert alert-<%= bootstrap_alert_class(key) %> alert-dismissible fade show" role="alert">
     <%= message %>
+    <% if key == 'notice' && flash[:gist_url].present? %>
+      <%= link_to flash[:gist_url], flash[:gist_url], target: "_blank" %>
+    <% end %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% end %>
