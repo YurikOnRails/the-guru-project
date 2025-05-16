@@ -179,6 +179,12 @@ en:
       filename: "test-guru-question.txt"
 
   questions:
+    question:
+      add_answer: "Add answer"
+      edit: "Edit"
+      delete: "Delete"
+      confirm: "Are you sure?"
+      no_answers: "No answers yet."
     edit:
       edit_question: "Edit Question"
       question_placeholder: "Enter your question text here..."
