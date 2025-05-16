@@ -67,13 +67,13 @@ Rails.application.configure do
 
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = {
-    host: ENV.fetch("SMTP_HOST", "the-guru-project-6.onrender.com"),
+    host: ENV.fetch("SMTP_HOST", "the-guru-project-klc8.onrender.com"),
     protocol: "https"
   }
 
   # Указываем разрешенные хосты вместо разрешения всех
-  config.hosts << "the-guru-project-6.onrender.com"
-  config.hosts << "www.the-guru-project-6.onrender.com"
+  config.hosts << "the-guru-project-klc8.onrender.com"
+  config.hosts << "www.the-guru-project-klc8.onrender.com"
   config.hosts << /.*\.onrender\.com/
 
   # Configure Gmail SMTP
