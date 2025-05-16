@@ -37,8 +37,12 @@
           
           <%= button_to t('shared.nav.logout'), destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger btn-sm ms-2' %>
         <% else %>
-          <%= link_to t('shared.nav.signup'), new_user_registration_path, class: 'btn btn-outline-primary btn-sm me-2' %>
-          <%= link_to t('shared.nav.login'), new_user_session_path, class: 'btn btn-outline-success btn-sm' %>
+          <%= link_to t('shared.nav.signup'), new_user_registration_path, class: 'btn btn-primary btn-sm me-2 px-3 py-2 rounded-pill shadow-sm' do %>
+            <i class="bi bi-person-plus-fill me-1"></i><%= t('shared.nav.signup') %>
+          <% end %>
+          <%= link_to t('shared.nav.login'), new_user_session_path, class: 'btn btn-outline-primary btn-sm px-3 py-2 rounded-pill shadow-sm' do %>
+            <i class="bi bi-box-arrow-in-right me-1"></i><%= t('shared.nav.login') %>
+          <% end %>
         <% end %>
       </div>
     </div>
