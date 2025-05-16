@@ -85,7 +85,7 @@ ru:
   devise:
     sessions:
       new:
-        header: "Войти в Гуру"
+        header: "Войти и стать Гуру"
         enter: "Войти"
         remember_me: "Запомнить"
     registrations:
