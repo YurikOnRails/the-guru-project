@@ -45,7 +45,7 @@
           <div class="card-body">
             <%= form_with url: test_passage_path(@test_passage), method: :put, data: { turbo: false } do |form| %>
               <div class="list-group mb-4">
-                <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.answers, :id, :content, include_hidden: false do |b| %>
+                <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.shuffled_answers, :id, :content, include_hidden: false do |b| %>
                   <div class="list-group-item">
                     <div class="form-check">
                       <%= b.check_box id: "answer_ids_#{b.object.id}", class: 'form-check-input' %>
