@@ -43,6 +43,12 @@
             <h2 class="h5 mb-0"><%= @test_passage.current_question.content %></h2>
           </div>
           <div class="card-body">
+            <% if @test_passage.test.timer %>
+              <div class="alert alert-info" id="timer" data-time-left="<%= @test_passage.time_left %>">
+                Time remaining: <span id="timer-display"></span>
+              </div>
+            <% end %>
+            
             <%= form_with url: test_passage_path(@test_passage), method: :put, data: { turbo: false } do |form| %>
               <div class="list-group mb-4">
                 <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.shuffled_answers, :id, :content, include_hidden: false do |b| %>
@@ -70,3 +76,30 @@
     </div>
   </div>
 </div>
+
+<% content_for :javascript do %>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const timerElement = document.getElementById('timer');
+      if (!timerElement) return;
+
+      let timeLeft = parseInt(timerElement.dataset.timeLeft);
+      const timerDisplay = document.getElementById('timer-display');
+
+      function updateTimer() {
+        if (timeLeft <= 0) {
+          window.location.href = '<%= result_test_passage_path(@test_passage) %>';
+          return;
+        }
+
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        timeLeft--;
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    });
+  </script>
+<% end %>
