@@ -6,34 +6,57 @@ class TestPassage < ApplicationRecord
   validates :correct_questions, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validate :test_has_questions, on: :create
 
-  before_validation :set_next_question, on: :create
+  before_validation :before_validation_set_first_question, on: :create
+  before_validation :before_validation_set_next_question, on: :update
 
   SUCCESS_THRESHOLD = 85
 
   def accept!(answer_ids)
-    self.correct_questions += 1 if correct_answer?(answer_ids)
-    self.current_question = next_question
+    if correct_answer?(answer_ids)
+      self.correct_questions += 1
+    end
+
     save!
   end
 
-  def success_percentage
-    return 0 if test.questions.count.zero?
+  def success_rate
+    ((correct_questions.to_f / test.questions.count) * 100).round(2)
+  end
 
-    (correct_questions.to_f / test.questions.count * 100).round
+  def success?
+    success_rate >= SUCCESS_THRESHOLD
   end
 
   def completed?
-    current_question.nil?
+    current_question.nil? || time_out?
   end
 
-  def successful?
-    success_percentage >= SUCCESS_THRESHOLD
+  def question_number
+    test.questions.order(:id).where('id <= ?', current_question.id).count
+  end
+
+  def time_left
+    return nil unless test.timer_minutes
+    
+    end_time = created_at + test.timer_minutes.minutes
+    seconds_left = (end_time - Time.current).to_i
+    seconds_left.positive? ? seconds_left : 0
+  end
+
+  def time_out?
+    return false unless test.timer_minutes
+    
+    time_left.zero?
   end
 
   private
 
-  def set_next_question
-    self.current_question = test.questions.first if test.present? && current_question.nil?
+  def before_validation_set_first_question
+    self.current_question = test.questions.first if test.present?
+  end
+
+  def before_validation_set_next_question
+    self.current_question = next_question
   end
 
   def correct_answer?(answer_ids)
@@ -45,7 +68,7 @@ class TestPassage < ApplicationRecord
   end
 
   def next_question
-    test.questions.order(:id).where("id > ?", current_question.id).first
+    test.questions.order(:id).where('id > ?', current_question.id).first
   end
 
   def test_has_questions
