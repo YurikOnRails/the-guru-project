@@ -5,8 +5,11 @@ class GistsController < ApplicationController
     @test_passage = TestPassage.find(params[:test_passage_id])
     result = GistQuestionService.new(@test_passage.current_question).call
 
-    flash_options = if result.success?
-      { notice: t(".success", url: view_context.link_to("Gist", result.url, target: "_blank")).html_safe }
+    flash_options = if result.successful?
+      {
+        notice: t(".success"),
+        gist_url: result.url
+      }
     else
       { alert: t(".failure") }
     end

@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: the-guru-project
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: SECRET_KEY_BASE
+        sync: false
+      - key: DEVISE_SECRET_KEY
+        sync: false
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
+      - key: RAILS_LOG_TO_STDOUT
+        value: true
+      - key: RAILS_MAX_THREADS
+        value: 5
+      - key: SMTP_HOST
+        value: the-guru-project-klc8.onrender.com
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+    disk:
+      name: sqlite-data
+      mountPath: /rails/storage
+      sizeGB: 1 

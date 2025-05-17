@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def github_url(author, repo)
-    link_to "#{repo} on GitHub", "https://github.com/#{author}/#{repo}", target: "_blank"
+    link_to "#{repo}", "https://github.com/#{author}/#{repo}", target: "_blank"
   end
 
   def flash_message
@@ -24,5 +24,17 @@ module ApplicationHelper
     else
       "info"
     end
+  end
+
+  # Возвращает полное наименование приложения с текущим годом,
+  # используется в футере
+  def full_title(page_title = "")
+    base_title = "Тест Гуру"
+    page_title.empty? ? base_title : "#{base_title} | #{page_title}"
+  end
+
+  # Возвращает путь к тестам в зависимости от роли пользователя
+  def tests_path_for_user(user)
+    user&.admin? ? admin_tests_path : tests_path
   end
 end

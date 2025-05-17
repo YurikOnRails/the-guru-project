@@ -14,7 +14,7 @@ class Admin::QuestionsController < Admin::BaseController
     if @question.save
       redirect_to admin_test_path(@test), notice: "Вопрос успешно создан"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -24,7 +24,7 @@ class Admin::QuestionsController < Admin::BaseController
     if @question.update(question_params)
       redirect_to admin_test_path(@question.test), notice: "Вопрос успешно обновлен"
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

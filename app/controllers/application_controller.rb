@@ -5,7 +5,10 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def default_url_options
-    I18n.locale == I18n.default_locale ? {} : { lang: I18n.locale }
+    {
+      lang: (I18n.locale == I18n.default_locale ? nil : I18n.locale),
+      protocol: (Rails.env.production? ? "https" : nil)
+    }.compact
   end
 
   protected

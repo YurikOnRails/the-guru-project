@@ -75,3 +75,4 @@ config/deploy.yml
 
 # Ignore .env file with secrets
 .env
+config/master.key

@@ -14,6 +14,28 @@ ru:
     errors:
       messages:
         blank: "не может быть пустым"
+  activemodel:
+    attributes:
+      feedback:
+        name: "Имя"
+        email: "Email"
+        message: "Сообщение"
+    errors:
+      models:
+        feedback:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+              too_short: "должно содержать не менее %{count} символов"
+              too_long: "должно содержать не более %{count} символов"
+            email:
+              blank: "не может быть пустым"
+              invalid: "имеет неверный формат"
+            message:
+              blank: "не может быть пустым"
+              too_short: "должно содержать не менее %{count} символов"
+              too_long: "должно содержать не более %{count} символов"
+  
   tests:
     index:
       header: "Доступные тесты"
@@ -32,10 +54,15 @@ ru:
       questions: "Вопросы"
       back: "Назад к тестам"
       add_question: "Добавить новый вопрос"
+      start: "Начать тест"
+      level: "Уровень"
+      category: "Категория"
+      author: "Автор"
+      no_questions: "В тесте пока нет вопросов."
 
   test_passages:
     result:
-      header: "Тест %{title} успешно завершен!"
+      header: "Тест %{title} завершен!"
       success: "Процент успеха: %{result}%"
       passed: "Тест пройден"
       failed: "Тест не пройден"
@@ -52,13 +79,13 @@ ru:
       completed: "завершено"
       no_questions: "Для этого теста нет доступных вопросов."
     gist:
-      success: "Gist успешно сохранен! %{url}"
+      success: "Gist успешно сохранен!"
       failure: "Во время сохранения gist произошла ошибка"
 
   devise:
     sessions:
       new:
-        header: "Войти в Гуру"
+        header: "Войти и стать Гуру"
         enter: "Войти"
         remember_me: "Запомнить"
     registrations:
@@ -149,14 +176,17 @@ ru:
         user: "Пользователь"
         created_at: "Создан"
       create:
-        success: "Gist успешно сохранен! %{url}"
+        success: "Gist успешно сохранен!"
         failure: "Во время сохранения gist произошла ошибка"
+        view_gist: "Просмотреть Gist"
 
   helpers:
     submit:
       test:
         create: "Создать тест"
         update: "Обновить тест"
+      feedback:
+        create: "Отправить сообщение"
     label:
       test:
         title: "Название"
@@ -186,10 +216,12 @@ ru:
       tests: "Тесты"
       back_to_tests: "Назад к тестам"
       gists: "Гисты"
+      feedback: "Обратная связь"
+      about: "О нас"
 
   tests_mailer:
     completed_test:
-      subject: "Вы только что прошли тест TESTGURU: %{title}!!!"
+      subject: "Поздравляем! Вы только что прошли тест от TESTGURU!"
       body: "Вы успешно прошли тест %{title}"
 
   questions:
@@ -199,20 +231,73 @@ ru:
       delete: "Удалить"
       confirm: "Вы уверены?"
       no_answers: "Ответов пока нет."
+    new:
+      header: "Новый вопрос для \"%{title}\""
+      back_to_test: "Назад к тесту"
     edit:
       edit_question: "Редактирование вопроса"
       question_placeholder: "Введите текст вопроса здесь..."
       question_help: "Напишите четкий и понятный вопрос для теста."
       update_button: "Обновить вопрос"
       back_to_test: "Назад к тесту"
+    form:
+      create_button: "Создать вопрос"
+      placeholder: "Введите здесь свой вопрос..."
+      help_text: "Напишите емкий и понятный вопрос для теста."
 
   answers:
     answer:
       edit: "Редактировать"
       delete: "Удалить"
       confirm: "Вы уверены?"
+    new:
+      header: "Новый ответ"
+      back: "Назад"
+    edit:
+      header: "Редактирование ответа"
+      back: "Назад"
+    form:
+      content: "Содержание"
+      correct: "Правильный"
+      submit: "Сохранить"
+    create:
+      success: "Ответ успешно создан."
+    update:
+      success_update: "Ответ успешно обновлен."
+    destroy:
+      success_delete: "Ответ успешно удален."
 
   services:
     gist_question_service:
       description: "Вопрос о %{title} от TestGuru"
       filename: "test-guru-вопрос.txt"
+
+  feedback:
+    new:
+      title: "Обратная связь"
+      name: "Ваше имя"
+      email: "Email"
+      message: "Сообщение"
+      send: "Отправить"
+      back: "Вернуться на главную"
+      errors_header: "Ошибки при заполнении формы:"
+      help:
+        name: "Введите ваше имя (от 2 до 50 символов)"
+        email: "Введите ваш действующий email"
+        message: "Введите ваше сообщение (от 10 до 1000 символов)"
+    create:
+      success: "Ваше сообщение успешно отправлено!"
+      error: "Произошла ошибка при отправке сообщения"
+
+  feedback_mailer:
+    feedback_email:
+      subject: "Новое сообщение обратной связи"
+      from: "От"
+      message: "Сообщение"
+      footer: "Это сообщение было отправлено через форму обратной связи на вашем сайте Тест Гуру."
+      
+  gists:
+    create:
+      success: "Gist успешно сохранен!"
+      failure: "Во время сохранения gist произошла ошибка"
+      view_gist: "Просмотреть Gist"

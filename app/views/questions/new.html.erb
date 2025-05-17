@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="card shadow-sm mb-4">
     <div class="card-header bg-primary text-white">
-      <h1 class="h3 mb-0">New Question for "<%= @test.title %>"</h1>
+      <h1 class="h3 mb-0"><%= t('.header', title: @test.title) %></h1>
     </div>
     
     <div class="card-body">
@@ -11,7 +11,7 @@
     
     <div class="card-footer bg-light">
       <%= link_to admin_test_path(@test), class: 'btn btn-secondary' do %>
-        <i class="bi bi-arrow-left me-1"></i> Back to Test
+        <i class="bi bi-arrow-left me-1"></i> <%= t('.back_to_test') %>
       <% end %>
     </div>
   </div>

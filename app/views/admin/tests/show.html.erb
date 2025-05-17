@@ -53,14 +53,8 @@
       <% end %>
       
       <div class="d-flex mt-4">
-        <%= link_to new_test_question_path(@test), class: 'btn btn-success me-2' do %>
+        <%= link_to new_test_question_path(@test), class: 'btn btn-success' do %>
           <i class="bi bi-plus-circle me-1"></i> <%= t('.add_question') %>
-        <% end %>
-        <%= link_to edit_admin_test_path(@test), class: 'btn btn-primary me-2' do %>
-          <i class="bi bi-pencil me-1"></i> <%= t('.edit_title') %>
-        <% end %>
-        <%= link_to admin_tests_path, class: 'btn btn-secondary' do %>
-          <i class="bi bi-arrow-left me-1"></i> <%= t('.back') %>
         <% end %>
       </div>
     </div>

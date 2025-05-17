@@ -1,12 +1,7 @@
 <div class="container mt-4">
   <div class="card shadow-sm mb-4">
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+    <div class="card-header bg-primary text-white">
       <h1 class="h3 mb-0"><%= @test.title %></h1>
-      <div>
-        <%= button_to start_test_path(@test), method: :post, class: 'btn btn-success' do %>
-          <i class="bi bi-play-fill me-1"></i> Начать тест
-        <% end %>
-      </div>
     </div>
     
     <div class="card-body">
@@ -14,7 +9,7 @@
         <div class="col-md-4">
           <div class="card bg-light h-100">
             <div class="card-body text-center">
-              <h5 class="card-title">Уровень</h5>
+              <h5 class="card-title"><%= t('.level') %></h5>
               <span class="badge bg-<%= @test.level > 2 ? 'danger' : (@test.level > 0 ? 'warning' : 'success') %> fs-5"><%= @test.level %></span>
             </div>
           </div>
@@ -22,7 +17,7 @@
         <div class="col-md-4">
           <div class="card bg-light h-100">
             <div class="card-body text-center">
-              <h5 class="card-title">Категория</h5>
+              <h5 class="card-title"><%= t('.category') %></h5>
               <span class="badge bg-info text-dark fs-5"><%= @test.category.name %></span>
             </div>
           </div>
@@ -30,14 +25,16 @@
         <div class="col-md-4">
           <div class="card bg-light h-100">
             <div class="card-body text-center">
-              <h5 class="card-title">Автор</h5>
+              <h5 class="card-title"><%= t('.author') %></h5>
               <p class="mb-0"><%= @test.author.email %></p>
             </div>
           </div>
         </div>
       </div>
       
-      <h2 class="h4 mb-3 border-bottom pb-2">Вопросы</h2>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h4 border-bottom pb-2 mb-0"><%= t('.questions') %></h2>
+      </div>
       
       <% if @test.questions.any? %>
         <div class="list-group mb-4">
@@ -52,18 +49,14 @@
         </div>
       <% else %>
         <div class="alert alert-info">
-          <i class="bi bi-info-circle me-2"></i> В тесте пока нет вопросов.
+          <i class="bi bi-info-circle me-2"></i> <%= t('.no_questions') %>
         </div>
       <% end %>
     </div>
     
     <div class="card-footer bg-light d-flex justify-content-between align-items-center">
-      <%= link_to tests_path, class: 'btn btn-secondary' do %>
-        <i class="bi bi-arrow-left me-1"></i> Назад к тестам
-      <% end %>
-      
-      <%= button_to start_test_path(@test), method: :post, class: 'btn btn-success' do %>
-        <i class="bi bi-play-fill me-1"></i> Начать тест
+      <%= link_to tests_path_for_user(current_user), class: 'btn btn-secondary' do %>
+        <i class="bi bi-arrow-left me-1"></i> <%= t('.back') %>
       <% end %>
     </div>
   </div>

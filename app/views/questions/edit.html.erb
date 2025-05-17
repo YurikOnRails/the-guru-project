@@ -21,7 +21,7 @@
     </div>
     
     <div class="card-footer bg-light">
-      <%= link_to t('.back_to_test'), test_path(@question.test), class: 'btn btn-secondary' do %>
+      <%= link_to @test, class: 'btn btn-secondary' do %>
         <i class="bi bi-arrow-left me-1"></i> <%= t('.back_to_test') %>
       <% end %>
     </div>

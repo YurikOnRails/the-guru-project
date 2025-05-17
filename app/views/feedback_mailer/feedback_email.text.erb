@@ -1,0 +1,14 @@
+===================================================
+<%= t('feedback_mailer.feedback_email.subject').upcase %>
+===================================================
+
+<%= t('feedback_mailer.feedback_email.from') %>: <%= @feedback.name %> (<%= @feedback.email %>)
+
+---------------------------------------------------
+
+<%= t('feedback_mailer.feedback_email.message') %>:
+<%= @feedback.message %>
+
+---------------------------------------------------
+
+<%= t('feedback_mailer.feedback_email.footer') %> 

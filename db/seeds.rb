@@ -4,11 +4,11 @@ puts "Database cleared successfully."
 
 puts "Seeding users..."
 admin = Admin.create!(
-  first_name: 'Andrey',
-  last_name: 'Yurik',
-  email: 'andrey@example.com',
-  password: 'password',
-  password_confirmation: 'password',
+  first_name: 'Pavel',
+  last_name: 'Administrator',
+  email: 'pavel@pochta.ru',
+  password: 'pavel_thinknetica',
+  password_confirmation: 'pavel_thinknetica',
   confirmed_at: Time.current
 )
 

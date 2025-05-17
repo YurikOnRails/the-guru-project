@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_13_191839) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_11_165235) do
   create_table "answers", force: :cascade do |t|
     t.string "content", null: false
     t.boolean "correct", default: false, null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_191839) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "gists", force: :cascade do |t|
@@ -74,6 +75,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_191839) do
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_tests_on_author_id"
     t.index ["category_id"], name: "index_tests_on_category_id"
+    t.index ["level"], name: "index_tests_on_level"
+    t.index ["title", "level"], name: "index_tests_on_title_and_level"
+    t.index ["title"], name: "index_tests_on_title"
   end
 
   create_table "users", force: :cascade do |t|
@@ -94,6 +98,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_191839) do
     t.string "last_name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["first_name", "last_name"], name: "index_users_on_first_name_and_last_name"
+    t.index ["first_name"], name: "index_users_on_first_name"
+    t.index ["last_name"], name: "index_users_on_last_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["type"], name: "index_users_on_type"
   end

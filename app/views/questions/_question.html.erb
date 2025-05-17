@@ -2,13 +2,13 @@
   <div class="d-flex justify-content-between align-items-start mb-3">
     <h5 class="mb-1"><%= question.content %></h5>
     <div class="btn-group">
-      <%= link_to new_question_answer_path(question), class: 'btn btn-sm btn-success me-1' do %>
+      <%= link_to new_admin_question_answer_path(question), class: 'btn btn-sm btn-success me-1' do %>
         <i class="bi bi-plus-circle me-1"></i> <%= t('questions.question.add_answer') %>
       <% end %>
-      <%= link_to edit_question_path(question), class: 'btn btn-sm btn-primary me-1' do %>
+      <%= link_to edit_admin_question_path(question), class: 'btn btn-sm btn-primary me-1' do %>
         <i class="bi bi-pencil me-1"></i> <%= t('questions.question.edit') %>
       <% end %>
-      <%= button_to question_path(question), method: :delete, class: 'btn btn-sm btn-danger', form: { data: { turbo_confirm: t('questions.question.confirm') } } do %>
+      <%= button_to admin_question_path(question), method: :delete, class: 'btn btn-sm btn-danger', form: { data: { turbo_confirm: t('questions.question.confirm') } } do %>
         <i class="bi bi-trash me-1"></i> <%= t('questions.question.delete') %>
       <% end %>
     </div>
@@ -27,10 +27,10 @@
             <%= answer.content %>
           </div>
           <div>
-            <%= link_to edit_answer_path(answer), class: 'btn btn-sm btn-outline-primary me-1' do %>
+            <%= link_to edit_admin_answer_path(answer), class: 'btn btn-sm btn-outline-primary me-1' do %>
               <i class="bi bi-pencil me-1"></i> <%= t('answers.answer.edit') %>
             <% end %>
-            <%= button_to answer_path(answer), method: :delete, class: 'btn btn-sm btn-outline-danger', form: { data: { turbo_confirm: t('answers.answer.confirm') } } do %>
+            <%= button_to admin_answer_path(answer), method: :delete, class: 'btn btn-sm btn-outline-danger', form: { data: { turbo_confirm: t('answers.answer.confirm') } } do %>
               <i class="bi bi-trash me-1"></i> <%= t('answers.answer.delete') %>
             <% end %>
           </div>
@@ -39,7 +39,7 @@
     </div>
   <% else %>
     <div class="alert alert-warning">
-      <i class="bi bi-exclamation-triangle me-2"></i> No answers yet.
+      <i class="bi bi-exclamation-triangle me-2"></i> <%= t('questions.question.no_answers') %>
     </div>
   <% end %>
 </div>

@@ -19,6 +19,11 @@ en:
       questions: "Questions"
       back: "Back to Tests"
       add_question: "Add a new question"
+      start: "Start Test"
+      level: "Level"
+      category: "Category"
+      author: "Author"
+      no_questions: "There are no questions in this test yet."
 
   admin:
     nav:
@@ -162,6 +167,7 @@ en:
       tests: "Tests"
       back_to_tests: "Back to Tests"
       gists: "Gists"
+      about: "About"
 
   tests_mailer:
     completed_test:
@@ -174,9 +180,43 @@ en:
       filename: "test-guru-question.txt"
 
   questions:
+    question:
+      add_answer: "Add answer"
+      edit: "Edit"
+      delete: "Delete"
+      confirm: "Are you sure?"
+      no_answers: "No answers yet."
     edit:
       edit_question: "Edit Question"
       question_placeholder: "Enter your question text here..."
       question_help: "Write a clear and concise question for the test."
       update_button: "Update Question"
       back_to_test: "Back to Test"
+    new:
+      header: "New Question for \"%{title}\""
+      back_to_test: "Back to Test"
+    form:
+      create_button: "Create Question"
+      placeholder: "Enter your question here..."
+      help_text: "Write a clear and concise question for the test."
+
+  answers:
+    answer:
+      edit: "Edit"
+      delete: "Delete"
+      confirm: "Are you sure?"
+    new:
+      header: "New Answer"
+      back: "Back"
+    edit:
+      header: "Edit Answer"
+      back: "Back"
+    form:
+      content: "Content"
+      correct: "Correct"
+      submit: "Submit"
+      
+  gists:
+    create:
+      success: "Gist was successfully created! %{url}"
+      failure: "An error occurred while saving gist"

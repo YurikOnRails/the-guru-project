@@ -22,6 +22,8 @@ gem "bootstrap", "~> 5.3.0"
 gem "octicons_helper"
 gem "sassc-rails"
 
+gem "faraday-retry"
+
 # AUTH
 gem "devise", "~> 4.0"
 
@@ -73,7 +75,9 @@ group :development do
   gem "web-console"
   gem "rails-erd"
 
+  # Инструменты для отладки почты
   gem "letter_opener"
+  gem "letter_opener_web", "~> 2.0"
 end
 
 group :test do

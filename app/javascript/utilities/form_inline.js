@@ -55,8 +55,8 @@ function submitInlineForm(testId) {
   const form = document.querySelector(`.form-inline[data-test-id="${testId}"]`)
   
   if (form) {
-    // Отправляем форму с обновленным названием
-    Rails.fire(form, 'submit')
+    // Отправляем форму стандартным методом
+    form.submit()
   } else {
     console.error('Form not found for test ID:', testId)
   }

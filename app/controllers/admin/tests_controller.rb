@@ -18,7 +18,7 @@ class Admin::TestsController < Admin::BaseController
     if @test.save
       redirect_to admin_test_path(@test), notice: t(".success")
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -28,7 +28,7 @@ class Admin::TestsController < Admin::BaseController
     if @test.update(test_params)
       redirect_to admin_test_path(@test), notice: t(".success")
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -36,7 +36,7 @@ class Admin::TestsController < Admin::BaseController
     if @test.update(test_params)
       redirect_to admin_tests_path, notice: t(".success")
     else
-      render :index
+      render :index, status: :unprocessable_entity
     end
   end
 
