@@ -1,10 +1,10 @@
 class Badge < ApplicationRecord
-  has_many :user_badges
+  has_many :user_badges, dependent: :destroy
   has_many :users, through: :user_badges
 
-  validates :name, presence: true
-  validates :image_url, presence: true
-  validates :rule_type, presence: true
+  validates :name, presence: true, uniqueness: true
+  validates :image_url, presence: true, format: { with: URI::regexp(%w[http https]), message: 'должен быть валидным URL' }
+  validates :rule_type, presence: true, inclusion: { in: :available_rule_types }
   validates :rule_value, presence: true
 
   # Типы правил для выдачи бейджей
@@ -16,45 +16,58 @@ class Badge < ApplicationRecord
 
   # Проверка выполнения условий для выдачи бейджа
   def award_condition_met?(test_passage)
-    case rule_type
-    when 'category_complete'
+    return false unless test_passage&.success?
+
+    case rule_type.to_sym
+    when :category_complete
       category_condition_met?(test_passage)
-    when 'first_try'
+    when :first_try
       first_try_condition_met?(test_passage)
-    when 'level_complete'
+    when :level_complete
       level_condition_met?(test_passage)
+    else
+      false
     end
   end
 
   private
 
+  def available_rule_types
+    RULE_TYPES.keys.map(&:to_s)
+  end
+
   def category_condition_met?(test_passage)
-    return false unless test_passage.success?
-    
     category = test_passage.test.category
-    user_tests = test_passage.user.test_passages.joins(test: :category)
-                            .where(tests: { category_id: category.id })
+    return false unless category.id.to_s == rule_value
+
+    completed_tests = test_passage.user.test_passages
+                                .joins(test: :category)
+                                .where(tests: { category_id: category.id })
+                                .where(success: true)
+                                .select('DISTINCT test_id')
     
-    user_tests.where(success: true).pluck(:test_id).uniq.count == 
-      Test.where(category: category).count
+    completed_tests.count == Test.where(category: category).count
   end
 
   def first_try_condition_met?(test_passage)
-    return false unless test_passage.success?
-    
+    test = test_passage.test
+    return false unless test.id.to_s == rule_value
+
     test_passage.user.test_passages
-                .where(test: test_passage.test)
+                .where(test: test)
                 .count == 1
   end
 
   def level_condition_met?(test_passage)
-    return false unless test_passage.success?
+    level = rule_value.to_i
+    return false unless test_passage.test.level == level
+
+    completed_tests = test_passage.user.test_passages
+                                .joins(:test)
+                                .where(tests: { level: level })
+                                .where(success: true)
+                                .select('DISTINCT test_id')
     
-    level = test_passage.test.level
-    user_tests = test_passage.user.test_passages.joins(:test)
-                            .where(tests: { level: level })
-    
-    user_tests.where(success: true).pluck(:test_id).uniq.count == 
-      Test.where(level: level).count
+    completed_tests.count == Test.where(level: level).count
   end
 end 
