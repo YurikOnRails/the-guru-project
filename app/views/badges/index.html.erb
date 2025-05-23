@@ -1,0 +1,40 @@
+<div class="container mt-4">
+  <h1>Мои бейджи</h1>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <h3>Полученные бейджи</h3>
+      <div class="row">
+        <% @user_badges.each do |user_badge| %>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="<%= user_badge.badge.image_url %>" class="card-img-top" alt="<%= user_badge.badge.title %>">
+              <div class="card-body">
+                <h5 class="card-title"><%= user_badge.badge.title %></h5>
+                <p class="card-text"><%= user_badge.badge.description %></p>
+                <small class="text-muted">Получен: <%= l(user_badge.created_at, format: :short) %></small>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Доступные бейджи</h3>
+      <div class="row">
+        <% @badges.each do |badge| %>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="<%= badge.image_url %>" class="card-img-top" alt="<%= badge.title %>">
+              <div class="card-body">
+                <h5 class="card-title"><%= badge.title %></h5>
+                <p class="card-text"><%= badge.description %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div> 

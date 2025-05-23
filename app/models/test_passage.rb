@@ -2,11 +2,13 @@ class TestPassage < ApplicationRecord
   belongs_to :test
   belongs_to :current_question, class_name: "Question", optional: true
   belongs_to :user, optional: true
+  has_many :user_badges, dependent: :destroy
 
   validates :correct_questions, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validate :test_has_questions, on: :create
 
   before_validation :set_next_question, on: :create
+  after_update :award_badges, if: :completed?
 
   SUCCESS_THRESHOLD = 85
 
@@ -52,5 +54,9 @@ class TestPassage < ApplicationRecord
     if test.questions.empty?
       errors.add(:base, "Тест не содержит вопросов")
     end
+  end
+
+  def award_badges
+    BadgeService.new(self).call if successful?
   end
 end

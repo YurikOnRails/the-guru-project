@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     resources :gists, only: :create
   end
 
+  resources :badges, only: :index
+
   namespace :admin do
     resources :tests do
       patch :update_inline, on: :member
@@ -35,6 +37,7 @@ Rails.application.routes.draw do
     end
 
     resources :gists, only: :index
+    resources :badges
   end
 
   # Маршруты для формы обратной связи
