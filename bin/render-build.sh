@@ -26,9 +26,14 @@ bundle exec rake assets:clean
 # Make sure database files have correct permissions (only if needed)
 chmod 644 storage/*.sqlite3
 
+# Reset and recreate database
+echo "Resetting database..."
+RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rake db:drop db:create
+
 # Run migrations
 echo "Running database migrations..."
 RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rake db:migrate
+RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rake db:schema:load
 
 # Run seeds only if needed (check if we need to seed first)
 if [ -z "$(RAILS_ENV=production bundle exec rails runner 'exit User.count > 0')" ]; then
