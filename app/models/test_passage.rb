@@ -30,6 +30,15 @@ class TestPassage < ApplicationRecord
     success_percentage >= SUCCESS_THRESHOLD
   end
 
+  def complete!
+    self.current_question = nil
+    self.success = successful?
+    save!
+    
+    # Выдача бейджей после успешного прохождения теста
+    BadgeService.new(self).call if successful?
+  end
+
   private
 
   def set_next_question

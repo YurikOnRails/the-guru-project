@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Управление бейджами</h1>
+    <%= link_to 'Создать новый бейдж', new_admin_badge_path, class: 'btn btn-primary' %>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Тип правила</th>
+            <th>Значение правила</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @badges.each do |badge| %>
+            <tr>
+              <td>
+                <img src="<%= badge.image_url %>" alt="<%= badge.name %>" style="width: 48px; height: 48px;">
+              </td>
+              <td><%= badge.name %></td>
+              <td><%= badge.rule_type %></td>
+              <td><%= badge.rule_value %></td>
+              <td>
+                <%= link_to 'Редактировать', edit_admin_badge_path(badge), class: 'btn btn-sm btn-outline-primary me-2' %>
+                <%= link_to 'Удалить', 
+                    admin_badge_path(badge),
+                    method: :delete,
+                    data: { confirm: 'Вы уверены?' },
+                    class: 'btn btn-sm btn-outline-danger' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> 
