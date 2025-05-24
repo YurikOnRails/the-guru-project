@@ -26,18 +26,27 @@ bundle exec rake assets:clean
 # Make sure database files have correct permissions
 chmod 644 storage/*.sqlite3
 
-# Setup database
-echo "Setting up database..."
-RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rails db:prepare
+# Setup primary database
+echo "Setting up primary database..."
+RAILS_ENV=production \
+DATABASE_URL=sqlite3:storage/production.sqlite3 \
+bundle exec rails db:prepare
 
-# Run migrations
-echo "Running database migrations..."
-RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rails db:migrate
+# Run migrations for all databases
+echo "Running migrations for all databases..."
+RAILS_ENV=production \
+DATABASE_URL=sqlite3:storage/production.sqlite3 \
+CACHE_DATABASE_URL=sqlite3:storage/production_cache.sqlite3 \
+QUEUE_DATABASE_URL=sqlite3:storage/production_queue.sqlite3 \
+CABLE_DATABASE_URL=sqlite3:storage/production_cable.sqlite3 \
+bundle exec rails db:migrate
 
 # Run seeds only if database is empty
 if [ -z "$(RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rails runner 'exit User.count > 0')" ]; then
   echo "Seeding database..."
-  RAILS_ENV=production DATABASE_URL=sqlite3:storage/production.sqlite3 bundle exec rails db:seed
+  RAILS_ENV=production \
+  DATABASE_URL=sqlite3:storage/production.sqlite3 \
+  bundle exec rails db:seed
 else
   echo "Database already has users, skipping seed"
 fi
