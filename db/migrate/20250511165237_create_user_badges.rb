@@ -6,7 +6,5 @@ class CreateUserBadges < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
-    add_index :user_badges, [:user_id, :badge_id]
   end
 end 
