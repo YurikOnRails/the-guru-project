@@ -40,11 +40,6 @@
                 <i class="bi bi-speedometer2 me-1"></i><%= t('shared.nav.admin_panel') %>
               <% end %>
             </li>
-            <li class="nav-item">
-              <%= link_to admin_badges_path, class: 'nav-link text-primary' do %>
-                <i class="bi bi-award me-1"></i>Управление бейджами
-              <% end %>
-            </li>
           <% end %>
           
           <%= button_to t('shared.nav.logout'), destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger btn-sm ms-2' %>
