@@ -4,7 +4,7 @@
       <% if @badge.errors.any? %>
         <div class="alert alert-danger">
           <h4 class="alert-heading">
-            Обнаружено <%= @badge.errors.count %> <%= Russian.p(@badge.errors.count, 'ошибка', 'ошибки', 'ошибок') %>:
+            <%= t('.errors_count', count: @badge.errors.count) %>:
           </h4>
           <ul class="mb-0">
             <% @badge.errors.full_messages.each do |message| %>

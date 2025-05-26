@@ -179,6 +179,13 @@ ru:
         success: "Gist успешно сохранен!"
         failure: "Во время сохранения gist произошла ошибка"
         view_gist: "Просмотреть Gist"
+    badges:
+      form:
+        errors_count:
+          one: "Обнаружена %{count} ошибка"
+          few: "Обнаружено %{count} ошибки"
+          many: "Обнаружено %{count} ошибок"
+          other: "Обнаружено %{count} ошибок"
 
   helpers:
     submit:
