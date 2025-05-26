@@ -3,9 +3,11 @@ class Badge < ApplicationRecord
   has_many :users, through: :user_badges
 
   validates :name, presence: true, uniqueness: true
-  validates :image_url, presence: true, format: { with: URI::regexp(%w[http https]), message: 'должен быть валидным URL' }
+  validates :image_url, format: { with: URI::regexp(%w[http https]), message: 'должен быть валидным URL' }, if: -> { image_url.present? }
   validates :rule_type, presence: true, inclusion: { in: :available_rule_types }
   validates :rule_value, presence: true
+
+  before_validation :set_default_image_url
 
   # Типы правил для выдачи бейджей
   RULE_TYPES = {
@@ -13,6 +15,8 @@ class Badge < ApplicationRecord
     first_try: 'Прохождение теста с первой попытки',
     level_complete: 'Завершение всех тестов уровня'
   }.freeze
+
+  DEFAULT_IMAGE_URL = 'https://cdn-icons-png.flaticon.com/512/2583/2583344.png'.freeze
 
   # Проверка выполнения условий для выдачи бейджа
   def award_condition_met?(test_passage)
@@ -31,6 +35,10 @@ class Badge < ApplicationRecord
   end
 
   private
+
+  def set_default_image_url
+    self.image_url = DEFAULT_IMAGE_URL if image_url.blank?
+  end
 
   def available_rule_types
     RULE_TYPES.keys.map(&:to_s)

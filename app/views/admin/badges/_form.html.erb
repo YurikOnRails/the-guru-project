@@ -1,43 +1,58 @@
-<%= form_with(model: [:admin, @badge], local: true, class: 'mb-4') do |f| %>
-  <% if @badge.errors.any? %>
-    <div class="alert alert-danger">
-      <h4 class="alert-heading">
-        Обнаружено <%= @badge.errors.count %> ошибок:
-      </h4>
-      <ul class="mb-0">
-        <% @badge.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: [:admin, @badge], local: true) do |f| %>
+      <% if @badge.errors.any? %>
+        <div class="alert alert-danger">
+          <h4 class="alert-heading">
+            Обнаружено <%= @badge.errors.count %> <%= Russian.p(@badge.errors.count, 'ошибка', 'ошибки', 'ошибок') %>:
+          </h4>
+          <ul class="mb-0">
+            <% @badge.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="mb-3">
+        <%= f.label :name, 'Название', class: 'form-label' %>
+        <%= f.text_field :name, class: 'form-control', placeholder: 'Введите название бейджа' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :image_url, 'URL изображения (необязательно)', class: 'form-label' %>
+        <%= f.text_field :image_url, class: 'form-control', placeholder: 'https://example.com/badge-image.png' %>
+        <div class="form-text">
+          Если не указать, будет использовано стандартное изображение бейджа.<br>
+          Для своего изображения укажите прямую ссылку на картинку (http/https).
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :rule_type, 'Тип правила', class: 'form-label' %>
+        <%= f.select :rule_type, 
+            Badge::RULE_TYPES,
+            { prompt: 'Выберите тип правила' },
+            class: 'form-select' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :rule_value, 'Значение правила', class: 'form-label' %>
+        <%= f.text_field :rule_value, class: 'form-control', placeholder: 'Введите значение для выбранного правила' %>
+        <div class="form-text">
+          Для правила категории - ID категории<br>
+          Для правила первой попытки - ID теста<br>
+          Для правила уровня - номер уровня
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <%= link_to admin_badges_path, class: 'btn btn-outline-secondary' do %>
+          <i class="bi bi-arrow-left"></i> Назад
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="mb-3">
-    <%= f.label :name, 'Название', class: 'form-label' %>
-    <%= f.text_field :name, class: 'form-control' %>
+        <%= f.submit @badge.new_record? ? 'Создать бейдж' : 'Обновить бейдж',
+            class: 'btn btn-primary' %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="mb-3">
-    <%= f.label :image_url, 'URL изображения', class: 'form-label' %>
-    <%= f.text_field :image_url, class: 'form-control' %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :rule_type, 'Тип правила', class: 'form-label' %>
-    <%= f.select :rule_type, 
-        Badge::RULE_TYPES,
-        {},
-        class: 'form-select' %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :rule_value, 'Значение правила', class: 'form-label' %>
-    <%= f.text_field :rule_value, class: 'form-control' %>
-  </div>
-
-  <div class="d-flex justify-content-end gap-2">
-    <%= link_to 'Назад', admin_badges_path, class: 'btn btn-secondary' %>
-    <%= f.submit @badge.new_record? ? 'Создать бейдж' : 'Обновить бейдж',
-        class: 'btn btn-primary' %>
-  </div>
-<% end %> 
+</div> 
