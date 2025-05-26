@@ -1,75 +1,53 @@
 <div class="container mt-4">
-  <h1 class="h2 mb-4">Бейджи</h1>
-
-  <div class="row mb-4">
-    <div class="col-md-12">
-      <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-          <h2 class="h5 mb-0">Мои бейджи</h2>
-        </div>
-        <div class="card-body">
-          <% if @user_badges.any? %>
-            <div class="row">
-              <% @user_badges.each do |badge| %>
-                <div class="col-md-3">
-                  <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-center">
-                      <img src="<%= badge.image_url %>" 
-                           class="img-fluid mb-3" 
-                           alt="<%= badge.name %>"
-                           style="height: 120px; object-fit: contain;">
-                      <h5 class="card-title"><%= badge.name %></h5>
-                      <p class="card-text text-muted">
-                        <i class="bi bi-star-fill text-warning me-1"></i>
-                        Получено: <%= @user_badge_stats[badge.id] || 0 %> <%= Russian.p(@user_badge_stats[badge.id] || 0, 'раз', 'раза', 'раз') %>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% else %>
-            <div class="text-center py-4">
-              <i class="bi bi-emoji-neutral display-4 text-muted"></i>
-              <p class="text-muted mb-0 mt-2">У вас пока нет полученных бейджей</p>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2 mb-0">
+      <i class="bi bi-award text-primary me-2"></i>Ваши бейджи
+    </h1>
   </div>
 
-  <div class="card shadow-sm">
-    <div class="card-header bg-light">
-      <h2 class="h5 mb-0">Все доступные бейджи</h2>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <% @all_badges.each do |badge| %>
-          <div class="col-md-3">
-            <div class="card h-100 <%= 'border-success' if @user_badges.include?(badge) %>">
-              <div class="card-body text-center">
+  <% if @user_badges.any? %>
+    <div class="row">
+      <% @user_badges.each do |badge| %>
+        <div class="col-md-3 mb-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center">
+              <div class="position-relative mb-3">
                 <img src="<%= badge.image_url %>" 
-                     class="img-fluid mb-3" 
+                     class="img-fluid" 
                      alt="<%= badge.name %>"
                      style="height: 120px; object-fit: contain;">
-                <h5 class="card-title"><%= badge.name %></h5>
-                <p class="card-text">
+                <span class="position-absolute top-0 end-0 badge rounded-pill bg-success">
+                  <i class="bi bi-star-fill me-1"></i>
+                  <%= @user_badge_stats[badge.id] || 0 %>
+                </span>
+              </div>
+              <h5 class="card-title text-primary"><%= badge.name %></h5>
+              <p class="card-text text-muted">
+                <small>
                   <i class="bi bi-info-circle me-1"></i>
                   <%= Badge::RULE_TYPES[badge.rule_type.to_sym] %>
-                </p>
-                <% if @user_badges.include?(badge) %>
-                  <span class="badge bg-success">
-                    <i class="bi bi-check-circle me-1"></i>Получено
-                  </span>
-                <% end %>
+                </small>
+              </p>
+              <div class="badge bg-light text-dark">
+                Получено: <%= @user_badge_stats[badge.id] || 0 %> <%= Russian.p(@user_badge_stats[badge.id] || 0, 'раз', 'раза', 'раз') %>
               </div>
             </div>
           </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="card shadow-sm">
+      <div class="card-body text-center py-5">
+        <i class="bi bi-emoji-smile display-1 text-muted mb-3"></i>
+        <h3 class="h4 text-muted">У вас пока нет бейджей</h3>
+        <p class="text-muted mb-4">Проходите тесты успешно, чтобы получить бейджи!</p>
+        <%= link_to tests_path, class: 'btn btn-primary' do %>
+          <i class="bi bi-play-fill me-1"></i>Перейти к тестам
         <% end %>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
 <style>
