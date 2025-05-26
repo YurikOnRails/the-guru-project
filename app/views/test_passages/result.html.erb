@@ -116,7 +116,7 @@
     <div class="card-body">
       <h2 class="card-title">Результат: <%= @test_passage.success_percentage %>%</h2>
       
-      <% if @test_passage.success? %>
+      <% if @test_passage.successful? %>
         <p class="text-success">Тест успешно пройден!</p>
       <% else %>
         <p class="text-danger">Тест не пройден. Попробуйте еще раз.</p>
