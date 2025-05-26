@@ -1,6 +1,11 @@
 class BadgesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @badges = Badge.all
-    @user_badges = current_user.badges
+    @all_badges = Badge.order(:name)
+    @user_badges = current_user.badges.distinct
+    @user_badge_stats = current_user.user_badges
+      .group(:badge_id)
+      .count
   end
 end 

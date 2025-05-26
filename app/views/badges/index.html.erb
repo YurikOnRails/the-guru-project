@@ -1,37 +1,73 @@
 <div class="container mt-4">
-  <h1 class="mb-4">Мои бейджи</h1>
+  <h1 class="h2 mb-4">Бейджи</h1>
 
-  <div class="mb-5">
-    <h2 class="mb-3">Полученные бейджи</h2>
-    <div class="row">
-      <% @user_badges.each do |badge| %>
-        <div class="col-md-4 col-lg-3 mb-4">
-          <div class="card">
-            <div class="card-body text-center">
-              <img src="<%= badge.image_url %>" alt="<%= badge.name %>" class="img-fluid mb-3" style="max-width: 100px;">
-              <h5 class="card-title"><%= badge.name %></h5>
-              <p class="card-text text-muted"><%= badge.rule_type %></p>
-            </div>
-          </div>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h2 class="h5 mb-0">Мои бейджи</h2>
         </div>
-      <% end %>
+        <div class="card-body">
+          <% if @user_badges.any? %>
+            <div class="row">
+              <% @user_badges.each do |badge| %>
+                <div class="col-md-3">
+                  <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                      <img src="<%= badge.image_url %>" 
+                           class="img-fluid mb-3" 
+                           alt="<%= badge.name %>"
+                           style="height: 120px; object-fit: contain;">
+                      <h5 class="card-title"><%= badge.name %></h5>
+                      <p class="card-text text-muted">
+                        <i class="bi bi-star-fill text-warning me-1"></i>
+                        Получено: <%= @user_badge_stats[badge.id] || 0 %> <%= Russian.p(@user_badge_stats[badge.id] || 0, 'раз', 'раза', 'раз') %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="text-center py-4">
+              <i class="bi bi-emoji-neutral display-4 text-muted"></i>
+              <p class="text-muted mb-0 mt-2">У вас пока нет полученных бейджей</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div>
-    <h2 class="mb-3">Доступные бейджи</h2>
-    <div class="row">
-      <% (@badges - @user_badges).each do |badge| %>
-        <div class="col-md-4 col-lg-3 mb-4">
-          <div class="card opacity-50">
-            <div class="card-body text-center">
-              <img src="<%= badge.image_url %>" alt="<%= badge.name %>" class="img-fluid mb-3 grayscale" style="max-width: 100px;">
-              <h5 class="card-title"><%= badge.name %></h5>
-              <p class="card-text text-muted"><%= badge.rule_type %></p>
+  <div class="card shadow-sm">
+    <div class="card-header bg-light">
+      <h2 class="h5 mb-0">Все доступные бейджи</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <% @all_badges.each do |badge| %>
+          <div class="col-md-3">
+            <div class="card h-100 <%= 'border-success' if @user_badges.include?(badge) %>">
+              <div class="card-body text-center">
+                <img src="<%= badge.image_url %>" 
+                     class="img-fluid mb-3" 
+                     alt="<%= badge.name %>"
+                     style="height: 120px; object-fit: contain;">
+                <h5 class="card-title"><%= badge.name %></h5>
+                <p class="card-text">
+                  <i class="bi bi-info-circle me-1"></i>
+                  <%= Badge::RULE_TYPES[badge.rule_type.to_sym] %>
+                </p>
+                <% if @user_badges.include?(badge) %>
+                  <span class="badge bg-success">
+                    <i class="bi bi-check-circle me-1"></i>Получено
+                  </span>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

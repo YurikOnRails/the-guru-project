@@ -20,7 +20,7 @@ class Badge < ApplicationRecord
 
   # Проверка выполнения условий для выдачи бейджа
   def award_condition_met?(test_passage)
-    return false unless test_passage&.success?
+    return false unless test_passage&.successful?
 
     case rule_type.to_sym
     when :category_complete
