@@ -15,9 +15,7 @@ class BadgeService
   private
 
   def award_badge(badge)
-    UserBadge.create(
-      user: @user,
-      badge: badge
-    )
+    UserBadge.create(user: @user, badge: badge)
+    badge
   end
 end 
