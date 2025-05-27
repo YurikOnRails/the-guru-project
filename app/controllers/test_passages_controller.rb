@@ -7,7 +7,6 @@ class TestPassagesController < ApplicationController
   def result
     if @test_passage.completed?
       @earned_badges = flash[:earned_badges] || []
-      @badge_errors = flash[:badge_errors] || []
     end
   end
 
@@ -18,7 +17,6 @@ class TestPassagesController < ApplicationController
       TestsMailer.completed_test(@test_passage).deliver_now
       result = BadgeService.new(@test_passage).call
       flash[:earned_badges] = result[:badges]
-      flash[:badge_errors] = result[:errors]
 
       if !@test_passage.successful?
         notice = "Тест не пройден. Попробуйте ещё раз."
