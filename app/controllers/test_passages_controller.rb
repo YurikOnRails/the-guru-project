@@ -27,7 +27,7 @@ class TestPassagesController < ApplicationController
         notice = nil
       end
 
-      alert_message = result[:errors].compact_blank.join('. ')
+      alert_message = result[:errors].compact_blank.join(". ")
       if alert_message.present? && @test_passage.successful?
         flash[:alert] = alert_message
       end
