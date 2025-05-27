@@ -29,7 +29,8 @@
                 </small>
               </p>
               <div class="badge bg-light text-dark">
-                Получено: <%= @user_badge_stats[badge.id] || 0 %> <%= Russian.p(@user_badge_stats[badge.id] || 0, 'раз', 'раза', 'раз') %>
+                <% count = @user_badge_stats[badge.id] || 0 %>
+                Получено: <%= count %> <%= times_word(count) %>
               </div>
             </div>
           </div>
