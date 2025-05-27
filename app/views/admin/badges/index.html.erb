@@ -28,15 +28,15 @@
               <td><%= Badge::RULE_TYPES[badge.rule_type.to_sym] %></td>
               <td><%= badge.rule_value %></td>
               <td>
-                <div class="btn-group">
-                  <%= link_to admin_badge_path(badge), class: 'btn btn-sm btn-outline-primary' do %>
-                    <i class="bi bi-eye"></i>
+                <div class="d-flex justify-content-center">
+                  <%= link_to admin_badge_path(badge), class: 'btn btn-sm btn-outline-primary me-1' do %>
+                    <i class="bi bi-eye me-1"></i>Просмотр
                   <% end %>
-                  <%= link_to edit_admin_badge_path(badge), class: 'btn btn-sm btn-outline-primary' do %>
-                    <i class="bi bi-pencil"></i>
+                  <%= link_to edit_admin_badge_path(badge), class: 'btn btn-sm btn-outline-success me-1' do %>
+                    <i class="bi bi-pencil me-1"></i>Редактировать
                   <% end %>
-                  <%= button_to admin_badge_path(badge), method: :delete, class: 'btn btn-sm btn-outline-danger', data: { turbo_confirm: 'Вы уверены?' } do %>
-                    <i class="bi bi-trash"></i>
+                  <%= button_to admin_badge_path(badge), method: :delete, form: { data: { turbo_confirm: 'Вы уверены?' } }, class: 'btn btn-sm btn-outline-danger' do %>
+                    <i class="bi bi-trash me-1"></i>Удалить
                   <% end %>
                 </div>
               </td>
