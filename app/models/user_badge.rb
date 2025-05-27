@@ -12,4 +12,4 @@ class UserBadge < ApplicationRecord
   def received_at
     created_at
   end
-end 
+end

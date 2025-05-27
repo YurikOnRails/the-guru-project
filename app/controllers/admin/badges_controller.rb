@@ -15,7 +15,7 @@ class Admin::BadgesController < Admin::BaseController
     @badge = Badge.new(badge_params)
 
     if @badge.save
-      redirect_to admin_badge_path(@badge), notice: 'Бейдж успешно создан'
+      redirect_to admin_badge_path(@badge), notice: "Бейдж успешно создан"
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,7 +25,7 @@ class Admin::BadgesController < Admin::BaseController
 
   def update
     if @badge.update(badge_params)
-      redirect_to admin_badge_path(@badge), notice: 'Бейдж успешно обновлен'
+      redirect_to admin_badge_path(@badge), notice: "Бейдж успешно обновлен"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class Admin::BadgesController < Admin::BaseController
 
   def destroy
     @badge.destroy
-    redirect_to admin_badges_path, notice: 'Бейдж успешно удален'
+    redirect_to admin_badges_path, notice: "Бейдж успешно удален"
   end
 
   private
@@ -45,4 +45,4 @@ class Admin::BadgesController < Admin::BaseController
   def badge_params
     params.require(:badge).permit(:name, :image_url, :rule_type, :rule_value)
   end
-end 
+end

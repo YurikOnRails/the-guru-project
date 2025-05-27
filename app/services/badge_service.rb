@@ -18,4 +18,4 @@ class BadgeService
     @user.badges << badge
     badge
   end
-end 
+end

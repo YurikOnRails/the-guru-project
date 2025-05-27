@@ -11,4 +11,4 @@ class CreateBadges < ActiveRecord::Migration[7.0]
 
     add_index :badges, :name, unique: true
   end
-end 
+end

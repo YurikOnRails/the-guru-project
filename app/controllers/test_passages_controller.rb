@@ -30,7 +30,7 @@ class TestPassagesController < ApplicationController
   end
 
   def success_message
-    message = 'Тест завершен.'
+    message = "Тест завершен."
     if @earned_badges.present?
       message += " Вы получили #{@earned_badges.count} " +
                 "#{Russian.p(@earned_badges.count, 'бейдж', 'бейджа', 'бейджей')}!"

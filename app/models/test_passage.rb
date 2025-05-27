@@ -34,7 +34,7 @@ class TestPassage < ApplicationRecord
     self.current_question = nil
     self.success = successful?
     save!
-    
+
     # Выдача бейджей после успешного прохождения теста
     BadgeService.new(self).call if successful?
   end

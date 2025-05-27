@@ -7,4 +7,4 @@ class BadgesController < ApplicationController
       .group(:badge_id)
       .count
   end
-end 
+end
