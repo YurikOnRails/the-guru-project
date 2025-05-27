@@ -97,6 +97,17 @@
               </div>
             </div>
           <% end %>
+
+          <% if @badge_errors.present? %>
+            <div class="alert alert-warning mt-4">
+              <h5 class="mb-2"><i class="bi bi-exclamation-triangle me-2"></i>Причины, по которым бейджи не были выданы:</h5>
+              <ul class="mb-0">
+                <% @badge_errors.each do |error| %>
+                  <li><%= error %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
         </div>
         
         <div class="card-footer bg-light d-grid gap-2">
