@@ -15,7 +15,8 @@ class Admin::BadgesController < Admin::BaseController
     @badge = Badge.new(badge_params)
 
     if @badge.save
-      redirect_to admin_badge_path(@badge), notice: "Бейдж успешно создан"
+      flash.now[:notice] = "Бейдж успешно создан"
+      render :new
     else
       render :new, status: :unprocessable_entity
     end
