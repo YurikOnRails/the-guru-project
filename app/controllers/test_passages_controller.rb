@@ -19,7 +19,20 @@ class TestPassagesController < ApplicationController
       result = BadgeService.new(@test_passage).call
       flash[:earned_badges] = result[:badges]
       flash[:badge_errors] = result[:errors]
-      redirect_to result_test_passage_path(@test_passage), notice: success_message(result[:badges])
+
+      if !@test_passage.successful?
+        notice = "Тест не пройден. Попробуйте ещё раз."
+      elsif result[:badges].present?
+        notice = success_message(result[:badges])
+      else
+        notice = nil
+      end
+
+      if result[:errors].present? && @test_passage.successful?
+        flash[:alert] = result[:errors].join(". ")
+      end
+
+      redirect_to result_test_passage_path(@test_passage), notice: notice
     else
       render :show
     end

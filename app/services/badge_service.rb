@@ -5,7 +5,7 @@ class BadgeService
   end
 
   def call
-    return { badges: [], errors: ['Тест не пройден успешно'] } unless @test_passage.successful?
+    return { badges: [], errors: [ "Тест не пройден успешно" ] } unless @test_passage.successful?
 
     badges = []
     errors = []
