@@ -59,7 +59,7 @@ class Badge < ApplicationRecord
 
   def first_try_condition_met?(test_passage)
     test = test_passage.test
-    return false unless rule_value == 'any' || test.id.to_s == rule_value
+    return false unless rule_value == "any" || test.id.to_s == rule_value
 
     test_passage.user.test_passages
                 .where(test: test)

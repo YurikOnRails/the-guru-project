@@ -6,12 +6,12 @@ class BadgeService
 
   def call
     # Автоматически создаём универсальный бейдж, если его нет
-    unless Badge.exists?(rule_type: 'first_try', rule_value: 'any')
+    unless Badge.exists?(rule_type: "first_try", rule_value: "any")
       Badge.create!(
-        name: 'С первой попытки',
-        image_url: 'https://cdn-icons-png.flaticon.com/512/2583/2583344.png',
-        rule_type: 'first_try',
-        rule_value: 'any'
+        name: "С первой попытки",
+        image_url: "https://cdn-icons-png.flaticon.com/512/2583/2583344.png",
+        rule_type: "first_try",
+        rule_value: "any"
       )
     end
 
