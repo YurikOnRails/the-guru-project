@@ -70,3 +70,25 @@
     </div>
   </div>
 </div>
+
+<div class="text-center mt-3">
+  <small class="text-muted" style="opacity: 0.6; font-size: 0.95em;">
+    <i class="bi bi-keyboard me-1"></i>
+    Для удобства вы можете нажимать <b>Enter</b> вместо кнопки «Далее»
+  </small>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    if (!form) return;
+
+    form.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') {
+        event.preventDefault();
+        const submit = form.querySelector('button[type=submit], input[type=submit]');
+        if (submit) submit.click();
+      }
+    });
+  });
+</script>
