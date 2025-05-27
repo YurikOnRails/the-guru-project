@@ -1,4 +1,5 @@
 class TestPassagesController < ApplicationController
+  include BadgesHelper
   before_action :authenticate_user!
   before_action :set_test_passage, only: %i[show update result]
 
@@ -26,7 +27,7 @@ class TestPassagesController < ApplicationController
         notice = nil
       end
 
-      alert_message = result[:errors].compact_blank.join(". ")
+      alert_message = result[:errors].compact_blank.join('. ')
       if alert_message.present? && @test_passage.successful?
         flash[:alert] = alert_message
       end
@@ -46,8 +47,7 @@ class TestPassagesController < ApplicationController
   def success_message(earned_badges)
     message = "Тест завершен."
     if earned_badges.present?
-      message += " Вы получили #{earned_badges.count} " +
-                "#{Russian.p(earned_badges.count, 'бейдж', 'бейджа', 'бейджей')}!"
+      message += " Вы получили #{earned_badges.count} #{badge_word(earned_badges.count)}!"
     end
     message
   end
