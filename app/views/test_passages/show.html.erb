@@ -83,10 +83,15 @@
     const form = document.querySelector('form');
     if (!form) return;
 
-    form.addEventListener('keydown', function(event) {
-      if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') {
+    document.addEventListener('keydown', function(event) {
+      // Проверяем, что фокус внутри формы и не на textarea
+      if (
+        event.key === 'Enter' &&
+        form.contains(document.activeElement) &&
+        document.activeElement.tagName !== 'TEXTAREA'
+      ) {
         event.preventDefault();
-        const submit = form.querySelector('button[type=submit], input[type=submit]');
+        const submit = form.querySelector('input[type=submit], button[type=submit]');
         if (submit) submit.click();
       }
     });
