@@ -15,7 +15,7 @@
     <%= link_to t("devise.shared.links.confirmation_instructions"), new_confirmation_path(resource_name), class: "text-decoration-none" %><br />
   <% end %>
 
-  <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != "unlocks" %>
     <%= link_to t("devise.shared.links.unlock_instructions"), new_unlock_path(resource_name), class: "text-decoration-none" %><br />
   <% end %>
 

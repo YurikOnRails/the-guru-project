@@ -21,12 +21,12 @@
       <%= form_group_with_error(f, :message, as: :text_area, rows: 5) %>
 
       <div class="d-grid">
-        <%= f.submit t('feedback.new.send'), class: "btn btn-primary" %>
+        <%= f.submit t("feedback.new.send"), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
   
   <div class="card-footer text-center">
-    <%= link_to t('feedback.new.back'), root_path, class: "btn btn-outline-secondary" %>
+    <%= link_to t("feedback.new.back"), root_path, class: "btn btn-outline-secondary" %>
   </div>
 </div> 

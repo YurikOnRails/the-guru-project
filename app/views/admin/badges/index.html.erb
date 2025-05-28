@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Управление бейджами</h1>
-    <%= link_to new_admin_badge_path, class: 'btn btn-primary' do %>
+    <%= link_to new_admin_badge_path, class: "btn btn-primary" do %>
       <i class="bi bi-plus-lg"></i> Создать бейдж
     <% end %>
   </div>
@@ -29,7 +29,7 @@
               <td><%= badge.rule_value %></td>
               <td>
                 <div class="d-flex justify-content-center">
-                  <%= button_to admin_badge_path(badge), method: :delete, form: { data: { turbo_confirm: 'Вы уверены?' } }, class: 'btn btn-sm btn-outline-danger' do %>
+                  <%= button_to admin_badge_path(badge), method: :delete, form: { data: { turbo_confirm: "Вы уверены?" } }, class: "btn btn-sm btn-outline-danger" do %>
                     <i class="bi bi-trash me-1"></i>Удалить
                   <% end %>
                 </div>

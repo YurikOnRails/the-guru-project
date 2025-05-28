@@ -32,7 +32,7 @@
               <%= f.label :password, class: "form-label" %>
               <% if @minimum_password_length %>
                 <small class="form-text text-muted" data-password-validation-target="hint">
-                  (<%= t('.characters_minimum', length: @minimum_password_length) %>)
+                  (<%= t(".characters_minimum", length: @minimum_password_length) %>)
                 </small>
               <% end %>
               <%= f.password_field :password, 

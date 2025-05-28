@@ -68,13 +68,13 @@
           
           <hr>
           
-          <p><strong><%= t('feedback_mailer.feedback_email.message') %>:</strong></p>
+          <p><strong><%= t("feedback_mailer.feedback_email.message") %>:</strong></p>
           <div class="message-content">
             <%= simple_format(@feedback.message) %>
           </div>
           
           <p class="text-muted" style="margin-top: 20px; font-size: 0.85rem;">
-            <%= t('feedback_mailer.feedback_email.footer') %>
+            <%= t("feedback_mailer.feedback_email.footer") %>
           </p>
         </div>
       </div>

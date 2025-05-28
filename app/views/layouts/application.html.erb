@@ -32,9 +32,9 @@
   <body class="d-flex flex-column min-vh-100">
     <div class="container mt-3 flex-grow-1">
       <%= render 'shared/flash' if flash.any? %>
-      <%= render 'layouts/navigation' %>
+      <%= render "layouts/navigation" %>
       <%= yield %>
     </div>
-    <%= render 'layouts/footer' %>
+    <%= render "layouts/footer" %>
   </body>
 </html>

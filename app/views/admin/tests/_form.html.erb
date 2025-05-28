@@ -16,11 +16,11 @@
   <div class="mb-4">
     <%= form.label :category_id, t('helpers.label.test.category'), class: 'form-label fw-bold' %>
     <%= form.collection_select :category_id, Category.all, :id, :name, 
-                             { prompt: t('helpers.label.test.category_prompt') }, 
-                             { class: 'form-select' } %>
+                             { prompt: t("helpers.label.test.category_prompt") }, 
+                             { class: "form-select" } %>
   </div>
 
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <%= form.submit t("helpers.submit.test.#{@test.new_record? ? 'create' : 'update'}"), class: 'btn btn-primary' %>
+    <%= form.submit t("helpers.submit.test.#{@test.new_record? ? 'create' : 'update'}"), class: "btn btn-primary" %>
   </div>
 <% end %>
