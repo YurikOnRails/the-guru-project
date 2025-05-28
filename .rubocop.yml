@@ -8,4 +8,4 @@ Layout/TrailingEmptyLines:
 
 # Использовать однострочный формат (def method; end)
 Style/EmptyMethod:
-  EnforcedStyle: compact 
+  EnforcedStyle: compact `

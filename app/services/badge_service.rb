@@ -5,37 +5,46 @@ class BadgeService
   end
 
   def call
-    # Автоматически создаём универсальный бейдж, если его нет
-    unless Badge.exists?(rule_type: "first_try", rule_value: "any")
-      Badge.create!(
-        name: "С первой попытки",
-        image_url: "https://cdn-icons-png.flaticon.com/512/2583/2583344.png",
-        rule_type: "first_try",
-        rule_value: "any"
-      )
-    end
+    ensure_universal_badge_exists
+    return failure_result('Тест не пройден успешно') unless @test_passage.successful?
 
-    return { badges: [], errors: [ "Тест не пройден успешно" ] } unless @test_passage.successful?
-
-    badges = []
-    errors = []
-
-    Badge.find_each do |badge|
-      unless badge.award_condition_met?(@test_passage)
-        errors << error_reason(badge)
-        next
-      end
-      if @user.badges.include?(badge)
-        errors << "Бейдж '#{badge.name}' уже выдан."
-        next
-      end
-      badges << award_badge(badge)
-    end
-
+    badges, errors = process_badges
     { badges: badges, errors: errors.compact_blank }
   end
 
   private
+
+  def ensure_universal_badge_exists
+    return if Badge.exists?(rule_type: 'first_try', rule_value: 'any')
+
+    Badge.create!(
+      name: 'С первой попытки',
+      image_url: 'https://cdn-icons-png.flaticon.com/512/2583/2583344.png',
+      rule_type: 'first_try',
+      rule_value: 'any'
+    )
+  end
+
+  def failure_result(message)
+    { badges: [], errors: [message] }
+  end
+
+  def process_badges
+    badges = []
+    errors = []
+
+    Badge.find_each do |badge|
+      if !badge.award_condition_met?(@test_passage)
+        errors << error_reason(badge)
+      elsif @user.badges.include?(badge)
+        errors << "Бейдж '#{badge.name}' уже выдан."
+      else
+        badges << award_badge(badge)
+      end
+    end
+
+    [badges, errors]
+  end
 
   def award_badge(badge)
     @user.badges << badge
