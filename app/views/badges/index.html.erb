@@ -7,35 +7,7 @@
 
   <% if @user_badges.any? %>
     <div class="row">
-      <% @user_badges.each do |badge| %>
-        <div class="col-md-3 mb-4">
-          <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body text-center">
-              <div class="position-relative mb-3">
-                <img src="<%= badge.image_url %>" 
-                     class="img-fluid" 
-                     alt="<%= badge.name %>"
-                     style="height: 120px; object-fit: contain;">
-                <span class="position-absolute top-0 end-0 badge rounded-pill bg-success">
-                  <i class="bi bi-star-fill me-1"></i>
-                  <%= @user_badge_stats[badge.id] || 0 %>
-                </span>
-              </div>
-              <h5 class="card-title text-primary"><%= badge.name %></h5>
-              <p class="card-text text-muted">
-                <small>
-                  <i class="bi bi-info-circle me-1"></i>
-                  <%= Badge::RULE_TYPES[badge.rule_type.to_sym] %>
-                </small>
-              </p>
-              <div class="badge bg-light text-dark">
-                <% count = @user_badge_stats[badge.id] || 0 %>
-                Получено: <%= count %> <%= times_word(count) %>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render @user_badges %>
     </div>
   <% else %>
     <div class="card shadow-sm">

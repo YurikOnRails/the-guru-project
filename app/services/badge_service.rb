@@ -52,23 +52,43 @@ class BadgeService
   end
 
   def error_reason(badge)
-    case badge.rule_type.to_sym
-    when :first_try
-      unless badge.rule_value == @test_passage.test.id.to_s
-        return "Бейдж '#{badge.name}': rule_value (#{badge.rule_value}) не совпадает с id теста (#{@test_passage.test.id})"
-      end
-      attempts = @user.test_passages.where(test: @test_passage.test).count
-      if attempts > 1
-        return "Бейдж '#{badge.name}': тест был пройден не с первой попытки (попыток: #{attempts})"
-      end
-    when :category_complete
-      unless @test_passage.test.category.id.to_s == badge.rule_value
-        return "Бейдж '#{badge.name}': rule_value (#{badge.rule_value}) не совпадает с id категории (#{@test_passage.test.category.id})"
-      end
-    when :level_complete
-      unless @test_passage.test.level == badge.rule_value.to_i
-        return "Бейдж '#{badge.name}': rule_value (#{badge.rule_value}) не совпадает с уровнем теста (#{@test_passage.test.level})"
-      end
+    return nil unless badge.present?
+
+    method_name = "#{badge.rule_type}_error_reason"
+    if respond_to?(method_name)
+      send(method_name, badge)
+    else
+      nil
+    end
+  end
+
+  def first_try_error_reason(badge)
+    return nil unless badge.present?
+
+    unless badge.rule_value == @test_passage.test&.id.to_s
+      return "Бейдж '#{badge.name}': rule_value (#{badge.rule_value}) не совпадает с id теста (#{@test_passage.test&.id})"
+    end
+
+    attempts = @user.test_passages.where(test: @test_passage.test).count
+    return "Бейдж '#{badge.name}': тест был пройден не с первой попытки (попыток: #{attempts})" if attempts > 1
+
+    nil
+  end
+
+  def category_complete_error_reason(badge)
+    return nil unless badge.present?
+
+    unless @test_passage.test&.category&.id.to_s == badge.rule_value
+      return "Бейдж '#{badge.name}': rule_value (#{badge.rule_value}) не совпадает с id категории (#{@test_passage.test.category&.id})"
+    end
+    nil
+  end
+
+  def level_complete_error_reason(badge)
+    return nil unless badge.present?
+
+    unless @test_passage.test&.level == badge.rule_value.to_i
+      return "Бейдж '#{badge.name}': rule_value (#{badge.rule_value}) не совпадает с уровнем теста (#{@test_passage.test.level})"
     end
     nil
   end
