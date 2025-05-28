@@ -16,21 +16,19 @@ class TestPassagesController < ApplicationController
 
     if @test_passage.completed?
       TestsMailer.completed_test(@test_passage).deliver_now
-      result = BadgeService.new(@test_passage).call
-      flash[:earned_badges] = result[:badges]
+      result = BadgeService.new(@test_passage).call if @test_passage.successful?
+      flash[:earned_badges] = result[:badges] if result
 
-      if !@test_passage.successful?
-        notice = "Тест не пройден. Попробуйте ещё раз."
-      elsif result[:badges].present?
-        notice = success_message(result[:badges])
-      else
-        notice = nil
-      end
+      notice = if !@test_passage.successful?
+                 "Тест не пройден. Попробуйте ещё раз."
+               elsif result[:badges].present?
+                 success_message(result[:badges])
+               else
+                 nil
+               end
 
-      alert_message = result[:errors].compact_blank.join(". ")
-      if alert_message.present? && @test_passage.successful?
-        flash[:alert] = alert_message
-      end
+      alert_message = result[:errors].compact_blank.join(". ") if result
+      flash[:alert] = alert_message if alert_message.present? && @test_passage.successful?
 
       redirect_to result_test_passage_path(@test_passage), notice: notice
     else
