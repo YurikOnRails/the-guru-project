@@ -6,7 +6,7 @@ class BadgeService
 
   def call
     ensure_universal_badge_exists
-    return failure_result('Тест не пройден успешно') unless @test_passage.successful?
+    return failure_result("Тест не пройден успешно") unless @test_passage.successful?
 
     badges, errors = process_badges
     { badges: badges, errors: errors.compact_blank }
@@ -15,18 +15,18 @@ class BadgeService
   private
 
   def ensure_universal_badge_exists
-    return if Badge.exists?(rule_type: 'first_try', rule_value: 'any')
+    return if Badge.exists?(rule_type: "first_try", rule_value: "any")
 
     Badge.create!(
-      name: 'С первой попытки',
-      image_url: 'https://cdn-icons-png.flaticon.com/512/2583/2583344.png',
-      rule_type: 'first_try',
-      rule_value: 'any'
+      name: "С первой попытки",
+      image_url: "https://cdn-icons-png.flaticon.com/512/2583/2583344.png",
+      rule_type: "first_try",
+      rule_value: "any"
     )
   end
 
   def failure_result(message)
-    { badges: [], errors: [message] }
+    { badges: [], errors: [ message ] }
   end
 
   def process_badges
@@ -43,7 +43,7 @@ class BadgeService
       end
     end
 
-    [badges, errors]
+    [ badges, errors ]
   end
 
   def award_badge(badge)
