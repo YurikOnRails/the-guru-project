@@ -58,23 +58,23 @@
     <div class="container">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title"><%= t('feedback_mailer.feedback_email.subject') %></h3>
+          <h3 class="card-title"><%= t("feedback_mailer.feedback_email.subject") %></h3>
         </div>
         <div class="card-body">
           <p>
-            <strong><%= t('feedback_mailer.feedback_email.from') %>:</strong>
+            <strong><%= t("feedback_mailer.feedback_email.from") %>:</strong>
             <%= @feedback.name %> (<a href="mailto:<%= @feedback.email %>"><%= @feedback.email %></a>)
           </p>
           
           <hr>
           
-          <p><strong><%= t('feedback_mailer.feedback_email.message') %>:</strong></p>
+          <p><strong><%= t("feedback_mailer.feedback_email.message") %>:</strong></p>
           <div class="message-content">
             <%= simple_format(@feedback.message) %>
           </div>
           
           <p class="text-muted" style="margin-top: 20px; font-size: 0.85rem;">
-            <%= t('feedback_mailer.feedback_email.footer') %>
+            <%= t("feedback_mailer.feedback_email.footer") %>
           </p>
         </div>
       </div>

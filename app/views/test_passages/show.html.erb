@@ -49,24 +49,51 @@
                   <div class="list-group-item">
                     <div class="form-check">
                       <%= b.check_box id: "answer_ids_#{b.object.id}", class: 'form-check-input' %>
-                      <%= b.label class: 'form-check-label' %>
+                      <%= b.label class: "form-check-label" %>
                     </div>
                   </div>
                 <% end %>
               </div>
               
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <%= form.submit t('.next'), class: 'btn btn-primary' %>
+                <%= form.submit t(".next"), class: "btn btn-primary" %>
               </div>
             <% end %>
           </div>
         </div>
       <% else %>
         <div class="alert alert-info">
-          <i class="bi bi-info-circle me-2"></i> <%= t('.no_questions') %>
+          <i class="bi bi-info-circle me-2"></i> <%= t(".no_questions") %>
         </div>
       <% end %>
-      <p><%= button_to 'Gist Question', test_passage_gists_path(@test_passage), class: 'btn btn-primary' %></p>
+      <p><%= button_to "Gist Question", test_passage_gists_path(@test_passage), class: "btn btn-primary" %></p>
     </div>
   </div>
 </div>
+
+<div class="text-center mt-3">
+  <small class="text-muted" style="opacity: 0.6; font-size: 0.95em;">
+    <i class="bi bi-keyboard me-1"></i>
+    Для удобства вы можете нажимать <b>Enter</b> вместо кнопки «Далее»
+  </small>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    if (!form) return;
+
+    document.addEventListener('keydown', function(event) {
+      // Проверяем, что фокус внутри формы и не на textarea
+      if (
+        event.key === 'Enter' &&
+        form.contains(document.activeElement) &&
+        document.activeElement.tagName !== 'TEXTAREA'
+      ) {
+        event.preventDefault();
+        const submit = form.querySelector('input[type=submit], button[type=submit]');
+        if (submit) submit.click();
+      }
+    });
+  });
+</script>

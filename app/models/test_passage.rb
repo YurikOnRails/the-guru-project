@@ -10,6 +10,8 @@ class TestPassage < ApplicationRecord
 
   SUCCESS_THRESHOLD = 85
 
+  scope :successful, -> { where("correct_questions * 100.0 / tests_count >= ?", SUCCESS_THRESHOLD) }
+
   def accept!(answer_ids)
     self.correct_questions += 1 if correct_answer?(answer_ids)
     self.current_question = next_question
@@ -28,6 +30,12 @@ class TestPassage < ApplicationRecord
 
   def successful?
     success_percentage >= SUCCESS_THRESHOLD
+  end
+
+  def complete!
+    self.current_question = nil
+    self.success = successful?
+    save!
   end
 
   private

@@ -1,0 +1,63 @@
+<div class="card shadow-sm">
+  <div class="card-body">
+    <%= form_with(model: [:admin, @badge], local: true, class: 'needs-validation') do |f| %>
+      <% if @badge.errors.any? %>
+        <div class="alert alert-danger alert-dismissible fade show">
+          <h4 class="alert-heading h5">
+            <%= t('.errors', count: @badge.errors.count) %>
+          </h4>
+          <ul class="list-unstyled mb-0">
+            <% @badge.errors.full_messages.each do |message| %>
+              <li><i class="bi bi-exclamation-circle me-2"></i><%= message %></li>
+            <% end %>
+          </ul>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+
+      <div class="mb-3">
+        <%= f.label :name, 'Название', class: 'form-label fw-bold' %>
+        <%= f.text_field :name, class: 'form-control', required: true, placeholder: 'Введите название бейджа' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :image_url, 'URL изображения', class: 'form-label fw-bold' %>
+        <%= f.text_field :image_url, class: 'form-control', placeholder: 'https://example.com/badge-image.png' %>
+        <div class="form-text">
+          <i class="bi bi-info-circle me-1"></i>
+          Если не указать, будет использовано стандартное изображение бейджа.<br>
+          Для своего изображения укажите прямую ссылку на картинку (http/https).
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :rule_type, 'Тип правила', class: 'form-label fw-bold' %>
+        <%= f.select :rule_type, 
+            Badge::RULE_TYPES.map { |key, value| [value, key] }, 
+            { prompt: 'Выберите тип правила' }, 
+            { class: 'form-select', required: true } %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :rule_value, 'Значение правила', class: 'form-label fw-bold' %>
+        <%= f.text_field :rule_value, class: "form-control", required: true, placeholder: "Введите значение для выбранного правила" %>
+        <div class="form-text">
+          <i class="bi bi-info-circle me-1"></i>
+          <strong>Укажите:</strong><br>
+          • Для правила категории - ID категории<br>
+          • Для правила первой попытки - ID теста<br>
+          • Для правила уровня - номер уровня
+        </div>
+      </div>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <%= link_to admin_badges_path, class: "btn btn-outline-secondary me-md-2" do %>
+          <i class="bi bi-arrow-left me-1"></i>Назад
+        <% end %>
+        <%= button_tag type: "submit", class: "btn btn-primary" do %>
+          <i class="bi bi-check-lg me-1"></i><%= @badge.new_record? ? "Создать бейдж" : "Обновить бейдж" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

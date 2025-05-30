@@ -1,8 +1,8 @@
-<p><%= t('devise.mailer.confirmation_instructions.greeting', email: @email, default: "Welcome #{@email}!") %></p>
+<p><%= t("devise.mailer.confirmation_instructions.greeting", email: @email, default: "Welcome #{@email}!") %></p>
 
-<p><%= t('devise.mailer.confirmation_instructions.instruction', default: 'You can confirm your account email through the link below:') %></p>
+<p><%= t("devise.mailer.confirmation_instructions.instruction", default: "You can confirm your account email through the link below:") %></p>
 
-<p><%= link_to t('devise.mailer.confirmation_instructions.action', default: 'Confirm my account'), 
+<p><%= link_to t("devise.mailer.confirmation_instructions.action", default: "Confirm my account"), 
                user_confirmation_url(confirmation_token: @token),
-               class: 'button',
+               class: "button",
                data: { turbo: false } %></p>

@@ -5,8 +5,8 @@
     <tr>
       <th><%= t('.question') %></th>
       <th><%= t('.gist_url') %></th>
-      <th><%= t('.user') %></th>
-      <th><%= t('.created_at') %></th>
+      <th><%= t(".user") %></th>
+      <th><%= t(".created_at") %></th>
     </tr>
   </thead>
   <tbody>
@@ -17,10 +17,10 @@
                       admin_question_path(gist.question) %>
         </td>
         <td>
-          <%= link_to gist.hash_id, gist.url, target: '_blank' %>
+          <%= link_to gist.hash_id, gist.url, target: "_blank" %>
         </td>
         <td><%= gist.user.email %></td>
-        <td><%= gist.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+        <td><%= gist.created_at.strftime("%d.%m.%Y %H:%M") %></td>
       </tr>
     <% end %>
   </tbody>

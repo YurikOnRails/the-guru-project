@@ -1,3 +1,7 @@
+# Для автоматической проверки ERB шаблонов
+require:
+  - rubocop-erb
+
 # Omakase Ruby styling for Rails
 inherit_gem:
   rubocop-rails-omakase: rubocop.yml
@@ -8,4 +12,4 @@ Layout/TrailingEmptyLines:
 
 # Использовать однострочный формат (def method; end)
 Style/EmptyMethod:
-  EnforcedStyle: compact 
+  EnforcedStyle: compact

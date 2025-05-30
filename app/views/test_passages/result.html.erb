@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card shadow-sm">
-        <div class="card-header text-white text-center <%= @test_passage.successful? ? 'bg-success' : 'bg-info' %>">
+        <div class="card-header text-white text-center <%= @test_passage.successful? ? 'bg-success' : 'bg-danger' %>">
           <h2 class="h3 mb-0"><%= t('.header', title: @test_passage.test.title) %></h2>
         </div>
         
@@ -10,13 +10,13 @@
           <div class="text-center mb-4">
             <div class="display-1 mb-3">
               <% if @test_passage.successful? %>
-                <i class="bi bi-emoji-smile"></i>
+                <i class="bi bi-emoji-smile text-success"></i>
               <% else %>
-                <i class="bi bi-emoji-frown"></i>
+                <i class="bi bi-emoji-frown text-danger"></i>
               <% end %>
             </div>
             
-            <h3 class="<%= @test_passage.successful? ? 'text-success' : 'text-info' %> mb-4">
+            <h3 class="<%= @test_passage.successful? ? 'text-success' : 'text-danger' %> mb-4">
               <% if @test_passage.successful? %>
                 <i class="bi bi-trophy me-2"></i><%= t('.success_message') %>
               <% else %>
@@ -25,39 +25,45 @@
             </h3>
           </div>
           
-          <div class="row text-center">
+          <div class="row text-center g-3">
             <div class="col-md-4">
-              <div class="card mb-3 h-100">
+              <div class="card h-100 border-0 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title"><i class="bi bi-check-circle me-2"></i><%= t('.correct_answers') %></h5>
+                  <h5 class="card-title text-muted">
+                    <i class="bi bi-check-circle me-2"></i><%= t('.correct_answers') %>
+                  </h5>
                   <p class="display-6 mb-0"><%= @test_passage.correct_questions %> / <%= @test_passage.test.questions.count %></p>
                 </div>
               </div>
             </div>
             
             <div class="col-md-4">
-              <div class="card mb-3 h-100">
+              <div class="card h-100 border-0 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title"><i class="bi bi-percent me-2"></i><%= t('.success_percent') %></h5>
+                  <h5 class="card-title text-muted">
+                    <i class="bi bi-percent me-2"></i><%= t('.success_percent') %>
+                  </h5>
                   <p class="display-6 mb-0"><%= @test_passage.success_percentage %>%</p>
                 </div>
               </div>
             </div>
             
             <div class="col-md-4">
-              <div class="card mb-3 h-100">
+              <div class="card h-100 border-0 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title"><i class="bi bi-award me-2"></i><%= t('.result') %></h5>
-                  <p class="display-6 mb-0 <%= @test_passage.successful? ? 'text-success' : 'text-info' %>">
-                    <%= @test_passage.successful? ? t('.passed') : t('.failed') %>
+                  <h5 class="card-title text-muted">
+                    <i class="bi bi-award me-2"></i><%= t('.result') %>
+                  </h5>
+                  <p class="display-6 mb-0 <%= @test_passage.successful? ? 'text-success' : 'text-danger' %>">
+                    <%= @test_passage.successful? ? t(".passed") : t(".failed") %>
                   </p>
                 </div>
               </div>
             </div>
           </div>
           
-          <div class="progress mt-4 mb-4" style="height: 25px;">
-            <div class="progress-bar <%= @test_passage.successful? ? 'bg-success' : 'bg-info' %>" 
+          <div class="progress mt-4" style="height: 25px;">
+            <div class="progress-bar <%= @test_passage.successful? ? "bg-success" : "bg-danger" %>" 
                  role="progressbar" 
                  style="width: <%= @test_passage.success_percentage %>%;" 
                  aria-valuenow="<%= @test_passage.success_percentage %>" 
@@ -66,14 +72,90 @@
               <%= @test_passage.success_percentage %>%
             </div>
           </div>
+
+          <% if @earned_badges.present? %>
+            <div class="mt-4">
+              <h4 class="text-center mb-3">
+                <i class="bi bi-award me-2"></i>Полученные бейджи
+              </h4>
+              <div class="row g-3">
+                <% @earned_badges.each do |badge| %>
+                  <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                      <div class="card-body text-center">
+                        <img src="<%= badge.image_url %>" 
+                             class="img-fluid mb-3" 
+                             alt="<%= badge.name %>" 
+                             style="height: 100px; object-fit: contain;">
+                        <h5 class="card-title mb-0 text-truncate">
+                          <%= badge.name %>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+          <% if @badge_errors.present? %>
+            <div class="alert alert-warning mt-4">
+              <h5 class="mb-2"><i class="bi bi-exclamation-triangle me-2"></i>Причины, по которым бейджи не были выданы:</h5>
+              <ul class="mb-0">
+                <% @badge_errors.each do |error| %>
+                  <li><%= error %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
         </div>
         
         <div class="card-footer bg-light d-grid gap-2">
-          <%= link_to tests_path_for_user(current_user), class: 'btn btn-primary' do %>
-            <i class="bi bi-list-check me-2"></i><%= t('.back_to_tests') %>
+          <%= link_to tests_path, class: "btn btn-primary" do %>
+            <i class="bi bi-list-check me-2"></i>Вернуться к тестам
           <% end %>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <h1>Тест <%= @test_passage.test.title %> завершен!</h1>
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <h2 class="card-title">Результат: <%= @test_passage.success_percentage %>%</h2>
+      
+      <% if @test_passage.successful? %>
+        <p class="text-success">Тест успешно пройден!</p>
+      <% else %>
+        <p class="text-danger">Тест не пройден. Попробуйте еще раз.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @earned_badges.present? %>
+    <div class="card mt-4">
+      <div class="card-body">
+        <h3 class="card-title">Полученные бейджи:</h3>
+        <div class="row">
+          <% @earned_badges.each do |badge| %>
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <img src="<%= badge.image_url %>" class="card-img-top" alt="<%= badge.name %>" style="height: 200px; object-fit: contain;">
+                <div class="card-body">
+                  <h5 class="card-title"><%= badge.name %></h5>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="mt-4">
+    <%= link_to "Все тесты", tests_path, class: "btn btn-primary" %>
   </div>
 </div>

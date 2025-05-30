@@ -10,17 +10,17 @@
   <div class="mb-3">
     <%= form.label :level, t('helpers.label.test.level'), class: 'form-label fw-bold' %>
     <%= form.number_field :level, id: :test_level, class: 'form-control', min: 0 %>
-    <div class="form-text"><%= t('admin.tests.form.level_help') %></div>
+    <div class="form-text"><%= t("admin.tests.form.level_help") %></div>
   </div>
 
   <div class="mb-4">
-    <%= form.label :category_id, t('helpers.label.test.category'), class: 'form-label fw-bold' %>
+    <%= form.label :category_id, t("helpers.label.test.category"), class: "form-label fw-bold" %>
     <%= form.collection_select :category_id, Category.all, :id, :name, 
-                             { prompt: t('helpers.label.test.category_prompt') }, 
-                             { class: 'form-select' } %>
+                             { prompt: t("helpers.label.test.category_prompt") }, 
+                             { class: "form-select" } %>
   </div>
 
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <%= form.submit t("helpers.submit.test.#{@test.new_record? ? 'create' : 'update'}"), class: 'btn btn-primary' %>
+    <%= form.submit t("helpers.submit.test.#{@test.new_record? ? 'create' : 'update'}"), class: "btn btn-primary" %>
   </div>
 <% end %>

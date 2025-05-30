@@ -33,7 +33,7 @@
       </div>
       
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="h4 border-bottom pb-2 mb-0"><%= t('.questions') %></h2>
+        <h2 class="h4 border-bottom pb-2 mb-0"><%= t(".questions") %></h2>
       </div>
       
       <% if @test.questions.any? %>
@@ -49,14 +49,14 @@
         </div>
       <% else %>
         <div class="alert alert-info">
-          <i class="bi bi-info-circle me-2"></i> <%= t('.no_questions') %>
+          <i class="bi bi-info-circle me-2"></i> <%= t(".no_questions") %>
         </div>
       <% end %>
     </div>
     
     <div class="card-footer bg-light d-flex justify-content-between align-items-center">
-      <%= link_to tests_path_for_user(current_user), class: 'btn btn-secondary' do %>
-        <i class="bi bi-arrow-left me-1"></i> <%= t('.back') %>
+      <%= link_to tests_path_for_user(current_user), class: "btn btn-secondary" do %>
+        <i class="bi bi-arrow-left me-1"></i> <%= t(".back") %>
       <% end %>
     </div>
   </div>

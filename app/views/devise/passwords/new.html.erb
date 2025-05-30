@@ -12,12 +12,12 @@
 
             <div class="mb-4">
               <%= f.label :email, class: 'form-label' %>
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'user@example.com' %>
-              <div class="form-text"><%= t('devise.passwords.new.instruction') %></div>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "user@example.com" %>
+              <div class="form-text"><%= t("devise.passwords.new.instruction") %></div>
             </div>
 
             <div class="d-grid gap-2">
-              <%= f.submit t('devise.passwords.new.send_instructions'), class: 'btn btn-primary' %>
+              <%= f.submit t("devise.passwords.new.send_instructions"), class: "btn btn-primary" %>
             </div>
           <% end %>
         </div>

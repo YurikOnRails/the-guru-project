@@ -18,3 +18,9 @@
 .form-inline.active {
   display: block;
 }
+
+html, body {
+  font-family: 'Montserrat', 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
