@@ -9,7 +9,7 @@
 
   <div class="mb-3">
     <%= form.label :level, t('helpers.label.test.level'), class: 'form-label fw-bold' %>
-    <%= form.number_field :level, id: :test_level, class: 'form-control', min: 0 %>
+    <%= form.number_field :level, id: :test_level, class: "form-control", min: 0 %>
     <div class="form-text"><%= t("admin.tests.form.level_help") %></div>
   </div>
 
@@ -18,6 +18,12 @@
     <%= form.collection_select :category_id, Category.all, :id, :name, 
                              { prompt: t("helpers.label.test.category_prompt") }, 
                              { class: "form-select" } %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :timer_minutes, "Время на прохождение (в минутах)", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.number_field :timer_minutes, min: 1, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    <p class="text-gray-600 text-xs italic">Оставьте пустым, если тест без ограничения по времени</p>
   </div>
 
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">

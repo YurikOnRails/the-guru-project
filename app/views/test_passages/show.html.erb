@@ -43,12 +43,19 @@
             <h2 class="h5 mb-0"><%= @test_passage.current_question.content %></h2>
           </div>
           <div class="card-body">
+            <% if @test_passage.test.timed? %>
+              <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-6"
+                   data-controller="timer"
+                   data-timer-remaining-time-value="<%= @test_passage.remaining_time %>">
+                <p class="font-bold">Оставшееся время: <span data-timer-target="countdown"></span></p>
+              </div>
+            <% end %>
             <%= form_with url: test_passage_path(@test_passage), method: :put, data: { turbo: false } do |form| %>
               <div class="list-group mb-4">
                 <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.shuffled_answers, :id, :content, include_hidden: false do |b| %>
                   <div class="list-group-item">
                     <div class="form-check">
-                      <%= b.check_box id: "answer_ids_#{b.object.id}", class: 'form-check-input' %>
+                      <%= b.check_box id: "answer_ids_#{b.object.id}", class: "form-check-input" %>
                       <%= b.label class: "form-check-label" %>
                     </div>
                   </div>

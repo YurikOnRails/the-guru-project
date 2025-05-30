@@ -16,7 +16,7 @@
               <% if @minimum_password_length %>
                 <div class="form-text mb-2"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></div>
               <% end %>
-              <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-control' %>
+              <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control" %>
             </div>
 
             <div class="mb-4">
