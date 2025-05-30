@@ -49,14 +49,14 @@
                   <div class="list-group-item">
                     <div class="form-check">
                       <%= b.check_box id: "answer_ids_#{b.object.id}", class: 'form-check-input' %>
-                      <%= b.label class: 'form-check-label' %>
+                      <%= b.label class: "form-check-label" %>
                     </div>
                   </div>
                 <% end %>
               </div>
               
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <%= form.submit t('.next'), class: 'btn btn-primary' %>
+                <%= form.submit t(".next"), class: "btn btn-primary" %>
               </div>
             <% end %>
           </div>

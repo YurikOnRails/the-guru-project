@@ -21,11 +21,11 @@ class TestPassagesController < ApplicationController
 
       notice = if !@test_passage.successful?
                  "Тест не пройден. Попробуйте ещё раз."
-               elsif result[:badges].present?
+      elsif result[:badges].present?
                  success_message(result[:badges])
-               else
+      else
                  nil
-               end
+      end
 
       alert_message = result[:errors].compact_blank.join(". ") if result
       flash[:alert] = alert_message if alert_message.present? && @test_passage.successful?

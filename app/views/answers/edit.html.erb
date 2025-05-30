@@ -9,8 +9,8 @@
         <strong>Вопрос:</strong> <%= @answer.question.content %>
       </div>
       
-      <%= render 'shared/errors', resource: @answer %>
-      <%= render 'form', answer: @answer %>
+      <%= render "shared/errors", resource: @answer %>
+      <%= render "form", answer: @answer %>
     </div>
     
     <div class="card-footer bg-light">

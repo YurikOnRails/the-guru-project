@@ -28,9 +28,9 @@
           </div>
           <div>
             <%= link_to edit_admin_answer_path(answer), class: 'btn btn-sm btn-outline-primary me-1' do %>
-              <i class="bi bi-pencil me-1"></i> <%= t('answers.answer.edit') %>
+              <i class="bi bi-pencil me-1"></i> <%= t("answers.answer.edit") %>
             <% end %>
-            <%= button_to admin_answer_path(answer), method: :delete, class: 'btn btn-sm btn-outline-danger', form: { data: { turbo_confirm: t('answers.answer.confirm') } } do %>
+            <%= button_to admin_answer_path(answer), method: :delete, class: "btn btn-sm btn-outline-danger", form: { data: { turbo_confirm: t("answers.answer.confirm") } } do %>
               <i class="bi bi-trash me-1"></i> <%= t("answers.answer.delete") %>
             <% end %>
           </div>

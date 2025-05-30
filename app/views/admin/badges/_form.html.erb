@@ -40,7 +40,7 @@
 
       <div class="mb-3">
         <%= f.label :rule_value, 'Значение правила', class: 'form-label fw-bold' %>
-        <%= f.text_field :rule_value, class: 'form-control', required: true, placeholder: 'Введите значение для выбранного правила' %>
+        <%= f.text_field :rule_value, class: "form-control", required: true, placeholder: "Введите значение для выбранного правила" %>
         <div class="form-text">
           <i class="bi bi-info-circle me-1"></i>
           <strong>Укажите:</strong><br>
@@ -51,7 +51,7 @@
       </div>
 
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <%= link_to admin_badges_path, class: 'btn btn-outline-secondary me-md-2' do %>
+        <%= link_to admin_badges_path, class: "btn btn-outline-secondary me-md-2" do %>
           <i class="bi bi-arrow-left me-1"></i>Назад
         <% end %>
         <%= button_tag type: "submit", class: "btn btn-primary" do %>

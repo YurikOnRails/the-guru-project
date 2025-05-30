@@ -1,13 +1,13 @@
 <div class="card col-md-6 mx-auto mt-4">
   <div class="card-header">
-    <h1 class="h4 mb-0"><%= t('feedback.new.title') %></h1>
+    <h1 class="h4 mb-0"><%= t("feedback.new.title") %></h1>
   </div>
   
   <div class="card-body">
     <%= form_with model: @feedback, url: feedbacks_path, local: true do |f| %>
       <% if @feedback.errors.any? %>
         <div class="alert alert-danger">
-          <h2 class="h6"><%= t('feedback.new.errors_header') %></h2>
+          <h2 class="h6"><%= t("feedback.new.errors_header") %></h2>
           <ul>
             <% @feedback.errors.full_messages.each do |message| %>
               <li><%= message %></li>

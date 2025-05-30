@@ -1,9 +1,9 @@
-<%= form_with model: [:admin, test], 
+<%= form_with model: [ :admin, test ], 
               url: update_inline_admin_test_path(test), 
               method: :patch,
               data: { turbo: false }, 
-              class: 'form-inline',
-              html: { style: 'display: none', 'data-test-id': test.id } do |form| %>
+              class: "form-inline",
+              html: { style: "display: none", 'data-test-id': test.id } do |form| %>
   <div class="d-flex align-items-center">
     <%= form.text_field :title, class: "form-control me-2", placeholder: "Введите название теста" %>
     <%= form.submit "Сохранить", class: "btn btn-success btn-sm" %>

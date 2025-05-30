@@ -55,7 +55,7 @@
                     <i class="bi bi-award me-2"></i><%= t('.result') %>
                   </h5>
                   <p class="display-6 mb-0 <%= @test_passage.successful? ? 'text-success' : 'text-danger' %>">
-                    <%= @test_passage.successful? ? t('.passed') : t('.failed') %>
+                    <%= @test_passage.successful? ? t(".passed") : t(".failed") %>
                   </p>
                 </div>
               </div>
@@ -63,7 +63,7 @@
           </div>
           
           <div class="progress mt-4" style="height: 25px;">
-            <div class="progress-bar <%= @test_passage.successful? ? 'bg-success' : 'bg-danger' %>" 
+            <div class="progress-bar <%= @test_passage.successful? ? "bg-success" : "bg-danger" %>" 
                  role="progressbar" 
                  style="width: <%= @test_passage.success_percentage %>%;" 
                  aria-valuenow="<%= @test_passage.success_percentage %>" 
