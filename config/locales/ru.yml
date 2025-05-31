@@ -59,6 +59,11 @@ ru:
       category: "Категория"
       author: "Автор"
       no_questions: "В тесте пока нет вопросов."
+    easy: "Легкий"
+    elementary: "Начальный"
+    intermediate: "Средний"
+    advanced: "Продвинутый"
+    expert: "Экспертный"
 
   test_passages:
     result:
@@ -149,6 +154,16 @@ ru:
         confirm: "Вы уверены?"
         timer_minutes: "%{count} мин"
         no_time_limit: "Без ограничений"
+        easy: "Легкий"
+        elementary: "Начальный"
+        intermediate: "Средний"
+        advanced: "Продвинутый"
+        expert: "Экспертный"
+        show_tooltip: "Показать тест"
+        edit_tooltip: "Редактировать тест"
+        delete_tooltip: "Удалить тест"
+        confirm_deletion: "Вы уверены, что хотите удалить этот тест?"
+        no_questions: "Нет вопросов"
       show:
         title: "Название теста: %{title}"
         questions: "Вопросы"
