@@ -19,6 +19,5 @@ class AddIndexesToTables < ActiveRecord::Migration[8.0]
 
     add_index :test_passages, :started_at
     add_index :test_passages, :success
-    add_index :tests, :timer_minutes
   end
 end
