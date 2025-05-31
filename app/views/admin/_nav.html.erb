@@ -17,6 +17,11 @@
           <% end %>
         </li>
         <li class="nav-item">
+          <%= link_to admin_tests_path(timer_settings: true), class: 'nav-link d-flex align-items-center' do %>
+            <i class="bi bi-stopwatch me-1"></i>Таймеры
+          <% end %>
+        </li>
+        <li class="nav-item">
           <%= link_to admin_badges_path, class: 'nav-link d-flex align-items-center' do %>
             <i class="bi bi-award me-1"></i>Бейджи
           <% end %>
@@ -42,7 +47,6 @@
         <%= link_to root_path, class: "btn btn-outline-light btn-sm d-flex align-items-center me-2" do %>
           <i class="bi bi-arrow-left-circle me-1"></i>На сайт
         <% end %>
-        <%= link_to t("shared.nav.back_to_tests"), tests_path_for_user(current_user), class: "btn btn-outline-light btn-sm me-2" %>
         <%= button_to destroy_user_session_path, method: :delete, class: "btn btn-danger btn-sm" do %>
           <i class="bi bi-box-arrow-right me-1"></i>Выйти
         <% end %>

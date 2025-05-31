@@ -4,6 +4,7 @@ class Admin::TestsController < Admin::BaseController
 
   def index
     @tests = Test.all
+    @timer_settings = params[:timer_settings].present?
   end
 
   def show; end
@@ -56,6 +57,6 @@ class Admin::TestsController < Admin::BaseController
   end
 
   def test_params
-    params.require(:test).permit(:title, :level, :category_id)
+    params.require(:test).permit(:title, :level, :category_id, :timer_minutes)
   end
 end
