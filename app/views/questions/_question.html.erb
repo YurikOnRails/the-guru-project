@@ -9,7 +9,7 @@
         <i class="bi bi-pencil me-1"></i> <%= t('questions.question.edit') %>
       <% end %>
       <%= button_to admin_question_path(question), method: :delete, class: 'btn btn-sm btn-danger', form: { data: { turbo_confirm: t('questions.question.confirm') } } do %>
-        <i class="bi bi-trash me-1"></i> <%= t('questions.question.delete') %>
+        <i class="bi bi-trash me-1"></i> <%= t("questions.question.delete") %>
       <% end %>
     </div>
   </div>

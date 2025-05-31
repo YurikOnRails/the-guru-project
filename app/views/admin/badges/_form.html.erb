@@ -33,9 +33,9 @@
       <div class="mb-3">
         <%= f.label :rule_type, 'Тип правила', class: 'form-label fw-bold' %>
         <%= f.select :rule_type, 
-            Badge::RULE_TYPES.map { |key, value| [value, key] }, 
-            { prompt: 'Выберите тип правила' }, 
-            { class: 'form-select', required: true } %>
+            Badge::RULE_TYPES.map { |key, value| [ value, key ] }, 
+            { prompt: "Выберите тип правила" }, 
+            { class: "form-select", required: true } %>
       </div>
 
       <div class="mb-3">

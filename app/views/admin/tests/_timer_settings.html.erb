@@ -30,19 +30,19 @@
                   data: { bs_toggle: "tooltip" },
                   title: t('.show_tooltip') %>
                   
-      <%= link_to t('.edit'), edit_admin_test_path(test),
+      <%= link_to t(".edit"), edit_admin_test_path(test),
                   class: "btn btn-sm btn-outline-success",
                   data: { bs_toggle: "tooltip" },
-                  title: t('.edit_tooltip') %>
+                  title: t(".edit_tooltip") %>
                   
-      <%= button_to t('.delete'), admin_test_path(test),
+      <%= button_to t(".delete"), admin_test_path(test),
                     method: :delete,
                     class: "btn btn-sm btn-outline-danger",
                     data: { 
                       bs_toggle: "tooltip",
-                      turbo_confirm: t('.confirm_deletion')
+                      turbo_confirm: t(".confirm_deletion")
                     },
-                    title: t('.delete_tooltip'),
+                    title: t(".delete_tooltip"),
                     form: { class: "d-inline-block" } %>
     </div>
   </td>

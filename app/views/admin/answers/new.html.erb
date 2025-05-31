@@ -4,7 +4,7 @@
 
 <%= form_with model: [:admin, @question, @answer], local: true do |form| %>
   <div class="form-group">
-    <%= form.label :content, 'Текст ответа' %>
+    <%= form.label :content, "Текст ответа" %>
     <%= form.text_area :content, class: "form-control" %>
   </div>
 

@@ -29,7 +29,7 @@
         <% if current_user&.admin? %>
           <li class="nav-item">
             <%= link_to admin_tests_path, class: 'nav-link text-primary fw-bold px-2 py-1' do %>
-              <i class="bi bi-speedometer2 me-1 small"></i><%= t('shared.nav.admin_panel') %>
+              <i class="bi bi-speedometer2 me-1 small"></i><%= t("shared.nav.admin_panel") %>
             <% end %>
           </li>
         <% end %>

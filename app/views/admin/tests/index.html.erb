@@ -42,7 +42,7 @@
           </thead>
           <tbody>
             <% if @timer_settings %>
-              <%= render partial: 'timer_settings', collection: @tests, as: :test %>
+              <%= render partial: "timer_settings", collection: @tests, as: :test %>
             <% else %>
               <%= render @tests %>
             <% end %>
