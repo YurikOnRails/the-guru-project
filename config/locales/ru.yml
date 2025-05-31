@@ -191,6 +191,15 @@ ru:
         timer_help: "Оставьте пустым, если тест без ограничения по времени"
       form_inline:
         submit: "ОК"
+      timer_settings:
+        show: "Показать"
+        edit: "Редактировать"
+        delete: "Удалить"
+        show_tooltip: "Показать тест"
+        edit_tooltip: "Редактировать тест"
+        delete_tooltip: "Удалить тест"
+        confirm_deletion: "Вы уверены, что хотите удалить этот тест?"
+        no_questions: "Нет вопросов"
     gists:
       index:
         header: "Гисты"
