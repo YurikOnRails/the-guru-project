@@ -59,25 +59,28 @@ ru:
       category: "Категория"
       author: "Автор"
       no_questions: "В тесте пока нет вопросов."
+    easy: "Легкий"
+    elementary: "Начальный"
+    intermediate: "Средний"
+    advanced: "Продвинутый"
+    expert: "Экспертный"
 
   test_passages:
     result:
       header: "Тест %{title} завершен!"
-      success: "Процент успеха: %{result}%"
-      passed: "Тест пройден"
-      failed: "Тест не пройден"
-      back_to_tests: "Вернуться к тестам"
-      success_message: "Поздравляем! Вы успешно прошли тест!"
-      failure_message: "К сожалению, тест не пройден. Попробуйте еще раз!"
-      correct_answers: "Правильные ответы"
-      success_percent: "Процент успеха"
-      result: "Результат"
+      success: "Успешность: %{result}%"
+      passed: "Вы прошли тест!"
+      failed: "Вы не прошли тест."
+      back: "Вернуться к тестам"
     show:
       header: "Прохождение теста %{title}"
       question_count: "Вопрос %{current} из %{total}"
       next: "Далее"
       completed: "завершено"
-      no_questions: "Для этого теста нет доступных вопросов."
+      no_questions: "В этом тесте нет вопросов."
+    update:
+      time_out: "Время на прохождение теста истекло"
+      failure: "Тест не пройден. Попробуйте ещё раз."
     gist:
       success: "Gist успешно сохранен!"
       failure: "Во время сохранения gist произошла ошибка"
@@ -144,6 +147,18 @@ ru:
         edit: "Редактировать"
         delete: "Удалить"
         confirm: "Вы уверены?"
+        timer_minutes: "%{count} мин"
+        no_time_limit: "Без ограничений"
+        easy: "Легкий"
+        elementary: "Начальный"
+        intermediate: "Средний"
+        advanced: "Продвинутый"
+        expert: "Экспертный"
+        show_tooltip: "Показать тест"
+        edit_tooltip: "Редактировать тест"
+        delete_tooltip: "Удалить тест"
+        confirm_deletion: "Вы уверены, что хотите удалить этот тест?"
+        no_questions: "Нет вопросов"
       show:
         title: "Название теста: %{title}"
         questions: "Вопросы"
@@ -166,8 +181,20 @@ ru:
         title_placeholder: "Введите название теста"
         title_help: "Название теста должно быть конкретным и понятным"
         level_help: "Уровень сложности теста: 0 - легкий, 1 - средний, 2+ - сложный"
+        timer_label: "Время на прохождение"
+        timer_placeholder: "Например: 15"
+        timer_help: "Оставьте пустым, если тест без ограничения по времени"
       form_inline:
         submit: "ОК"
+      timer_settings:
+        show: "Показать"
+        edit: "Редактировать"
+        delete: "Удалить"
+        show_tooltip: "Показать тест"
+        edit_tooltip: "Редактировать тест"
+        delete_tooltip: "Удалить тест"
+        confirm_deletion: "Вы уверены, что хотите удалить этот тест?"
+        no_questions: "Нет вопросов"
     gists:
       index:
         header: "Гисты"
@@ -183,7 +210,7 @@ ru:
       form:
         errors_count:
           one: "Обнаружена %{count} ошибка"
-          few: "Обнаружено %{count} ошибки"
+          few: "Обнаружено %{count} ошибок"
           many: "Обнаружено %{count} ошибок"
           other: "Обнаружено %{count} ошибок"
 
@@ -204,7 +231,7 @@ ru:
   shared:
     errors:
       header:
-        few: "Обнаружено %{count} ошибки"
+        few: "Обнаружено %{count} ошибок"
         many: "Обнаружено %{count} ошибок"
         one: "Обнаружена %{count} ошибка"
         other: "Обнаружено %{count} ошибок"

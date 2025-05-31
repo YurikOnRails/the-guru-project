@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <div class="card shadow-sm">
         <div class="card-header bg-primary text-white text-center">
-          <h2 class="h3 mb-0"><%= t('devise.passwords.new.forgot_your_password') %></h2>
+          <h2 class="h3 mb-0"><%= t("devise.passwords.new.forgot_your_password") %></h2>
         </div>
         
         <div class="card-body p-4">
@@ -11,7 +11,7 @@
             <%= render "shared/errors", resource: resource %>
 
             <div class="mb-4">
-              <%= f.label :email, class: 'form-label' %>
+              <%= f.label :email, class: "form-label" %>
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "user@example.com" %>
               <div class="form-text"><%= t("devise.passwords.new.instruction") %></div>
             </div>

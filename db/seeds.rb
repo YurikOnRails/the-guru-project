@@ -57,34 +57,34 @@ puts "Categories: #{Category.count}"
 puts "Seeding tests..."
 tests = Test.create!([
   # География
-  { title: 'Страны Европы', level: 1, category: categories[0], author: admin },
-  { title: 'Столицы мира', level: 2, category: categories[0], author: admin },
-  { title: 'Горы и вершины', level: 3, category: categories[0], author: users[0] },
-  { title: 'Океаны и моря', level: 2, category: categories[0], author: users[1] },
+  { title: 'Страны Европы', level: 1, category: categories[0], author: admin, timer_minutes: 15 },
+  { title: 'Столицы мира', level: 2, category: categories[0], author: admin, timer_minutes: 10 },
+  { title: 'Горы и вершины', level: 3, category: categories[0], author: users[0], timer_minutes: 20 },
+  { title: 'Океаны и моря', level: 2, category: categories[0], author: users[1], timer_minutes: 15 },
 
   # История
-  { title: 'Древние цивилизации', level: 2, category: categories[1], author: users[0] },
-  { title: 'Вторая мировая война', level: 3, category: categories[1], author: admin },
-  { title: 'История России', level: 2, category: categories[1], author: users[1] },
-  { title: 'Великие правители', level: 3, category: categories[1], author: users[2] },
+  { title: 'Древние цивилизации', level: 2, category: categories[1], author: users[0], timer_minutes: 20 },
+  { title: 'Вторая мировая война', level: 3, category: categories[1], author: admin, timer_minutes: 25 },
+  { title: 'История России', level: 2, category: categories[1], author: users[1], timer_minutes: 20 },
+  { title: 'Великие правители', level: 3, category: categories[1], author: users[2], timer_minutes: 15 },
 
   # Наука
-  { title: 'Основы физики', level: 3, category: categories[2], author: users[1] },
-  { title: 'Химические элементы', level: 2, category: categories[2], author: admin },
-  { title: 'Биология человека', level: 2, category: categories[2], author: users[0] },
+  { title: 'Основы физики', level: 3, category: categories[2], author: users[1], timer_minutes: 30 },
+  { title: 'Химические элементы', level: 2, category: categories[2], author: admin, timer_minutes: 20 },
+  { title: 'Биология человека', level: 2, category: categories[2], author: users[0], timer_minutes: 15 },
 
   # Литература
-  { title: 'Русская классика', level: 2, category: categories[3], author: admin },
-  { title: 'Зарубежная литература', level: 2, category: categories[3], author: users[1] },
+  { title: 'Русская классика', level: 2, category: categories[3], author: admin, timer_minutes: 20 },
+  { title: 'Зарубежная литература', level: 2, category: categories[3], author: users[1], timer_minutes: 20 },
 
   # Математика
-  { title: 'Алгебра', level: 3, category: categories[4], author: users[2] },
-  { title: 'Геометрия', level: 2, category: categories[4], author: admin },
+  { title: 'Алгебра', level: 3, category: categories[4], author: users[2], timer_minutes: 25 },
+  { title: 'Геометрия', level: 2, category: categories[4], author: admin, timer_minutes: 20 },
 
   # Программирование
-  { title: 'Ruby основы', level: 1, category: categories[5], author: admin },
-  { title: 'JavaScript базовый', level: 1, category: categories[5], author: users[0] },
-  { title: 'SQL запросы', level: 2, category: categories[5], author: users[1] }
+  { title: 'Ruby основы', level: 1, category: categories[5], author: admin, timer_minutes: 30 },
+  { title: 'JavaScript базовый', level: 1, category: categories[5], author: users[0], timer_minutes: 25 },
+  { title: 'SQL запросы', level: 2, category: categories[5], author: users[1], timer_minutes: 20 }
 ])
 puts "Tests: #{Test.count}"
 
