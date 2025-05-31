@@ -1,4 +1,4 @@
-class AddIndexesToTables < ActiveRecord::Migration[7.0]
+class AddIndexesToTables < ActiveRecord::Migration[8.0]
   def change
     # Индекс для поиска тестов по названию
     add_index :tests, :title unless index_exists?(:tests, :title)
