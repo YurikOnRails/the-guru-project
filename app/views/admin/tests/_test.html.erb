@@ -1,29 +1,50 @@
 <tr>
-  <td class="align-middle">
-    <%= content_tag :span, test.title, class: 'test-title', data: { test_id: test.id } %>
-    <%= render 'form_inline', test: test == @test ? @test : test %>
-  </td>
-  <td><span class="badge bg-<%= test.level > 2 ? 'danger' : (test.level > 0 ? 'warning' : 'success') %>"><%= test.level %></span></td>
-  <td><span class="badge bg-info text-dark"><%= test.category.name %></span></td>
-  <td><span class="badge bg-secondary"><%= test.questions.count %></span></td>
   <td>
-    <div class="d-flex justify-content-center">
-      <%= link_to admin_test_path(test), class: 'btn btn-sm btn-outline-primary me-1' do %>
-        <i class="bi bi-eye me-1"></i><%= t(".show") %>
-      <% end %>
-      
-      <%= link_to "#", 
-                  data: { test_id: test.id }, 
-                  class: "form-inline-link btn btn-sm btn-outline-success me-1" do %>
-        <i class="bi bi-pencil me-1"></i><%= t(".edit") %>
-      <% end %>
-      
-      <%= button_to admin_test_path(test), 
-                  method: :delete, 
-                  form: { data: { turbo_confirm: t(".confirm") } },
-                  class: "btn btn-sm btn-outline-danger" do %>
-        <i class="bi bi-trash me-1"></i><%= t(".delete") %>
-      <% end %>
+    <%= content_tag :span, test.title, class: "test-title" %>
+    <% if test.questions.empty? %>
+      <span class="badge bg-warning text-dark ms-2">
+        <i class="bi bi-exclamation-triangle me-1"></i>
+        <%= t('.no_questions') %>
+      </span>
+    <% end %>
+  </td>
+  <td><%= test_level(test) %></td>
+  <td><%= test.category.name %></td>
+  <td><%= test.questions.count %></td>
+  <td>
+    <% if test.timer_minutes.present? %>
+      <span class="badge bg-info">
+        <i class="bi bi-clock me-1"></i>
+        <%= test.timer_minutes %> мин
+      </span>
+    <% else %>
+      <span class="badge bg-secondary">
+        <i class="bi bi-infinity me-1"></i>
+        Без ограничений
+      </span>
+    <% end %>
+  </td>
+  <td class="text-end">
+    <div class="btn-group" role="group">
+      <%= link_to t('.show'), admin_test_path(test),
+                  class: "btn btn-sm btn-outline-primary",
+                  data: { bs_toggle: "tooltip" },
+                  title: t('.show_tooltip') %>
+                  
+      <%= link_to t('.edit'), edit_admin_test_path(test),
+                  class: "btn btn-sm btn-outline-success",
+                  data: { bs_toggle: "tooltip" },
+                  title: t('.edit_tooltip') %>
+                  
+      <%= button_to t('.delete'), admin_test_path(test),
+                    method: :delete,
+                    class: "btn btn-sm btn-outline-danger",
+                    data: { 
+                      bs_toggle: "tooltip",
+                      turbo_confirm: t('.confirm_deletion')
+                    },
+                    title: t('.delete_tooltip'),
+                    form: { class: "d-inline-block" } %>
     </div>
   </td>
 </tr>

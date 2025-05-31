@@ -12,6 +12,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
+
+      <% if @test_passage.test.timed? %>
+        <div class="alert alert-info" data-controller="timer" data-timer-remaining-time-value="<%= @test_passage.remaining_time %>">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-clock-history fs-4 me-3"></i>
+            <div>
+              <h6 class="mb-1">Оставшееся время:</h6>
+              <div class="fs-4 fw-bold" data-timer-target="countdown"></div>
+            </div>
+          </div>
+        </div>
+      <% end %>
       
       <% if @test_passage.current_question.present? %>
         <div class="mb-4">
@@ -24,18 +36,19 @@
             <span class="badge bg-primary fs-6">
               <%= t('.question_count', current: current_question_number, total: total_questions) %>
             </span>
-            <span class="text-muted" id="progress-percent" data-progress-percent="<%= progress_percentage %>">
+            <span class="text-muted" id="progress-percent">
               <%= progress_percentage %>% <%= t('.completed') %>
             </span>
           </div>
           
-          <% if @test_passage.test.questions.any? %>
-            <div class="progress" style="height: 10px;" id="progress-container" data-total-questions="<%= total_questions %>" data-current-question="<%= current_question_number %>">
-              <div class="progress-bar bg-success" id="progress-bar" role="progressbar" style="width: <%= progress_percentage %>%" 
-                  aria-valuenow="<%= progress_percentage %>" aria-valuemin="0" aria-valuemax="100"
-                  data-progress-value="<%= progress_percentage %>"></div>
+          <div class="progress" style="height: 10px;">
+            <div class="progress-bar bg-success" role="progressbar" 
+                 style="width: <%= progress_percentage %>%" 
+                 aria-valuenow="<%= progress_percentage %>" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100">
             </div>
-          <% end %>
+          </div>
         </div>
         
         <div class="card mb-4">
@@ -43,19 +56,12 @@
             <h2 class="h5 mb-0"><%= @test_passage.current_question.content %></h2>
           </div>
           <div class="card-body">
-            <% if @test_passage.test.timed? %>
-              <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-6"
-                   data-controller="timer"
-                   data-timer-remaining-time-value="<%= @test_passage.remaining_time %>">
-                <p class="font-bold">Оставшееся время: <span data-timer-target="countdown"></span></p>
-              </div>
-            <% end %>
             <%= form_with url: test_passage_path(@test_passage), method: :put, data: { turbo: false } do |form| %>
               <div class="list-group mb-4">
-                <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.shuffled_answers, :id, :content, include_hidden: false do |b| %>
+                <%= form.collection_check_boxes :answer_ids, @test_passage.current_question.answers, :id, :content, include_hidden: false do |b| %>
                   <div class="list-group-item">
                     <div class="form-check">
-                      <%= b.check_box id: "answer_ids_#{b.object.id}", class: "form-check-input" %>
+                      <%= b.check_box class: "form-check-input" %>
                       <%= b.label class: "form-check-label" %>
                     </div>
                   </div>
@@ -85,13 +91,12 @@
   </small>
 </div>
 
-<script>
+<%= javascript_tag do %>
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
     if (!form) return;
 
     document.addEventListener('keydown', function(event) {
-      // Проверяем, что фокус внутри формы и не на textarea
       if (
         event.key === 'Enter' &&
         form.contains(document.activeElement) &&
@@ -103,4 +108,4 @@
       }
     });
   });
-</script>
+<% end %>

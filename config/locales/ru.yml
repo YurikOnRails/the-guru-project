@@ -62,10 +62,10 @@ ru:
 
   test_passages:
     result:
-      header: "Тест %{title} завершен!"
-      success: "Процент успеха: %{result}%"
-      passed: "Тест пройден"
-      failed: "Тест не пройден"
+      header: "Тест %{title} завершен"
+      time_out: "Время истекло. Тест не пройден."
+      success: "Тест успешно пройден"
+      fail: "Тест не пройден"
       back_to_tests: "Вернуться к тестам"
       success_message: "Поздравляем! Вы успешно прошли тест!"
       failure_message: "К сожалению, тест не пройден. Попробуйте еще раз!"
@@ -74,6 +74,9 @@ ru:
       result: "Результат"
     show:
       header: "Прохождение теста %{title}"
+      time_remaining: "Оставшееся время"
+      time_expired: "Время истекло"
+      no_time_limit: "Без ограничения по времени"
       question_count: "Вопрос %{current} из %{total}"
       next: "Далее"
       completed: "завершено"
@@ -144,6 +147,8 @@ ru:
         edit: "Редактировать"
         delete: "Удалить"
         confirm: "Вы уверены?"
+        timer_minutes: "%{count} мин"
+        no_time_limit: "Без ограничений"
       show:
         title: "Название теста: %{title}"
         questions: "Вопросы"
@@ -166,6 +171,9 @@ ru:
         title_placeholder: "Введите название теста"
         title_help: "Название теста должно быть конкретным и понятным"
         level_help: "Уровень сложности теста: 0 - легкий, 1 - средний, 2+ - сложный"
+        timer_label: "Время на прохождение"
+        timer_placeholder: "Например: 15"
+        timer_help: "Оставьте пустым, если тест без ограничения по времени"
       form_inline:
         submit: "ОК"
     gists:
@@ -183,7 +191,7 @@ ru:
       form:
         errors_count:
           one: "Обнаружена %{count} ошибка"
-          few: "Обнаружено %{count} ошибки"
+          few: "Обнаружено %{count} ошибок"
           many: "Обнаружено %{count} ошибок"
           other: "Обнаружено %{count} ошибок"
 
@@ -204,7 +212,7 @@ ru:
   shared:
     errors:
       header:
-        few: "Обнаружено %{count} ошибки"
+        few: "Обнаружено %{count} ошибок"
         many: "Обнаружено %{count} ошибок"
         one: "Обнаружена %{count} ошибка"
         other: "Обнаружено %{count} ошибок"

@@ -21,9 +21,15 @@
   </div>
 
   <div class="mb-4">
-    <%= form.label :timer_minutes, "Время на прохождение (в минутах)", class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.number_field :timer_minutes, min: 1, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-    <p class="text-gray-600 text-xs italic">Оставьте пустым, если тест без ограничения по времени</p>
+    <%= form.label :timer_minutes, "Время на прохождение", class: "form-label fw-bold" %>
+    <div class="input-group">
+      <%= form.number_field :timer_minutes, min: 1, class: "form-control", placeholder: "Например: 15" %>
+      <span class="input-group-text">минут</span>
+    </div>
+    <div class="form-text">
+      <i class="bi bi-info-circle me-1"></i>
+      Оставьте пустым, если тест без ограничения по времени
+    </div>
   </div>
 
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
