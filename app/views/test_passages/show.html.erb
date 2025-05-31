@@ -14,7 +14,10 @@
       <% end %>
 
       <% if @test_passage.test.timed? %>
-        <div class="alert alert-info" data-controller="timer" data-timer-remaining-time-value="<%= @test_passage.remaining_time %>">
+        <div class="alert alert-info" 
+             data-controller="timer" 
+             data-timer-remaining-time-value="<%= @test_passage.remaining_time %>"
+             data-result-path="<%= result_test_passage_path(@test_passage) %>">
           <div class="d-flex align-items-center">
             <i class="bi bi-clock-history fs-4 me-3"></i>
             <div>

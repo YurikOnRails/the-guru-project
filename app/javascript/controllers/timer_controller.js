@@ -25,7 +25,7 @@ export default class extends Controller {
       
       if (this.remainingTimeValue <= 0) {
         clearInterval(this.timer)
-        this.submitForm()
+        this.handleTimeOut()
       } else {
         this.updateDisplay()
       }
@@ -38,10 +38,24 @@ export default class extends Controller {
     this.countdownTarget.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
 
-  submitForm() {
-    const form = this.element.closest('form')
+  handleTimeOut() {
+    const form = this.element.querySelector('form')
     if (form) {
+      // Добавляем скрытое поле для индикации истечения времени
+      const timeOutInput = document.createElement('input')
+      timeOutInput.type = 'hidden'
+      timeOutInput.name = 'time_out'
+      timeOutInput.value = 'true'
+      form.appendChild(timeOutInput)
+      
+      // Отправляем форму
       form.requestSubmit()
+    } else {
+      // Если форма не найдена, делаем редирект на страницу результатов
+      const resultPath = this.element.dataset.resultPath
+      if (resultPath) {
+        window.location.href = resultPath
+      }
     }
   }
 } 

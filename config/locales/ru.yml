@@ -67,25 +67,20 @@ ru:
 
   test_passages:
     result:
-      header: "Тест %{title} завершен"
-      time_out: "Время истекло. Тест не пройден."
-      success: "Тест успешно пройден"
-      fail: "Тест не пройден"
-      back_to_tests: "Вернуться к тестам"
-      success_message: "Поздравляем! Вы успешно прошли тест!"
-      failure_message: "К сожалению, тест не пройден. Попробуйте еще раз!"
-      correct_answers: "Правильные ответы"
-      success_percent: "Процент успеха"
-      result: "Результат"
+      header: "Тест %{title} завершен!"
+      success: "Успешность: %{result}%"
+      passed: "Вы прошли тест!"
+      failed: "Вы не прошли тест."
+      back: "Вернуться к тестам"
     show:
       header: "Прохождение теста %{title}"
-      time_remaining: "Оставшееся время"
-      time_expired: "Время истекло"
-      no_time_limit: "Без ограничения по времени"
       question_count: "Вопрос %{current} из %{total}"
       next: "Далее"
       completed: "завершено"
-      no_questions: "Для этого теста нет доступных вопросов."
+      no_questions: "В этом тесте нет вопросов."
+    update:
+      time_out: "Время на прохождение теста истекло"
+      failure: "Тест не пройден. Попробуйте ещё раз."
     gist:
       success: "Gist успешно сохранен!"
       failure: "Во время сохранения gist произошла ошибка"
