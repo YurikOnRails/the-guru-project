@@ -29,7 +29,16 @@ class Admin::TestsController < Admin::BaseController
 
   def update
     if @test.update(test_params)
-      redirect_to admin_test_path(@test), notice: t(".success")
+      respond_to do |format|
+        format.html { redirect_to admin_test_path(@test), notice: t(".success") }
+        format.turbo_stream { 
+          flash.now[:notice] = t(".success")
+          render turbo_stream: [
+            turbo_stream.replace(@test),
+            turbo_stream.update("flash", partial: "shared/flash")
+          ]
+        }
+      end
     else
       render :edit, status: :unprocessable_entity
     end

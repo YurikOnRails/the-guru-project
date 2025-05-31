@@ -14,6 +14,10 @@
     <% end %>
   </div>
 
+  <div id="flash">
+    <%= render "shared/flash" %>
+  </div>
+
   <%= render 'admin/shared/errors', resource: @test, data: { resource_id: @test&.id } %>
 
   <div class="card shadow-sm">
