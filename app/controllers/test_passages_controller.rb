@@ -14,9 +14,9 @@ class TestPassagesController < ApplicationController
 
   def update
     # Если пришел параметр time_out или время истекло, завершаем тест
-    if params[:time_out] == 'true' || @test_passage.time_out?
+    if params[:time_out] == "true" || @test_passage.time_out?
       @test_passage.complete!
-      redirect_to result_test_passage_path(@test_passage), alert: t('.time_out')
+      redirect_to result_test_passage_path(@test_passage), alert: t(".time_out")
       return
     end
 
@@ -28,10 +28,10 @@ class TestPassagesController < ApplicationController
       flash[:earned_badges] = result[:badges] if result
 
       notice = if !@test_passage.successful?
-                 t('.failure')
-               elsif result[:badges].present?
+                 t(".failure")
+      elsif result[:badges].present?
                  success_message(result[:badges])
-               end
+      end
 
       alert_message = result[:errors].compact_blank.join(". ") if result
       flash[:alert] = alert_message if alert_message.present? && @test_passage.successful?
@@ -51,7 +51,7 @@ class TestPassagesController < ApplicationController
   def check_timer
     if @test_passage.time_out?
       @test_passage.complete!
-      redirect_to result_test_passage_path(@test_passage), alert: t('.time_out')
+      redirect_to result_test_passage_path(@test_passage), alert: t(".time_out")
     end
   end
 

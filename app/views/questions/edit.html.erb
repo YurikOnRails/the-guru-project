@@ -7,7 +7,7 @@
     <div class="card-body">
       <%= render 'shared/errors', resource: @question %>
 
-      <%= form_with model: [@test, @question], local: true do |f| %>
+      <%= form_with model: [ @test, @question ], local: true do |f| %>
         <div class="mb-3">
           <%= f.label :content, class: "form-label fw-bold" %>
           <%= f.text_area :content, rows: 7, class: "form-control", placeholder: t(".question_placeholder") %>

@@ -31,7 +31,7 @@ class Admin::TestsController < Admin::BaseController
     if @test.update(test_params)
       respond_to do |format|
         format.html { redirect_to admin_test_path(@test), notice: t(".success") }
-        format.turbo_stream { 
+        format.turbo_stream {
           flash.now[:notice] = t(".success")
           render turbo_stream: [
             turbo_stream.replace(@test),
