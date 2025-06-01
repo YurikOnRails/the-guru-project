@@ -7,55 +7,51 @@ export default class extends Controller {
   }
 
   connect() {
-    if (this.hasCountdownTarget && this.remainingTimeValue > 0) {
-      this.startTimer()
-    }
+    if (!this.hasRemainingTimeValue) return
+
+    this.remainingSeconds = parseInt(this.remainingTimeValue)
+    if (this.remainingSeconds <= 0) return
+
+    this.startTimer()
   }
 
   disconnect() {
-    if (this.timer) {
-      clearInterval(this.timer)
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval)
     }
   }
 
   startTimer() {
     this.updateDisplay()
-    this.timer = setInterval(() => {
-      this.remainingTimeValue -= 1
-      
-      if (this.remainingTimeValue <= 0) {
-        clearInterval(this.timer)
-        this.handleTimeOut()
-      } else {
-        this.updateDisplay()
+    this.timerInterval = setInterval(() => {
+      this.remainingSeconds -= 1
+      this.updateDisplay()
+
+      if (this.remainingSeconds <= 0) {
+        clearInterval(this.timerInterval)
+        this.handleTimeout()
       }
     }, 1000)
   }
 
   updateDisplay() {
-    const minutes = Math.floor(this.remainingTimeValue / 60)
-    const seconds = this.remainingTimeValue % 60
+    const minutes = Math.floor(this.remainingSeconds / 60)
+    const seconds = this.remainingSeconds % 60
     this.countdownTarget.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
 
-  handleTimeOut() {
-    const form = this.element.querySelector('form')
+  handleTimeout() {
+    const form = document.querySelector('form')
     if (form) {
-      // Добавляем скрытое поле для индикации истечения времени
-      const timeOutInput = document.createElement('input')
-      timeOutInput.type = 'hidden'
-      timeOutInput.name = 'time_out'
-      timeOutInput.value = 'true'
-      form.appendChild(timeOutInput)
+      // Добавляем скрытое поле для передачи информации о таймауте
+      const timeoutInput = document.createElement('input')
+      timeoutInput.type = 'hidden'
+      timeoutInput.name = 'time_out'
+      timeoutInput.value = 'true'
+      form.appendChild(timeoutInput)
       
       // Отправляем форму
-      form.requestSubmit()
-    } else {
-      // Если форма не найдена, делаем редирект на страницу результатов
-      const resultPath = this.element.dataset.resultPath
-      if (resultPath) {
-        window.location.href = resultPath
-      }
+      form.submit()
     }
   }
 } 

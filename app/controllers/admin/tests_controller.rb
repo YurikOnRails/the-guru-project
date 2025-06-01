@@ -1,6 +1,4 @@
 class Admin::TestsController < Admin::BaseController
-  include TestsHelper
-
   before_action :set_tests, only: %i[index update_inline]
   before_action :set_test, only: %i[show edit update destroy update_inline]
 

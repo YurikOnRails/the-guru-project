@@ -14,7 +14,7 @@ class TestPassage < ApplicationRecord
   scope :successful, -> { where("correct_questions * 100.0 / tests_count >= ?", SUCCESS_THRESHOLD) }
 
   def accept!(answer_ids)
-    if time_out?
+    if completed?
       complete!
       return false
     end
