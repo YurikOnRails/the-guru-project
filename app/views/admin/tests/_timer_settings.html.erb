@@ -12,7 +12,7 @@
   <td><%= test.category.name %></td>
   <td><%= test.questions.count %></td>
   <td>
-    <%= form_with(model: [:admin, test], class: "d-flex align-items-center gap-2") do |f| %>
+    <%= form_with(model: [ :admin, test ], class: "d-flex align-items-center gap-2") do |f| %>
       <div class="input-group input-group-sm" style="width: 150px;">
         <%= f.number_field :timer_minutes,
                           class: "form-control",

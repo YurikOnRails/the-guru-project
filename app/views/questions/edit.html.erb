@@ -5,7 +5,7 @@
     </div>
     
     <div class="card-body">
-      <%= render 'shared/errors', resource: @question %>
+      <%= render "shared/errors", resource: @question %>
 
       <%= form_with model: [ @test, @question ], local: true do |f| %>
         <div class="mb-3">
