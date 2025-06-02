@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <div class="card shadow-sm">
         <div class="card-header bg-primary text-white text-center">
-          <h2 class="h3 mb-0"><%= t('.change_your_password') %></h2>
+          <h2 class="h3 mb-0"><%= t(".change_your_password") %></h2>
         </div>
         
         <div class="card-body p-4">
@@ -12,11 +12,11 @@
             <%= f.hidden_field :reset_password_token %>
 
             <div class="mb-3">
-              <%= f.label :password, t('.new_password'), class: 'form-label' %>
+              <%= f.label :password, t(".new_password"), class: "form-label" %>
               <% if @minimum_password_length %>
-                <div class="form-text mb-2"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></div>
+                <div class="form-text mb-2"><%= t("devise.shared.minimum_password_length", count: @minimum_password_length) %></div>
               <% end %>
-              <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-control' %>
+              <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control" %>
             </div>
 
             <div class="mb-4">

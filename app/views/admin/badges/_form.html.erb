@@ -22,7 +22,7 @@
 
       <div class="mb-3">
         <%= f.label :image_url, 'URL изображения', class: 'form-label fw-bold' %>
-        <%= f.text_field :image_url, class: 'form-control', placeholder: 'https://example.com/badge-image.png' %>
+        <%= f.text_field :image_url, class: "form-control", placeholder: "https://example.com/badge-image.png" %>
         <div class="form-text">
           <i class="bi bi-info-circle me-1"></i>
           Если не указать, будет использовано стандартное изображение бейджа.<br>
@@ -31,15 +31,15 @@
       </div>
 
       <div class="mb-3">
-        <%= f.label :rule_type, 'Тип правила', class: 'form-label fw-bold' %>
+        <%= f.label :rule_type, "Тип правила", class: "form-label fw-bold" %>
         <%= f.select :rule_type, 
-            Badge::RULE_TYPES.map { |key, value| [value, key] }, 
-            { prompt: 'Выберите тип правила' }, 
-            { class: 'form-select', required: true } %>
+            Badge::RULE_TYPES.map { |key, value| [ value, key ] }, 
+            { prompt: "Выберите тип правила" }, 
+            { class: "form-select", required: true } %>
       </div>
 
       <div class="mb-3">
-        <%= f.label :rule_value, 'Значение правила', class: 'form-label fw-bold' %>
+        <%= f.label :rule_value, "Значение правила", class: "form-label fw-bold" %>
         <%= f.text_field :rule_value, class: "form-control", required: true, placeholder: "Введите значение для выбранного правила" %>
         <div class="form-text">
           <i class="bi bi-info-circle me-1"></i>

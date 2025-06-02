@@ -18,14 +18,14 @@
           <div class="card bg-light">
             <div class="card-body text-center">
               <h5 class="card-title"><%= t('.level') %></h5>
-              <span class="badge bg-<%= @test.level > 2 ? 'danger' : (@test.level > 0 ? 'warning' : 'success') %> fs-5"><%= @test.level %></span>
+              <span class="badge bg-<%= @test.level > 2 ? "danger" : (@test.level > 0 ? "warning" : "success") %> fs-5"><%= @test.level %></span>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card bg-light">
             <div class="card-body text-center">
-              <h5 class="card-title"><%= t('.category') %></h5>
+              <h5 class="card-title"><%= t(".category") %></h5>
               <span class="badge bg-info text-dark fs-5"><%= @test.category.name %></span>
             </div>
           </div>
@@ -33,14 +33,14 @@
         <div class="col-md-4">
           <div class="card bg-light">
             <div class="card-body text-center">
-              <h5 class="card-title"><%= t('.questions_count') %></h5>
+              <h5 class="card-title"><%= t(".questions_count") %></h5>
               <span class="badge bg-secondary fs-5"><%= @test.questions.count %></span>
             </div>
           </div>
         </div>
       </div>
       
-      <h2 class="h4 mb-3 border-bottom pb-2"><%= t('.questions') %></h2>
+      <h2 class="h4 mb-3 border-bottom pb-2"><%= t(".questions") %></h2>
       
       <% if @test.questions.any? %>
         <div class="list-group mb-4">

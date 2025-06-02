@@ -25,15 +25,15 @@
     </ul>
     <div class="navbar-nav flex-row align-items-center gap-1 ms-auto">
       <% if user_signed_in? %>
-        <span class="nav-item nav-link px-2 py-1" style="font-size: 0.97rem;"><%= t('admin.nav.welcome') %>, <b><%= current_user.email %></b></span>
+        <span class="nav-item nav-link px-2 py-1" style="font-size: 0.97rem;"><%= t("admin.nav.welcome") %>, <b><%= current_user.email %></b></span>
         <% if current_user&.admin? %>
           <li class="nav-item">
-            <%= link_to admin_tests_path, class: 'nav-link text-primary fw-bold px-2 py-1' do %>
-              <i class="bi bi-speedometer2 me-1 small"></i><%= t('shared.nav.admin_panel') %>
+            <%= link_to admin_tests_path, class: "nav-link text-primary fw-bold px-2 py-1" do %>
+              <i class="bi bi-speedometer2 me-1 small"></i><%= t("shared.nav.admin_panel") %>
             <% end %>
           </li>
         <% end %>
-        <%= button_to t('shared.nav.logout'), destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger btn-sm ms-1 px-2 py-1' %>
+        <%= button_to t("shared.nav.logout"), destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-sm ms-1 px-2 py-1" %>
       <% else %>
         <%= link_to new_user_registration_path, class: "btn btn-primary btn-sm me-1 px-2 py-1 rounded-pill shadow-sm" do %>
           <i class="bi bi-person-plus-fill me-1 small"></i><%= t("shared.nav.signup") %>

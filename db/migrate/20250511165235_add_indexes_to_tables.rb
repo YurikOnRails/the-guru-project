@@ -16,5 +16,8 @@ class AddIndexesToTables < ActiveRecord::Migration[8.0]
 
     # Индекс для категорий по имени (для быстрого поиска)
     add_index :categories, :name, unique: true unless index_exists?(:categories, :name, unique: true)
+
+    add_index :test_passages, :started_at
+    add_index :test_passages, :success
   end
 end

@@ -7,12 +7,18 @@ class TestPassage < ApplicationRecord
   validate :test_has_questions, on: :create
 
   before_validation :set_next_question, on: :create
+  before_create :set_started_at
 
   SUCCESS_THRESHOLD = 85
 
   scope :successful, -> { where("correct_questions * 100.0 / tests_count >= ?", SUCCESS_THRESHOLD) }
 
   def accept!(answer_ids)
+    if completed?
+      complete!
+      return false
+    end
+
     self.correct_questions += 1 if correct_answer?(answer_ids)
     self.current_question = next_question
     save!
@@ -25,7 +31,7 @@ class TestPassage < ApplicationRecord
   end
 
   def completed?
-    current_question.nil?
+    current_question.nil? || time_out?
   end
 
   def successful?
@@ -38,7 +44,25 @@ class TestPassage < ApplicationRecord
     save!
   end
 
+  def time_out?
+    return false unless test.timed?
+    return false if started_at.nil?
+
+    Time.current >= started_at + test.timer_minutes.minutes
+  end
+
+  def remaining_time
+    return nil unless test.timed?
+    return 0 if time_out?
+
+    ((started_at + test.timer_minutes.minutes) - Time.current).round
+  end
+
   private
+
+  def set_started_at
+    self.started_at = Time.current
+  end
 
   def set_next_question
     self.current_question = test.questions.first if test.present? && current_question.nil?

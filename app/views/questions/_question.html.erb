@@ -6,10 +6,10 @@
         <i class="bi bi-plus-circle me-1"></i> <%= t('questions.question.add_answer') %>
       <% end %>
       <%= link_to edit_admin_question_path(question), class: 'btn btn-sm btn-primary me-1' do %>
-        <i class="bi bi-pencil me-1"></i> <%= t('questions.question.edit') %>
+        <i class="bi bi-pencil me-1"></i> <%= t("questions.question.edit") %>
       <% end %>
-      <%= button_to admin_question_path(question), method: :delete, class: 'btn btn-sm btn-danger', form: { data: { turbo_confirm: t('questions.question.confirm') } } do %>
-        <i class="bi bi-trash me-1"></i> <%= t('questions.question.delete') %>
+      <%= button_to admin_question_path(question), method: :delete, class: "btn btn-sm btn-danger", form: { data: { turbo_confirm: t("questions.question.confirm") } } do %>
+        <i class="bi bi-trash me-1"></i> <%= t("questions.question.delete") %>
       <% end %>
     </div>
   </div>
@@ -27,7 +27,7 @@
             <%= answer.content %>
           </div>
           <div>
-            <%= link_to edit_admin_answer_path(answer), class: 'btn btn-sm btn-outline-primary me-1' do %>
+            <%= link_to edit_admin_answer_path(answer), class: "btn btn-sm btn-outline-primary me-1" do %>
               <i class="bi bi-pencil me-1"></i> <%= t("answers.answer.edit") %>
             <% end %>
             <%= button_to admin_answer_path(answer), method: :delete, class: "btn btn-sm btn-outline-danger", form: { data: { turbo_confirm: t("answers.answer.confirm") } } do %>

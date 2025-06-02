@@ -1,7 +1,10 @@
-<% flash.each do |key, message| %>
-  <div class="alert alert-<%= bootstrap_alert_class(key) %> alert-dismissible fade show" role="alert">
+<% flash.each do |type, message| %>
+  <% alert_class = type == "notice" ? "alert-success" : "alert-danger" %>
+  <div class="alert <%= alert_class %> alert-dismissible fade show" role="alert">
+    <% icon_class = type == "notice" ? "bi-check-circle" : "bi-exclamation-triangle" %>
+    <i class="bi <%= icon_class %> me-2"></i>
     <%= message %>
-    <% if key == "notice" && flash[:gist_url].present? %>
+    <% if type == "notice" && flash[:gist_url].present? %>
       <%= link_to flash[:gist_url], flash[:gist_url], target: "_blank" %>
     <% end %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
